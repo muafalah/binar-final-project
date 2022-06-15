@@ -3,7 +3,7 @@ import style from './FooterDefault.module.css'
 
 const FooterDefault = () => {
     return (
-        <div><p>tes </p></div>
+        <div><p>Footer</p></div>
     )
 }
 
