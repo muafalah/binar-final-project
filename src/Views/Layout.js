@@ -1,6 +1,5 @@
 import React from 'react'
-import FooterDefault from '../Components/Footer/FooterDefault'
-import NavbarDefault from '../Components/Navbar/NavbarDefault'
+import NavbarDefault from '../Components/Navbar/NavbarDefault/NavbarDefault'
 
 const Default = ({ children }) => {
     return (
@@ -12,7 +11,7 @@ const Default = ({ children }) => {
                 {children}
             </main>
             <footer>
-                <FooterDefault />
+                Footer
             </footer>
         </>
     )
