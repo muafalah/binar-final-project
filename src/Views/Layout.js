@@ -1,16 +1,18 @@
 import React from 'react'
+import FooterDefault from '../Components/Footer/FooterDefault'
+import NavbarDefault from '../Components/Navbar/NavbarDefault'
 
 const Default = ({ children }) => {
     return (
         <>
             <header>
-                Navbar
+                <NavbarDefault />
             </header>
             <main>
                 {children}
             </main>
             <footer>
-                Footer
+                <FooterDefault />
             </footer>
         </>
     )
