@@ -1,0 +1,72 @@
+.image{
+    background-image: url(../../../Assets/image/img.png);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.field_login{
+    text-align: center;
+    position: relative;
+    margin: 100px;
+}
+
+.property_logo{
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+::placeholder{
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 18px;
+}
+
+.title_login{
+    margin-bottom: -3rem;
+}
+
+.Property_email_pass{
+    margin-left: 5.5rem;
+    margin-right: 5.5rem;
+}
+
+.property_btn{
+    margin-top: 1rem;
+    margin-bottom: 5.5rem;
+    border-radius: none;
+    cursor: pointer;
+}
+
+.for_login{
+    text-align: center;
+    /* margin-top: 5.5rem; */
+}
+
+.for_href{
+    color: black;
+}
+
+@media screen and (max-width:425px) {
+    .image{
+        background-image: none;
+        margin-bottom: -50rem;
+    }
+
+    .form_login{
+        margin-top: -4rem;
+    }
+
+    .Property_email_pass{
+        margin-right: 2rem;
+        margin-left: 2rem;
+    }
+
+    .title_login{
+        margin-left: -2rem;
+        margin-right: -2rem;
+    }
+    
+}

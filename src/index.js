@@ -6,13 +6,14 @@ import Routers from './Routers/Routers';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Assets/css/index.css'
 
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Routers />
+      <Routers/>
     </Provider>
   </React.StrictMode>
 );
