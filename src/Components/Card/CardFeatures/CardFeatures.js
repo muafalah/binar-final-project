@@ -1,11 +1,11 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
-import style from './CardProduct.module.css'
+import style from '../CardFeatures/CardFeatures.module.css'
 
-const CardProduct = () => {
-    return (
-        <div>
-             <Card className={style.cardproduct} style={{ width: '15rem' }}>
+export const CardFeatures = () => {
+  return (
+    <div>
+        <Card className={style.cardfeatures} style={{ width: '19.1rem' }}>
       <Card.Img variant="top" src="holder.js/100px180" />
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
@@ -15,8 +15,6 @@ const CardProduct = () => {
         </Card.Text>
       </Card.Body>
     </Card>
-        </div>
-    )
+    </div>
+  )
 }
-
-export default CardProduct
