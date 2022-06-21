@@ -1,0 +1,52 @@
+.image_bg{
+    background-image: url(../../../Assets/image/img.png);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media screen and (max-width:425px){
+    .image_bg{
+        background-image: none;
+        /* margin-top: -50rem; */
+    }
+
+    .Property_email_pass{
+        margin-right: 2rem;
+        margin-left: 2rem;
+    }
+}
+
+.field_login{
+    text-align: center;
+    position: relative;
+    margin-top: 7rem;
+}
+
+.title_login{
+    margin-top: 2rem;
+    font-size: 25px;
+}
+
+.Property_email_pass{
+    margin-top: 1rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+}
+
+.property_btn{
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    border-radius: none;
+    cursor: pointer;
+}
+
+.for_regis{
+    text-align: center;
+    /* margin-top: 6.5rem; */
+}
+
+.for_href{
+    color: black;
+}
