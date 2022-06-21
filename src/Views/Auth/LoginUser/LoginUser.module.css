@@ -1,0 +1,19 @@
+@media screen and (min-width: 576px) {
+    .image {
+        height: 100vh;
+        background-image: url(../../../Assets/image/Auth/img-bg-auth-tablet.svg);
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .image {
+        height: 100vh;
+        background-image: url(../../../Assets/image/Auth/img-bg-auth-desktop.svg);
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}

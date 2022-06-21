@@ -1,97 +1,15 @@
-
-@media (max-width:1920px){
-    .header_txt{
-        margin-left: 7rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-    }
-    .header_txtcategory{
-        margin-left: 7rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-    }
-    .header_txtfeature{
-        margin-left: 7rem;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-    }
-    .cardbanner{
-        margin-top: 1rem;
-        margin-left: 7rem;
-        width: 81rem;
-        height: 12rem;
-        padding-top: 2rem;
-        margin-bottom: 1rem;
-    }
+.featured {
+    background-color: black;
 }
 
-@media (max-width:768px){
-    .header_txtcategory{
-        margin-left: 20.2rem;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-    .header_txt{
-        margin-left: 18rem;
-        margin-bottom: 1rem;
-    }
-    .header_txtfeature{
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        margin-left: 8rem;
-    }
-    .cardproduct{
-        padding-left: 4rem;
-    }
-    .cardfeatures{
-        padding-left: 0.8rem;
-    }
-    .cardbanner{
-        margin-top: 1rem;
-        margin-left: 3rem;
-        width: 41.5rem;
-        height: auto;
-        margin-bottom: 1rem;
-    }
-    .banner{
-        margin-top: 1rem;
-    }
+.card:hover {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
 }
 
-@media (max-width:576px){
-    .header_txtcategory{
-        margin-left: 14.4rem;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-    }
-    .header_txt{
-        margin-left: 12rem;
-        margin-bottom: 1rem;
-    }
-    .header_txtfeature{
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-        margin-left: 1rem;
-        text-align: center;
-    }
-    .CardCategory{
-        width: 30rem;
-        padding-left: 3rem;
-    }
-    .cardproduct{
-        padding-left: 0.5rem;
-    }
-    .cardfeatures{
-        padding-left: 7rem;
-    }
-    .cardbanner{
-        margin-top: 1rem;
-        margin-left: 2rem;
-        width: 32rem;
-        height: auto;
-    }
-    .banner{
-        margin-top: 1rem;
-    }
+.bg_ctabanner {
+    background-image: url(../../Assets/image/LandingPage/img-bg-ctabanner.svg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-

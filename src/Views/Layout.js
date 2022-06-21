@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
-import FooterAdmin from '../Components/Footer/FooterAdmin/FooterAdmin'
+import React from 'react'
 import FooterDefault from '../Components/Footer/FooterDefault/FooterDefault'
-import FooterUser from '../Components/Footer/FooterUser/FooterUser'
 import NavbarAdmin from '../Components/Navbar/NavbarAdmin/NavbarAdmin'
+import NavbarBuyer from '../Components/Navbar/NavbarBuyer/NavbarBuyer'
 import NavbarDefault from '../Components/Navbar/NavbarDefault/NavbarDefault'
-import NavbarUser from '../Components/Navbar/NavbarUser/NavbarUser'
+import NavbarSeller from '../Components/Navbar/NavbarSeller/NavbarSeller'
 
-const Layout = ({ children }) => {
-
-    const [Auth, setAuth] = useState(localStorage.getItem('role'))
+const Layout = (props) => {
 
     const Default = () => {
         return (
@@ -17,7 +14,7 @@ const Layout = ({ children }) => {
                     <NavbarDefault />
                 </header>
                 <main>
-                    {children}
+                    {props.children}
                 </main>
                 <footer>
                     <FooterDefault />
@@ -33,37 +30,54 @@ const Layout = ({ children }) => {
                     <NavbarAdmin />
                 </header>
                 <main>
-                    {children}
+                    {props.children}
                 </main>
                 <footer>
-                    <FooterAdmin />
+                    <FooterDefault />
                 </footer>
             </>
         )
     }
 
-    const User = () => {
+    const Buyer = () => {
         return (
             <>
                 <header>
-                    <NavbarUser />
+                    <NavbarBuyer />
                 </header>
                 <main>
-                    {children}
+                    {props.children}
                 </main>
                 <footer>
-                    <FooterUser />
+                    <FooterDefault />
+                </footer>
+            </>
+        )
+    }
+
+    const Seller = () => {
+        return (
+            <>
+                <header>
+                    <NavbarSeller />
+                </header>
+                <main>
+                    {props.children}
+                </main>
+                <footer>
+                    <FooterDefault />
                 </footer>
             </>
         )
     }
 
     return (
-        <div>
-            {Auth === null ? Default() : null}
-            {Auth === "user" ? User() : null}
-            {Auth === "admin" ? Admin() : null}
-        </div>
+        <>
+            {props.role === "default" ? Default() : null}
+            {props.role === "admin" ? Admin() : null}
+            {props.role === "buyer" ? Buyer() : null}
+            {props.role === "seller" ? Seller() : null}
+        </>
     )
 }
 

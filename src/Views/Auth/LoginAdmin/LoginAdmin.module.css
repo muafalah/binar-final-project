@@ -1,0 +1,11 @@
+@media (min-width: 576px) {
+    .box {
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .box {
+        width: 30%;
+    }
+}
