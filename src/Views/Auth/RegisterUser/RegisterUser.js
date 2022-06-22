@@ -4,10 +4,6 @@ import style from './RegisterUser.module.css'
 
 const RegisterUser = () => {
 
-    useEffect(() => {
-        document.title = "Register";
-    }, []);
-
     return (
         <Container fluid>
             <Row style={{ height: "100vh" }}>

@@ -6,7 +6,7 @@ import { EnvelopeFill, Facebook, Instagram, Linkedin, TelephoneFill, Twitter, Yo
 
 const FooterDefault = () => {
     return (
-        <div style={{ backgroundColor: "#1E1E1E", color: "white" }} className={'pt-3 pb-2'}>
+        <div style={{ backgroundColor: "#212529", color: "white" }} className={'pt-3 pb-2'}>
             <Container>
                 <Row>
                     <Col lg={3} md={6} sm={12} xs={12} className={'pt-2 pb-2'}>

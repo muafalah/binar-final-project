@@ -5,7 +5,7 @@ import style from './CardStore.module.css'
 
 const CardStore = ({ value }) => {
     return (
-        <a href={'/user/' + value.id_store} style={{ color: "black" }}>
+        <a href={'/user/' + value.username} style={{ color: "black" }}>
             <Card className={'mt-1 mb-1' + style.card}>
                 <div className='d-flex ps-3 pe-3'>
                     <div className="d-grid align-items-center justify-content-center"><Card.Img src={value.image} style={{ height: "6rem", width: "6rem" }} /></div>

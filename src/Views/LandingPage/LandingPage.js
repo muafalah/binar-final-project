@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Card, Carousel, Col, Container, Row, Button } from 'react-bootstrap'
 import Layout from '../Layout'
 import style from './LandingPage.module.css'
@@ -159,10 +159,6 @@ const LandingPage = () => {
 
   const space = "mt-lg-5 mb-lg-5 mt-md-5 mb-md-5 mt-4 mb-4"
 
-  useEffect(() => {
-    document.title = "Landing Page";
-  }, []);
-
   return (
     <Layout role="default">
       <section id="Slider-LandingPage">
@@ -183,7 +179,7 @@ const LandingPage = () => {
             {dataCategory?.map((value, index) => {
               return (
                 <Col lg={2} md={3} sm={4} xs={4} key={index} className={'pt-2 pb-2'}>
-                  <a href={'/search/category?=' + value.id_category}>
+                  <a href={'/search/keyword=' + value.name + '&type=product&sort=1&category=' + value.id_category + '&location=null&minprice=null&maxprice=null'}>
                     <Card body className={'text-center p-0 p-md-1 ' + style.card} text="dark" style={{ backgroundColor: "#F1F1F1", border: "0px" }}>
                       <img src={value.image} width="80%" height="auto" alt={value.name} />
                       <div style={{ fontWeight: "400", color: "black", marginTop: "10px" }}>{value.name}</div>

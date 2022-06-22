@@ -4,10 +4,6 @@ import style from './LoginUser.module.css'
 
 const LoginUser = () => {
 
-    useEffect(() => {
-        document.title = "Login";
-    }, []);
-
     return (
         <Container fluid>
             <Row style={{ height: "100vh" }}>
