@@ -5,6 +5,7 @@ import LandingPage from '../Views/LandingPage/LandingPage'
 import LoginAdmin from '../Views/Auth/LoginAdmin/LoginAdmin'
 import LoginUser from '../Views/Auth/LoginUser/LoginUser'
 import RegisterUser from '../Views/Auth/RegisterUser/RegisterUser'
+import Search from '../Views/Search/Search'
 
 const Routers = () => {
     return (
@@ -16,6 +17,7 @@ const Routers = () => {
                 <Route path="/register" element={<RegisterUser />} />
                 <Route path="/login" element={<LoginUser />} />
                 <Route path="/login-admin" element={<LoginAdmin />} />
+                <Route path="/search/keyword=:keyword&type=:type&sort=:sort&category=:category&location=:location&minprice=:minprice&maxprice=:maxprice" element={<Search />} />
             </Routes>
         </BrowserRouter>
     )
