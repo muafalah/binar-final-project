@@ -4,18 +4,14 @@ import style from './LoginUser.module.css'
 
 const LoginUser = () => {
 
-    useEffect(() => {
-        document.title = "Login";
-    }, []);
-
     return (
         <Container fluid>
             <Row style={{ height: "100vh" }}>
                 <Col lg={7} md={6} sm={0} className={style.image}></Col>
                 <Col lg={5} md={6} sm={12} className={'ps-md-5 pe-md-5 '} style={{ height: "100%" }}>
-                    <Row className={'align-content-center gap-4'} style={{ height: "100%" }}>
+                    <Row className={'align-content-center'} style={{ height: "100%" }}>
                         <Col md={12} className={'text-center'}>
-                            <h2 className="mt-3">Masuk</h2>
+                            <h2>Masuk</h2>
                             <p style={{ color: "#8A8A8A" }}>Selamat datang kembali, yuk masuk<br />untuk mengakses beragam fitur di SecondGadget!</p>
                         </Col>
                         <Col md={12}>
@@ -32,7 +28,7 @@ const LoginUser = () => {
                             </Form>
                         </Col>
                         <Col md={12} className={'text-center'}>
-                            <p>Belum mempunyai akun? <a href="/register" style={{ color: "#FB374F" }}>Daftar Disini!</a></p>
+                            <p className={'mt-3'}>Belum mempunyai akun? <a href="/register" style={{ color: "#FB374F" }}>Daftar Disini!</a></p>
                         </Col>
                     </Row>
                 </Col>

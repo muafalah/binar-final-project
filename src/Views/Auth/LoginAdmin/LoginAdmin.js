@@ -4,10 +4,6 @@ import style from './LoginAdmin.module.css'
 
 const LoginAdmin = () => {
 
-    useEffect(() => {
-        document.title = "Login Admin";
-    }, []);
-
     return (
         <Container fluid style={{ height: "100vh", backgroundColor: "#1E1E1E" }} className={'d-flex align-items-center justify-content-center'}>
             <Row style={{ backgroundColor: "white", borderRadius: "5px" }} className={'p-2 pt-3 pb-3 pt-md-4 pb-md-4 gap-2 m-2 ' + style.box}>

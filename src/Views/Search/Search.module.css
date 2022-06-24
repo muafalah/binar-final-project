@@ -1,0 +1,10 @@
+@media screen and (max-width: 992px) {
+    .filter_md {
+        display: none;
+    }
+}
+@media screen and (min-width: 992px) {
+    .filter_sm {
+        display: none;
+    }
+}
