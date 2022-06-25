@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Carousel, Col, Container, Row, Button } from 'react-bootstrap'
+import { Card, Col, Container, Row, Button } from 'react-bootstrap'
 import Layout from '../Layout'
 import style from './LandingPage.module.css'
 import ImageBestPrice from '../../Assets/image/LandingPage/img-best-price.svg'
@@ -13,6 +13,8 @@ import ImageWatch from '../../Assets/image/LandingPage/img-category-watch.svg'
 import ImageAirpods from '../../Assets/image/LandingPage/img-category-airpods.svg'
 import ImageOther from '../../Assets/image/LandingPage/img-category-other.svg'
 import CardProduct from '../../Components/Card/CardProduct/CardProduct'
+import SliderCarousel from '../../Components/Slider/SliderCarousel/SliderCarousel'
+import CardCategory from '../../Components/Card/CardCategory/CardCategory'
 
 const dataCarousel = [
   {
@@ -68,67 +70,115 @@ const dataCategory = [
 const dataProduct = [
   {
     id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
   {
-    id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    id_product: 2,
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
   {
-    id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    id_product: 3,
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
   {
-    id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    id_product: 4,
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
   {
-    id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    id_product: 4,
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
   {
-    id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    id_product: 4,
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
   {
-    id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    id_product: 4,
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
   {
-    id_product: 1,
-    image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-    name: "Iphone 11 Pro Max 256GB Space Gray",
-    price: 5000000,
-    username: "suryamahendra",
-    location: "Jakarta Selatan",
+    id_product: 4,
+    name: "iPhone 11 Pro Max 256 GB Space Gray",
+    price: 12400000,
+    image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+    seller: {
+      id_seller: 1,
+      username: "suryamahendra",
+      address: {
+        id_address: 1,
+        name: "Kota Jakarta",
+      },
+    },
   },
 ]
 
@@ -162,15 +212,7 @@ const LandingPage = () => {
   return (
     <Layout role="default">
       <section id="Slider-LandingPage">
-        <Carousel variant="dark">
-          {dataCarousel?.map((value, index) => {
-            return (
-              <Carousel.Item key={index}>
-                <a href={value.link}><img className="d-block w-100" src={value.image} alt={value.name} /></a>
-              </Carousel.Item>
-            )
-          })}
-        </Carousel>
+        <SliderCarousel data={dataCarousel} />
       </section>
       <section id="Category-LandingPage" className={space}>
         <Container>
@@ -179,12 +221,7 @@ const LandingPage = () => {
             {dataCategory?.map((value, index) => {
               return (
                 <Col lg={2} md={3} sm={4} xs={4} key={index} className={'pt-2 pb-2'}>
-                  <a href={'/search/keyword=' + value.name + '&type=product&sort=1&category=' + value.id_category + '&location=null&minprice=null&maxprice=null'}>
-                    <Card body className={'text-center p-0 p-md-1 ' + style.card} text="dark" style={{ backgroundColor: "#F1F1F1", border: "0px" }}>
-                      <img src={value.image} width="80%" height="auto" alt={value.name} />
-                      <div style={{ fontWeight: "400", color: "black", marginTop: "10px" }}>{value.name}</div>
-                    </Card>
-                  </a>
+                  <CardCategory value={value} />
                 </Col>
               )
             })}
