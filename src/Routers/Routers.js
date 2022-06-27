@@ -8,6 +8,7 @@ import RegisterUser from '../Views/Auth/RegisterUser/RegisterUser'
 import ComplateProfil from '../Views/Buyer/Complateprofil/ComplateProfil'
 import Search from '../Views/Search/Search'
 import DetailProduct from '../Views/DetailProduct/DetailProduct'
+import { ProfileUser } from '../Views/ProfileUser/ProfileUser'
 
 const Routers = () => {
     return (
@@ -20,6 +21,7 @@ const Routers = () => {
                 <Route path="/login" element={<LoginUser />} />
                 <Route path="/login-admin" element={<LoginAdmin />} />
                 <Route path='/complete-profile' element={<ComplateProfil />} />
+                <Route path='/profile-user' element={<ProfileUser />} />
                 <Route path="/search/keyword=:keyword&type=:type&sort=:sort&category=:category&location=:location&minprice=:minprice&maxprice=:maxprice" element={<Search />} />
                 <Route path='/product/:id_product' element={<DetailProduct />} />
             </Routes>
