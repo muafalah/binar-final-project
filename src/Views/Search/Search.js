@@ -3,125 +3,205 @@ import { Col, Container, Nav, Row, Tab, Button, Modal } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import CardFilter from '../../Components/Card/CardFilter/CardFilter'
 import CardProduct from '../../Components/Card/CardProduct/CardProduct'
-import CardStore from '../../Components/Card/CardStore/CardStore'
+import CardSeller from '../../Components/Card/CardSeller/CardSeller'
 import Layout from '../Layout'
 import style from './Search.module.css'
 
 const dataProduct = [
     {
         id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
     {
-        id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        id_product: 2,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
     {
-        id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        id_product: 3,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
     {
-        id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        id_product: 4,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
     {
-        id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        id_product: 4,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
     {
-        id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        id_product: 4,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
     {
-        id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        id_product: 4,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
     {
-        id_product: 1,
-        image: "https://malline.id/src/iphone_13_midnight_1_4.jpg",
-        name: "Iphone 11 Pro Max 256GB Space Gray",
-        price: 5000000,
-        username: "suryamahendra",
-        location: "Jakarta Selatan",
+        id_product: 4,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
+    },
+    {
+        id_product: 4,
+        name: "iPhone 11 Pro Max 256 GB Space Gray",
+        price: 12400000,
+        image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        seller: {
+            id_seller: 1,
+            username: "suryamahendra",
+            address: {
+                id_address: 1,
+                name: "Kota Jakarta",
+            },
+        },
     },
 ]
 
-const dataStore = [
+const dataSeller = [
     {
-        id_store: 1,
-        fullname: "Surya Mahendra",
+        id_seller: 1,
+        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
         username: "suryamahendra",
-        location: "Kota Surabaya",
-        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-        createdAt: "6 Juli 2020",
-    },
-    {
-        id_store: 2,
-        fullname: "Putra Asmara",
-        username: "putraasmara",
-        location: "Kota Jakarta",
-        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-        createdAt: "6 Juli 2020",
-    },
-    {
-        id_store: 3,
-        fullname: "Nanda Citra Ayu Mustika",
-        username: "nandacitraayumustika",
-        location: "Kota Bandung",
-        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-        createdAt: "6 Juli 2020",
-    },
-    {
-        id_store: 4,
         fullname: "Surya Mahendra",
+        address: {
+            id_address: 1,
+            name: "Kota Jakarta",
+        },
+        createdAt: "1 Juni 2022",
+    },
+    {
+        id_seller: 1,
+        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
         username: "suryamahendra",
-        location: "Kota Surabaya",
-        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-        createdAt: "6 Juli 2020",
+        fullname: "Surya Mahendra",
+        address: {
+            id_address: 1,
+            name: "Kota Jakarta",
+        },
+        createdAt: "1 Juni 2022",
     },
     {
-        id_store: 5,
-        fullname: "Putra Asmara",
-        username: "putraasmara",
-        location: "Kota Jakarta",
+        id_seller: 1,
         image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-        createdAt: "6 Juli 2020",
+        username: "suryamahendra",
+        fullname: "Surya Mahendra",
+        address: {
+            id_address: 1,
+            name: "Kota Jakarta",
+        },
+        createdAt: "1 Juni 2022",
     },
     {
-        id_store: 6,
-        fullname: "Nanda Citra Ayu Mustika",
-        username: "nandacitraayumustika",
-        location: "Kota Bandung",
+        id_seller: 1,
         image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-        createdAt: "6 Juli 2020",
+        username: "suryamahendra",
+        fullname: "Surya Mahendra",
+        address: {
+            id_address: 1,
+            name: "Kota Jakarta",
+        },
+        createdAt: "1 Juni 2022",
+    },
+    {
+        id_seller: 1,
+        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
+        username: "suryamahendra",
+        fullname: "Surya Mahendra",
+        address: {
+            id_address: 1,
+            name: "Kota Jakarta",
+        },
+        createdAt: "1 Juni 2022",
+    },
+    {
+        id_seller: 1,
+        image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
+        username: "suryamahendra",
+        fullname: "Surya Mahendra",
+        address: {
+            id_address: 1,
+            name: "Kota Jakarta",
+        },
+        createdAt: "1 Juni 2022",
     },
 ]
 
@@ -190,10 +270,10 @@ const Search = () => {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        {dataStore?.map((value, index) => {
+                                        {dataSeller?.map((value, index) => {
                                             return (
                                                 <Col lg={6} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
-                                                    <CardStore value={value} />
+                                                    <CardSeller value={value} />
                                                 </Col>
                                             )
                                         })}
