@@ -5,7 +5,7 @@ import style from './ComplateProfil'
 
 function ComplateProfil() {
   return (
-    <Layout role="default">
+    <Layout role="buyer">
       <Container fluid style={{ height: "100vh", backgroundColor: "#1e1e1e" }} className={'d-flex align-items-center justify-content-center'}>
         <Row> <h3 className={'text-center'} style={{ color: "white" }}>Selamat Datang Di SecondGadget!</h3>
           <Row style={{ backgroundColor: "#ffffff", borderRadius: "5px" }} className={'p-2 pt-3 pb-3 pt-md-4 pb-md-4 gap-2 m-0 ' + style.box_profil}>
@@ -18,7 +18,6 @@ function ComplateProfil() {
                 className='p-1'
               />
             </Col>
-
             <Col xs={12}>
               <Form>
                 <Form.Group as={Row} className="mb-3 d-flex justify-content-center" controlId="formPlaintext" >

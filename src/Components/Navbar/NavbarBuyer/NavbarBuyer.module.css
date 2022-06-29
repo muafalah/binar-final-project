@@ -1,0 +1,11 @@
+@media screen and (max-width: 576px) {
+    .menu_lg {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 577px) {
+    .menu_sm {
+        display: none;
+    }
+}

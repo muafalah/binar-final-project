@@ -5,6 +5,14 @@ import NavbarBuyer from '../Components/Navbar/NavbarBuyer/NavbarBuyer'
 import NavbarDefault from '../Components/Navbar/NavbarDefault/NavbarDefault'
 import NavbarSeller from '../Components/Navbar/NavbarSeller/NavbarSeller'
 
+const dataUser = {
+    id_user: 1,
+    username: "suryamahendra",
+    fullname: "Surya Mahendra",
+    image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
+    role: ["buyer", "seller"],
+}
+
 const Layout = (props) => {
 
     const Default = () => {
@@ -43,7 +51,7 @@ const Layout = (props) => {
         return (
             <>
                 <header>
-                    <NavbarBuyer />
+                    <NavbarBuyer user={dataUser} />
                 </header>
                 <main>
                     {props.children}

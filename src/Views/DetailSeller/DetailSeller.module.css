@@ -1,0 +1,4 @@
+.Link_Menu a::visited {
+    color: red !important;
+    background-color: black !important;
+}

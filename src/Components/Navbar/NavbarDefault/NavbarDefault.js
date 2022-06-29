@@ -6,7 +6,6 @@ import LogoWhite from '../../../Assets/image/Logo/img-logo-landscape-white.svg'
 import FormSearch from '../../Form/FormSearch/FormSearch'
 
 const NavbarDefault = () => {
-
   return (
     <Navbar key="sm" bg="dark" expand="sm" variant="dark">
       <Container>
