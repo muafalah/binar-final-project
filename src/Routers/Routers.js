@@ -10,6 +10,9 @@ import Search from '../Views/Search/Search'
 import AddProduct from '../Views/Seller/Product/Addproduct/AddProduct'
 import DetailProduct from '../Views/DetailProduct/DetailProduct'
 import { ProfileUser } from '../Views/ProfileUser/ProfileUser'
+import { DashboardBuyer } from '../Views/Buyer/DashboardBuyer/DashboardBuyer'
+import { ListProduct } from '../Views/Seller/Product/ListProduct/ListProduct'
+import { EditProduct } from '../Views/Seller/Product/EditProduct/EditProduct'
 
 
 const Routers = () => {
@@ -28,8 +31,11 @@ const Routers = () => {
 
 
                 <Route path='/tambah-produk' element={<AddProduct/>} />
+                <Route path='/list-product' element={<ListProduct/>} />
+                <Route path='/edit-product' element={<EditProduct/>} />
 
                 <Route path='/product/:id_product' element={<DetailProduct />} />
+                <Route path='/dashboardbuyer' element={<DashboardBuyer />} />
 
             </Routes>
         </BrowserRouter>
