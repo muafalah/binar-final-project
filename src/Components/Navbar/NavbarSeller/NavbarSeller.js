@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Container, Offcanvas, Nav, Button, Col } from 'react-bootstrap'
+import { Navbar, Container, Offcanvas, Nav, Col } from 'react-bootstrap'
 import FormSearch from '../../Form/FormSearch/FormSearch'
 import LogoBlack from '../../../Assets/image/Logo/img-logo-landscape-black.svg'
 import LogoWhite from '../../../Assets/image/Logo/img-logo-landscape-white.svg'

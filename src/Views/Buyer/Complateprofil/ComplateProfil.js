@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col, Form, Button, } from 'react-bootstrap'
 import Layout from '../../Layout'
-import style from './ComplateProfil'
+import style from './ComplateProfil.module.css'
 
 function ComplateProfil() {
   return (
