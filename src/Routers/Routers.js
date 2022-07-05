@@ -17,7 +17,7 @@ import DashboardAdmin from '../Views/Admin/DashboardAdmin/DashboardAdmin'
 import ListCategory from '../Views/Admin/Category/ListCategory/ListCategory'
 import ListCarousel from '../Views/Admin/Carousel/ListCarousel/ListCarousel'
 import ListUser from '../Views/Admin/User/ListUser/ListUser'
-import CompleteProfile from '../Views/User/CompleteProfile/CompleteProfile'
+import CompleteProfile from '../Views/General/CompleteProfile/CompleteProfile'
 
 const Routers = () => {
     return (
