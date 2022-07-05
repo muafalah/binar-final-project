@@ -14,6 +14,10 @@ import ListOffer from '../Views/User/Offer/ListOffer/ListOffer'
 import ListNotification from '../Views/User/Notification/ListNotification/ListNotification'
 import ListFavorit from '../Views/User/Favorit/ListFavorit/ListFavorit'
 import EditProfile from '../Views/User/Profile/EditProfile/EditProfile'
+import DashboardAdmin from '../Views/Admin/DashboardAdmin/DashboardAdmin'
+import ListCategory from '../Views/Admin/Category/ListCategory/ListCategory'
+import ListCarousel from '../Views/Admin/Carousel/ListCarousel/ListCarousel'
+import ListUser from '../Views/Admin/User/ListUser/ListUser'
 
 const Routers = () => {
     return (
@@ -41,6 +45,15 @@ const Routers = () => {
                 <Route path='/dashboard/favorit/list' element={<ListFavorit />} />
                 <Route path='/dashboard/profile' element={<Navigate to="/dashboard/profile/edit" />} />
                 <Route path='/dashboard/profile/edit' element={<EditProfile />} />
+
+                <Route path='/admin' element={<DashboardAdmin />} />
+
+                <Route path='/admin/category' element={<Navigate to="/admin/category/list" />} />
+                <Route path='/admin/category/list' element={<ListCategory />} />
+                <Route path='/admin/carousel' element={<Navigate to="/admin/carousel/list" />} />
+                <Route path='/admin/carousel/list' element={<ListCarousel />} />
+                <Route path='/admin/user' element={<Navigate to="/admin/user/list" />} />
+                <Route path='/admin/user/list' element={<ListUser />} />
 
             </Routes>
         </BrowserRouter>
