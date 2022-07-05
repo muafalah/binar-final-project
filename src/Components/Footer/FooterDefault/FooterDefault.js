@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Row, Container } from 'react-bootstrap'
-import style from './FooterDefault.module.css'
 import Logo from '../../../Assets/image/Logo/img-logo-landscape-white.svg'
+import style from './FooterDefault.module.css'
 import { EnvelopeFill, Facebook, Instagram, Linkedin, TelephoneFill, Twitter, Youtube } from 'react-bootstrap-icons'
 
 const FooterDefault = () => {

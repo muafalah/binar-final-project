@@ -1,0 +1,36 @@
+@media screen and (max-width: 576px) {
+    .profile_lg {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 577px) {
+    .profile_sm {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .category_lg {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .category_sm {
+        display: none;
+    }
+}
+
+.box {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #e4e4e7;
+    padding: 1rem;
+}
+
+.scroll_menu {
+    display: block !important;
+    overflow: auto;
+    white-space: nowrap;
+}

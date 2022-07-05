@@ -1,0 +1,10 @@
+.featured {
+    background-color: black;
+}
+
+.bg_ctabanner {
+    background-image: url(../../../Assets/image/LandingPage/img-bg-ctabanner.svg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

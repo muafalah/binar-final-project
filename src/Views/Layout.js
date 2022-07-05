@@ -1,19 +1,12 @@
 import React from 'react'
 import FooterDefault from '../Components/Footer/FooterDefault/FooterDefault'
-import NavbarAdmin from '../Components/Navbar/NavbarAdmin/NavbarAdmin'
-import NavbarBuyer from '../Components/Navbar/NavbarBuyer/NavbarBuyer'
 import NavbarDefault from '../Components/Navbar/NavbarDefault/NavbarDefault'
-import NavbarSeller from '../Components/Navbar/NavbarSeller/NavbarSeller'
+import NavbarUser from '../Components/Navbar/NavbarUser/NavbarUser'
+import { dataUser } from './DataDummy'
 
-const dataUser = {
-    id_user: 1,
-    username: "suryamahendra",
-    fullname: "Surya Mahendra",
-    image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-    role: ["buyer", "seller"],
-}
+const Layout = ({ children }) => {
 
-const Layout = (props) => {
+    const role = "user"
 
     const Default = () => {
         return (
@@ -22,7 +15,23 @@ const Layout = (props) => {
                     <NavbarDefault />
                 </header>
                 <main>
-                    {props.children}
+                    {children}
+                </main>
+                <footer>
+                    <FooterDefault />
+                </footer>
+            </>
+        )
+    }
+
+    const User = () => {
+        return (
+            <>
+                <header>
+                    <NavbarUser dataUser={dataUser} />
+                </header>
+                <main>
+                    {children}
                 </main>
                 <footer>
                     <FooterDefault />
@@ -35,45 +44,13 @@ const Layout = (props) => {
         return (
             <>
                 <header>
-                    <NavbarAdmin />
+                    Navbar
                 </header>
                 <main>
-                    {props.children}
+                    {children}
                 </main>
                 <footer>
-                    <FooterDefault />
-                </footer>
-            </>
-        )
-    }
-
-    const Buyer = () => {
-        return (
-            <>
-                <header>
-                    <NavbarBuyer user={dataUser} />
-                </header>
-                <main>
-                    {props.children}
-                </main>
-                <footer>
-                    <FooterDefault />
-                </footer>
-            </>
-        )
-    }
-
-    const Seller = () => {
-        return (
-            <>
-                <header>
-                    <NavbarSeller />
-                </header>
-                <main>
-                    {props.children}
-                </main>
-                <footer>
-                    <FooterDefault />
+                    Footer
                 </footer>
             </>
         )
@@ -81,10 +58,9 @@ const Layout = (props) => {
 
     return (
         <>
-            {props.role === "default" ? Default() : null}
-            {props.role === "admin" ? Admin() : null}
-            {props.role === "buyer" ? Buyer() : null}
-            {props.role === "seller" ? Seller() : null}
+            {role === "default" ? Default() : null}
+            {role === "user" ? User() : null}
+            {role === "Admin" ? User() : null}
         </>
     )
 }

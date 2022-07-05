@@ -34,3 +34,27 @@ h5 {
 a {
     text-decoration: none;
 }
+
+.nav-tabs .nav-link.active {
+    border: 0px solid black !important;
+    background-color: #f8fafc !important;
+    border-bottom: 2px solid black !important;
+    color: black !important;
+}
+
+.nav-tabs .nav-link {
+    border: 0px !important;
+    color: #6c757d !important;
+}
+
+.bg-merah {
+    background-color: red;
+}
+
+.bg-biru {
+    background-color: blue;
+}
+
+.bg-ungu {
+    background-color: purple;
+}
