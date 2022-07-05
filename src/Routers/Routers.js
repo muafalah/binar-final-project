@@ -14,10 +14,11 @@ import ListNotification from '../Views/User/Notification/ListNotification/ListNo
 import ListFavorit from '../Views/User/Favorit/ListFavorit/ListFavorit'
 import EditProfile from '../Views/User/Profile/EditProfile/EditProfile'
 import DashboardAdmin from '../Views/Admin/DashboardAdmin/DashboardAdmin'
-import ListCategory from '../Views/Admin/Category/ListCategory/ListCategory'
-import ListCarousel from '../Views/Admin/Carousel/ListCarousel/ListCarousel'
-import ListUser from '../Views/Admin/User/ListUser/ListUser'
 import CompleteProfile from '../Views/General/CompleteProfile/CompleteProfile'
+import ListCategoryAdmin from '../Views/Admin/CategoryAdmin/ListCategoryAdmin/ListCategoryAdmin'
+import ListCarouselAdmin from '../Views/Admin/CarouselAdmin/ListCarouselAdmin/ListCarouselAdmin'
+import ListUserAdmin from '../Views/Admin/UserAdmin/ListUserAdmin/ListUserAdmin'
+import ListProductAdmin from '../Views/Admin/ProductAdmin/ListProductAdmin/ListProductAdmin'
 
 const Routers = () => {
     return (
@@ -49,11 +50,13 @@ const Routers = () => {
                 <Route path='/admin' element={<DashboardAdmin />} />
 
                 <Route path='/admin/category' element={<Navigate to="/admin/category/list" />} />
-                <Route path='/admin/category/list' element={<ListCategory />} />
+                <Route path='/admin/category/list' element={<ListCategoryAdmin />} />
+                <Route path='/admin/product' element={<Navigate to="/admin/product/list" />} />
+                <Route path='/admin/product/list' element={<ListProductAdmin />} />
                 <Route path='/admin/carousel' element={<Navigate to="/admin/carousel/list" />} />
-                <Route path='/admin/carousel/list' element={<ListCarousel />} />
+                <Route path='/admin/carousel/list' element={<ListCarouselAdmin />} />
                 <Route path='/admin/user' element={<Navigate to="/admin/user/list" />} />
-                <Route path='/admin/user/list' element={<ListUser />} />
+                <Route path='/admin/user/list' element={<ListUserAdmin />} />
 
             </Routes>
         </BrowserRouter>

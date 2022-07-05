@@ -12,7 +12,7 @@ const NavbarUser = ({ dataUser }) => {
             <Container>
                 <Navbar.Brand href="/" className="pe-3"><img src={LogoWhite} height="35" alt="SecondGadget" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar-expand-sm" />
-                <div className="w-100 me-3"><FormSearch /></div>
+                <div className="w-100 me-0 me-md-3"><FormSearch /></div>
                 <Navbar.Offcanvas id="offcanvasNavbar-expand-sm" aria-labelledby="offcanvasNavbarLabel-expand-sm" placement="end" bg="dark">
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title id="offcanvasNavbarLabel-expand-sm">

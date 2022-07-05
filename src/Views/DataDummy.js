@@ -446,3 +446,10 @@ export const dataUser = {
     image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
     role: ["buyer", "seller"],
 }
+
+export const dataAdmin = {
+    id_admin: 1,
+    fullname: "User Admin",
+    email: "admin@mail.com",
+    image: "https://media-exp1.licdn.com/dms/image/C5603AQGIJRElvENaDg/profile-displayphoto-shrink_800_800/0/1644576004558?e=1662595200&v=beta&t=icVsH_Wf8Ua8cxeNnUrDxSoqOrTa8Q4-9G_kATl4XQA",
+}
