@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Navbar } from 'react-bootstrap'
 import LogoWhite from '../../../Assets/image/Logo/img-logo-landscape-white.svg'
+import style from './NavbarBlank.module.css'
 
 const NavbarBlank = () => {
     return (

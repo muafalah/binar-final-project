@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
+import style from './FormSearch.module.css'
 
 const FormSearch = () => {
 
