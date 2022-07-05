@@ -1,0 +1,16 @@
+@media (min-width: 576px) {
+    .box_login {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .box_login {
+        width: 60%;
+    }
+}
+@media (min-width: 992px) {
+    .box_login {
+        width: 50%;
+    }
+}
