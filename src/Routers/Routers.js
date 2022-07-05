@@ -19,6 +19,9 @@ import ListCategoryAdmin from '../Views/Admin/CategoryAdmin/ListCategoryAdmin/Li
 import ListCarouselAdmin from '../Views/Admin/CarouselAdmin/ListCarouselAdmin/ListCarouselAdmin'
 import ListUserAdmin from '../Views/Admin/UserAdmin/ListUserAdmin/ListUserAdmin'
 import ListProductAdmin from '../Views/Admin/ProductAdmin/ListProductAdmin/ListProductAdmin'
+import AddProduct from '../Views/User/Product/AddProduct/AddProduct'
+import EditProduct from '../Views/User/Product/EditProduct/EditProduct'
+import DetailOffer from '../Views/User/Offer/DetailOffer/DetailOffer'
 
 const Routers = () => {
     return (
@@ -38,8 +41,11 @@ const Routers = () => {
 
                 <Route path='/dashboard/product' element={<Navigate to="/dashboard/product/list" />} />
                 <Route path='/dashboard/product/list' element={<ListProduct />} />
+                <Route path='/dashboard/product/add' element={<AddProduct />} />
+                <Route path='/dashboard/product/edit/:id_product' element={<EditProduct />} />
                 <Route path='/dashboard/offer' element={<Navigate to="/dashboard/offer/list" />} />
                 <Route path='/dashboard/offer/list' element={<ListOffer />} />
+                <Route path='/dashboard/offer/detail/id_offer' element={<DetailOffer />} />
                 <Route path='/dashboard/notification' element={<Navigate to="/dashboard/notification/list" />} />
                 <Route path='/dashboard/notification/list' element={<ListNotification />} />
                 <Route path='/dashboard/favorit' element={<Navigate to="/dashboard/favorit/list" />} />

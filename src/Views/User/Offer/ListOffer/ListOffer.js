@@ -7,7 +7,7 @@ const ListOffer = () => {
     return (
         <Dashboard menu="offer">
             <Tab.Container defaultActiveKey="1">
-                <Row className="m-0 gap-4">
+                <Row className="m-0 gap-3">
                     <Col xs={12} className="p-0">
                         <Nav variant="tabs" className={style.scroll_menu}>
                             <Nav.Item className="d-flex">

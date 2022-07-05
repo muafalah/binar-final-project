@@ -101,7 +101,7 @@ const DetailSeller = () => {
                                                 {dataCardProduct?.map((value, index) => {
                                                     return (
                                                         <Col lg={4} md={6} sm={12} xs={12} key={index} className={'mb-3'}>
-                                                            <CardProduct value={value} />
+                                                            <CardProduct value={value} type="default" />
                                                         </Col>
                                                     )
                                                 })}
@@ -112,7 +112,7 @@ const DetailSeller = () => {
                                                 {dataCardProduct?.map((value, index) => {
                                                     return (
                                                         <Col lg={4} md={6} sm={12} xs={12} key={index} className={'mb-3'}>
-                                                            <CardProduct value={value} />
+                                                            <CardProduct value={value} type="default" />
                                                         </Col>
                                                     )
                                                 })}
@@ -123,7 +123,7 @@ const DetailSeller = () => {
                                                 {dataCardProduct?.map((value, index) => {
                                                     return (
                                                         <Col lg={4} md={6} sm={12} xs={12} key={index} className={'mb-3'}>
-                                                            <CardProduct value={value} />
+                                                            <CardProduct value={value} type="default" />
                                                         </Col>
                                                     )
                                                 })}

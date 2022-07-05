@@ -58,7 +58,7 @@ const NavbarUser = ({ dataUser }) => {
                                             <img src={dataUser.image} alt="User Profile" style={{ borderRadius: "100px", width: "30px", height: "30px" }} />
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu variant="secondary" style={{ width: "15rem" }}>
-                                            <Dropdown.Item href={'/seller/' + dataUser.username}>
+                                            <Dropdown.Item href={'/dashboard/profile/edit'}>
                                                 <div className="d-flex">
                                                     <div className="my-auto me-3"><img src={dataUser.image} alt="User Profile" style={{ borderRadius: "100px", width: "38px", height: "38px" }} /></div>
                                                     <div className='w-100'>

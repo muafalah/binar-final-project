@@ -52,8 +52,8 @@ const Search = () => {
                                     <Row>
                                         {dataCardProduct?.map((value, index) => {
                                             return (
-                                                <Col lg={4} md={4} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
-                                                    <CardProduct value={value} />
+                                                <Col lg={4} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
+                                                    <CardProduct value={value} type="default" />
                                                 </Col>
                                             )
                                         })}
