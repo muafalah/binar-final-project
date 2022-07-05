@@ -12,6 +12,9 @@ import DetailProduct from '../Views/DetailProduct/DetailProduct'
 import { ProfileUser } from '../Views/ProfileUser/ProfileUser'
 import EditProfil from '../Views/Buyer/Editprofil/EditProfil'
 import ListProdukAdmin from '../Views/Admin/ListProduk/ListProdukAdmin'
+import { DashboardBuyer } from '../Views/Buyer/DashboardBuyer/DashboardBuyer'
+import { ListProduct } from '../Views/Seller/Product/ListProduct/ListProduct'
+import { EditProduct } from '../Views/Seller/Product/EditProduct/EditProduct'
 
 
 const Routers = () => {
