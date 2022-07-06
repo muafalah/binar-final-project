@@ -22,6 +22,7 @@ import ListProductAdmin from '../Views/Admin/ProductAdmin/ListProductAdmin/ListP
 import AddProduct from '../Views/User/Product/AddProduct/AddProduct'
 import EditProduct from '../Views/User/Product/EditProduct/EditProduct'
 import DetailOffer from '../Views/User/Offer/DetailOffer/DetailOffer'
+import ListTransaction from '../Views/User/Transaction/ListTransaction/ListTransaction'
 
 const Routers = () => {
     return (
@@ -46,6 +47,8 @@ const Routers = () => {
                 <Route path='/dashboard/offer' element={<Navigate to="/dashboard/offer/list" />} />
                 <Route path='/dashboard/offer/list' element={<ListOffer />} />
                 <Route path='/dashboard/offer/detail/id_offer' element={<DetailOffer />} />
+                <Route path='/dashboard/transaction' element={<Navigate to="/dashboard/transaction/list" />} />
+                <Route path='/dashboard/transaction/list' element={<ListTransaction />} />
                 <Route path='/dashboard/notification' element={<Navigate to="/dashboard/notification/list" />} />
                 <Route path='/dashboard/notification/list' element={<ListNotification />} />
                 <Route path='/dashboard/favorit' element={<Navigate to="/dashboard/favorit/list" />} />

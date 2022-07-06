@@ -1,0 +1,6 @@
+.scroll_menu {
+    display: block !important;
+    overflow: auto;
+    white-space: nowrap;
+    padding-bottom: 0.063rem;
+}

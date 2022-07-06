@@ -1,13 +1,13 @@
 import React from 'react'
 import { Col, Nav, Row, Tab } from 'react-bootstrap'
-import CardOffer from '../../../../Components/Card/CardOffer/CardOffer'
+import CardTransaction from '../../../../Components/Card/CardTransaction/CardTransaction'
 import { dataOffer } from '../../../DataDummy'
 import Dashboard from '../../Dashboard/Dashboard'
-import style from './ListOffer.module.css'
+import style from './ListTransaction.module.css'
 
-const ListOffer = () => {
+const ListTransaction = () => {
     return (
-        <Dashboard menu="offer">
+        <Dashboard menu="transaction">
             <Tab.Container defaultActiveKey="1">
                 <Row className="m-0 gap-3">
                     <Col xs={12} className="p-0">
@@ -27,7 +27,7 @@ const ListOffer = () => {
                                     {dataOffer?.map((value, index) => {
                                         return (
                                             <Col xs={12} className={'pt-2 pb-2'} key={index}>
-                                                <CardOffer value={value} />
+                                                <CardTransaction value={value} />
                                             </Col>
                                         )
                                     })}
@@ -38,7 +38,7 @@ const ListOffer = () => {
                                     {dataOffer?.map((value, index) => {
                                         return (
                                             <Col xs={12} className={'pt-2 pb-2'} key={index}>
-                                                <CardOffer value={value} />
+                                                <CardTransaction value={value} />
                                             </Col>
                                         )
                                     })}
@@ -49,7 +49,7 @@ const ListOffer = () => {
                                     {dataOffer?.map((value, index) => {
                                         return (
                                             <Col xs={12} className={'pt-2 pb-2'} key={index}>
-                                                <CardOffer value={value} />
+                                                <CardTransaction value={value} />
                                             </Col>
                                         )
                                     })}
@@ -60,7 +60,7 @@ const ListOffer = () => {
                                     {dataOffer?.map((value, index) => {
                                         return (
                                             <Col xs={12} className={'pt-2 pb-2'} key={index}>
-                                                <CardOffer value={value} />
+                                                <CardTransaction value={value} />
                                             </Col>
                                         )
                                     })}
@@ -74,4 +74,4 @@ const ListOffer = () => {
     )
 }
 
-export default ListOffer
+export default ListTransaction

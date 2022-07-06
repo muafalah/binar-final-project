@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { Bell, BoxSeam, ChevronRight, Person, Star, Tags } from 'react-bootstrap-icons'
+import { Bell, BoxSeam, ChevronRight, ClipboardCheck, Person, Star, Tags } from 'react-bootstrap-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { dataDetailSeller, dataUser } from '../../DataDummy'
 import Layout from '../../Layout'
@@ -29,6 +29,11 @@ const Dashboard = ({ children, menu }) => {
     ]
 
     const menuBuyer = [
+        {
+            value: 'transaction',
+            label: 'Transaksi',
+            icon: <ClipboardCheck className='my-auto me-2 me-lg-2' size={16} />
+        },
         {
             value: 'notification',
             label: 'Notifikasi',
