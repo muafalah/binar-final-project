@@ -27,7 +27,7 @@ const CardOffer = ({ value }) => {
                                     <div style={{ fontSize: "0.875rem", color: "#8A8A8A" }}>{value.product.category.name}</div>
                                     <div style={{ fontWeight: "500", color: "black" }}>{value.product.name}</div>
                                 </div>
-                                <div><span style={{ fontWeight: "600", color: "#8A8A8A", textDecoration: "line-through" }}>Rp. {formatRupiah(value.product.price)}</span>  <span style={{ fontSize: "1.125rem", fontWeight: "500", color: "#fb374f" }}>Rp. {formatRupiah(value.price)}</span></div>
+                                <div><span style={{ fontWeight: "400", color: "#8A8A8A", textDecoration: "line-through" }}>Rp. {formatRupiah(value.product.price)}</span>  <span style={{ fontSize: "1.125rem", fontWeight: "600", color: "#fb374f" }}>Rp. {formatRupiah(value.price)}</span></div>
                             </div>
                         </a>
                         <hr className={'m-0 p-0 mt-3 mb-3 ' + style.line_horizontal} />
@@ -71,7 +71,7 @@ const CardOffer = ({ value }) => {
                 }
                 {value.status === "accepted" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="outline-secondary" type="submit">Lihat Produk</Button>
+                        {/* <Button className={style.button_respon} variant="outline-secondary" type="submit">Lihat Produk</Button> */}
                         <Button className={style.button_respon} variant="success" type="submit">Cetak Bukti</Button>
                     </div>
                     : null
