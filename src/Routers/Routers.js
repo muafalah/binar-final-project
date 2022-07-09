@@ -23,6 +23,8 @@ import AddProduct from '../Views/User/Product/AddProduct/AddProduct'
 import EditProduct from '../Views/User/Product/EditProduct/EditProduct'
 import DetailOffer from '../Views/User/Offer/DetailOffer/DetailOffer'
 import ListTransaction from '../Views/User/Transaction/ListTransaction/ListTransaction'
+import AddCarouselAdmin from '../Views/Admin/CarouselAdmin/AddCarouselAdmin/AddCarouselAdmin'
+import EditCarouselAdmin from '../Views/Admin/CarouselAdmin/EditCarouselAdmin/EditCarouselAdmin'
 
 const Routers = () => {
     return (
@@ -64,8 +66,11 @@ const Routers = () => {
                 <Route path='/admin/product/list' element={<ListProductAdmin />} />
                 <Route path='/admin/carousel' element={<Navigate to="/admin/carousel/list" />} />
                 <Route path='/admin/carousel/list' element={<ListCarouselAdmin />} />
+                <Route path='/admin/carousel/list/addcarousel' element={<AddCarouselAdmin />} />
+                <Route path='/admin/carousel/list/editcarousel' element={<EditCarouselAdmin />} />
                 <Route path='/admin/user' element={<Navigate to="/admin/user/list" />} />
                 <Route path='/admin/user/list' element={<ListUserAdmin />} />
+                
 
             </Routes>
         </BrowserRouter>
