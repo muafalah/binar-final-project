@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Container, Row, Button } from 'react-bootstrap'
+import { Col, Container, Row, Button, Badge } from 'react-bootstrap'
 import { ChatDotsFill, HeartFill } from 'react-bootstrap-icons'
 import CardProduct from '../../../Components/Card/CardProduct/CardProduct'
 import SliderProduct from '../../../Components/Slider/SliderProduct/SliderProduct'
@@ -28,7 +28,7 @@ const DetailProduct = () => {
                                             <div style={{ fontSize: "0.875rem", color: "#8A8A8A" }}>Terakhir diperbarui pada tanggal {formatDate(dataDetailProduct.updatedAt)}</div>
                                         </Col>
                                         <Col xs={12} className="mb-2">
-                                            <h3 style={{ color: "#fb374f" }}>Rp. {formatRupiah(dataDetailProduct.price)},-</h3>
+                                            {dataDetailProduct.status === "sold" ? <div className="d-flex gap-2"><span><h3 style={{ color: "#8A8A8A", textDecoration: "line-through" }}>Rp. {formatRupiah(dataDetailProduct.price)},-</h3></span><span><Badge style={{ fontSize: "1rem", fontWeight: "400" }} bg="danger">Habis</Badge></span></div> : <h3 style={{ color: "#fb374f" }}>Rp. {formatRupiah(dataDetailProduct.price)},-</h3>}
                                         </Col>
                                         <Col xs={12} className={style.detail_lg}>
                                             <div style={{ backgroundColor: "#F4F4F4" }} className="d-flex gap-2 justify-content-between p-2">
@@ -73,7 +73,7 @@ const DetailProduct = () => {
                                                     <a href={'https://wa.me/' + dataDetailProduct.seller.no_hp} target="_blank"><Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="outline-dark" style={{ fontSize: "1.125rem" }}><ChatDotsFill className='my-auto me-2' size={16} /> Chat Penjual</Button></a>
                                                 </Col>
                                                 <Col lg={5} md={5} className="mt-3">
-                                                    <Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="danger" style={{ fontSize: "1.125rem" }}>Tawar Harga</Button>
+                                                    {dataDetailProduct.status === "sold" ? <Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="danger" style={{ fontSize: "1.125rem" }} disabled>Tawar Harga</Button> : <Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="danger" style={{ fontSize: "1.125rem" }}>Tawar Harga</Button>}
                                                 </Col>
                                             </Row>
                                         </Col>
@@ -124,7 +124,7 @@ const DetailProduct = () => {
                             {dataRelatedProduct?.map((value, index) => {
                                 return (
                                     <Col lg={3} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
-                                        <CardProduct value={value} />
+                                        <CardProduct value={value} type="default" />
                                     </Col>
                                 )
                             })}

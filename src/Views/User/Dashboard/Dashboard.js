@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { Bell, BoxSeam, ChevronRight, Person, Star, Tags } from 'react-bootstrap-icons'
+import { Bell, BoxSeam, ChevronRight, ClipboardCheck, Person, Star, Tags } from 'react-bootstrap-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { dataDetailSeller, dataUser } from '../../DataDummy'
 import Layout from '../../Layout'
@@ -29,6 +29,11 @@ const Dashboard = ({ children, menu }) => {
     ]
 
     const menuBuyer = [
+        {
+            value: 'transaction',
+            label: 'Transaksi',
+            icon: <ClipboardCheck className='my-auto me-2 me-lg-2' size={16} />
+        },
         {
             value: 'notification',
             label: 'Notifikasi',
@@ -108,7 +113,7 @@ const Dashboard = ({ children, menu }) => {
                             <Col xs={12} className={'p-0 mt-4 pe-lg-3 ' + style.box_sm}>
                                 <div className={'p-3 ' + style.box_temp}>
                                     <h5 className="mb-3">Menu</h5>
-                                    {dataUser.role[1] === "seller" ? <Select className="mt-2" options={[...menuSeller, ...menuBuyer]} defaultValue={menuSeller.filter(option => option.value == menu)} placeholder="Menu" theme={selectTheme} onChange={(e) => navigateMenu(e.value)} /> : <Select className="mt-2" options={menuBuyer} defaultValue={menuSeller.filter(option => option.value == menu)} placeholder="Menu" theme={selectTheme} onChange={(e) => navigateMenu(e.value)} />}
+                                    {dataUser.role[1] === "seller" ? <Select className="mt-2" options={[...menuSeller, ...menuBuyer]} defaultValue={[...menuSeller, ...menuBuyer].filter(option => option.value == menu)} placeholder="Menu" theme={selectTheme} onChange={(e) => navigateMenu(e.value)} /> : <Select className="mt-2" options={menuBuyer} defaultValue={menuBuyer.filter(option => option.value == menu)} placeholder="Menu" theme={selectTheme} onChange={(e) => navigateMenu(e.value)} />}
                                 </div>
                             </Col>
                             <Col lg={9} className={'p-0 mt-4 ps-lg-3'}>

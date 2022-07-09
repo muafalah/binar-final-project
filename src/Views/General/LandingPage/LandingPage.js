@@ -37,7 +37,7 @@ const LandingPage = () => {
                         {dataCardProduct?.map((value, index) => {
                             return (
                                 <Col lg={3} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
-                                    <CardProduct value={value} />
+                                    <CardProduct value={value} type="default" />
                                 </Col>
                             )
                         })}

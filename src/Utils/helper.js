@@ -19,6 +19,9 @@ export const formatRupiah = (value) => {
 
 export const formatTimestamp = (value) => {
     if (!value || value == null) return `0`
+
+    let date = value.substring(0, 11)
+    return moment(value).format('Do MMM YYYY, HH:MM')
 }
 
 export const formatDate = (value) => {

@@ -67,6 +67,11 @@ export const dataCategory = [
 export const dataCardProduct = [
     {
         id_product: 1,
+        status: "available",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -82,6 +87,11 @@ export const dataCardProduct = [
     },
     {
         id_product: 2,
+        status: "available",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -94,9 +104,13 @@ export const dataCardProduct = [
                 name: "Kota Jakarta Utara",
             },
         },
-    },
-    {
+    }, {
         id_product: 3,
+        status: "available",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -109,9 +123,13 @@ export const dataCardProduct = [
                 name: "Kota Jakarta Utara",
             },
         },
-    },
-    {
+    }, {
         id_product: 4,
+        status: "available",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -124,9 +142,13 @@ export const dataCardProduct = [
                 name: "Kota Jakarta Utara",
             },
         },
-    },
-    {
+    }, {
         id_product: 5,
+        status: "available",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -139,9 +161,13 @@ export const dataCardProduct = [
                 name: "Kota Jakarta Utara",
             },
         },
-    },
-    {
+    }, {
         id_product: 6,
+        status: "available",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -154,9 +180,13 @@ export const dataCardProduct = [
                 name: "Kota Jakarta Utara",
             },
         },
-    },
-    {
+    }, {
         id_product: 7,
+        status: "available",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -169,9 +199,13 @@ export const dataCardProduct = [
                 name: "Kota Jakarta Utara",
             },
         },
-    },
-    {
+    }, {
         id_product: 8,
+        status: "sold",
+        category: {
+            id_category: 1,
+            name: "iPhone",
+        },
         name: "iPhone 11 Pro Max 256 GB Space Gray",
         price: 12400000,
         image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
@@ -366,6 +400,7 @@ export const dataRelatedProduct = [
 
 export const dataDetailProduct = {
     id_product: 1,
+    status: "sold",
     category: {
         id_category: 1,
         name: "iPhone",
@@ -446,3 +481,121 @@ export const dataUser = {
     image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
     role: ["buyer", "seller"],
 }
+
+export const dataAdmin = {
+    id_admin: 1,
+    fullname: "User Admin",
+    email: "admin@mail.com",
+    image: "https://media-exp1.licdn.com/dms/image/C5603AQGIJRElvENaDg/profile-displayphoto-shrink_800_800/0/1644576004558?e=1662595200&v=beta&t=icVsH_Wf8Ua8cxeNnUrDxSoqOrTa8Q4-9G_kATl4XQA",
+}
+
+export const dataOffer = [
+    {
+        id_offer: 1,
+        status: "pending",
+        price: 12000000,
+        product: {
+            id_product: 1,
+            name: "iPhone 11 Pro Max 256GB Space Gray",
+            category: {
+                id_category: 1,
+                name: "iPhone",
+            },
+            price: 12400000,
+            image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        },
+        user: {
+            id_user: 1,
+            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
+            fullname: "Surya Mahendra",
+            username: "suryamahendra",
+            city: {
+                id_city: 1,
+                name: "Kota Jakarta Utara",
+            },
+        },
+        updatedAt: "2022-06-27 15:07:25.387",
+        createdAt: "2022-08-27 15:07:25.387",
+    },
+    {
+        id_offer: 1,
+        status: "processed",
+        price: 12000000,
+        product: {
+            id_product: 1,
+            name: "iPhone 11 Pro Max 256GB Space Gray",
+            category: {
+                id_category: 1,
+                name: "iPhone",
+            },
+            price: 12400000,
+            image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        },
+        user: {
+            id_user: 1,
+            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
+            fullname: "Surya Mahendra",
+            username: "suryamahendra",
+            city: {
+                id_city: 1,
+                name: "Kota Jakarta Utara",
+            },
+        },
+        updatedAt: "2022-06-27 15:07:25.387",
+        createdAt: "2022-08-27 15:07:25.387",
+    },
+    {
+        id_offer: 1,
+        status: "declined",
+        price: 12000000,
+        product: {
+            id_product: 1,
+            name: "iPhone 11 Pro Max 256GB Space Gray",
+            category: {
+                id_category: 1,
+                name: "iPhone",
+            },
+            price: 12400000,
+            image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        },
+        user: {
+            id_user: 1,
+            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
+            fullname: "Surya Mahendra",
+            username: "suryamahendra",
+            city: {
+                id_city: 1,
+                name: "Kota Jakarta Utara",
+            },
+        },
+        updatedAt: "2022-06-27 15:07:25.387",
+        createdAt: "2022-08-27 15:07:25.387",
+    },
+    {
+        id_offer: 1,
+        status: "accepted",
+        price: 12000000,
+        product: {
+            id_product: 1,
+            name: "iPhone 11 Pro Max 256GB Space Gray",
+            category: {
+                id_category: 1,
+                name: "iPhone",
+            },
+            price: 12400000,
+            image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
+        },
+        user: {
+            id_user: 1,
+            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
+            fullname: "Surya Mahendra",
+            username: "suryamahendra",
+            city: {
+                id_city: 1,
+                name: "Kota Jakarta Utara",
+            },
+        },
+        updatedAt: "2022-06-27 15:07:25.387",
+        createdAt: "2022-08-27 15:07:25.387",
+    },
+]

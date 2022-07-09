@@ -1,10 +1,13 @@
 import React from 'react'
-import { Container, Navbar, Offcanvas, Button, Dropdown, Badge } from 'react-bootstrap'
-import { BagCheckFill, BagHeartFill, BellFill, BoxArrowRight, HouseFill, StarFill } from 'react-bootstrap-icons'
+import { Container, Navbar, Offcanvas, Button, Dropdown, Badge, Row, Col } from 'react-bootstrap'
+import { BagCheckFill, BagHeartFill, BellFill, BoxArrowRight, HouseFill, StarFill, XCircle } from 'react-bootstrap-icons'
 import FormSearch from '../../Form/FormSearch/FormSearch'
 import style from './NavbarUser.module.css'
 import LogoWhite from '../../../Assets/image/Logo/img-logo-landscape-white.svg'
 import LogoBlack from '../../../Assets/image/Logo/img-logo-landscape-black.svg'
+import { dataCardProduct } from '../../../Views/DataDummy'
+import { formatRupiah } from '../../../Utils/helper'
+import CardNavbarFavorit from '../../Card/CardNavbarFavorit/CardNavbarFavorit'
 
 const NavbarUser = ({ dataUser }) => {
     return (
@@ -12,7 +15,7 @@ const NavbarUser = ({ dataUser }) => {
             <Container>
                 <Navbar.Brand href="/" className="pe-3"><img src={LogoWhite} height="35" alt="SecondGadget" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar-expand-sm" />
-                <div className="w-100 me-3"><FormSearch /></div>
+                <div className="w-100 me-0 me-md-3"><FormSearch /></div>
                 <Navbar.Offcanvas id="offcanvasNavbar-expand-sm" aria-labelledby="offcanvasNavbarLabel-expand-sm" placement="end" bg="dark">
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title id="offcanvasNavbarLabel-expand-sm">
@@ -34,7 +37,15 @@ const NavbarUser = ({ dataUser }) => {
                                             </div>
                                             <hr className="p-0 m-0 mt-1 mb-3" />
                                             <div>
-                                                a
+                                                <Row className='m-0 gap-2'>
+                                                    {dataCardProduct?.map((value, index) => {
+                                                        return (
+                                                            <Col xs={12} className='p-0'>
+                                                                <CardNavbarFavorit value={value} />
+                                                            </Col>
+                                                        )
+                                                    })}
+                                                </Row>
                                             </div>
                                         </Dropdown.Menu>
                                     </Dropdown>
@@ -49,7 +60,11 @@ const NavbarUser = ({ dataUser }) => {
                                             </div>
                                             <hr className="p-0 m-0 mt-1 mb-3" />
                                             <div>
-                                                a
+                                                <Row className='m-0 gap-2'>
+                                                    <Col xs={12} className='p-0'>
+                                                        a
+                                                    </Col>
+                                                </Row>
                                             </div>
                                         </Dropdown.Menu>
                                     </Dropdown>
@@ -58,7 +73,7 @@ const NavbarUser = ({ dataUser }) => {
                                             <img src={dataUser.image} alt="User Profile" style={{ borderRadius: "100px", width: "30px", height: "30px" }} />
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu variant="secondary" style={{ width: "15rem" }}>
-                                            <Dropdown.Item href={'/seller/' + dataUser.username}>
+                                            <Dropdown.Item href={'/dashboard/profile/edit'}>
                                                 <div className="d-flex">
                                                     <div className="my-auto me-3"><img src={dataUser.image} alt="User Profile" style={{ borderRadius: "100px", width: "38px", height: "38px" }} /></div>
                                                     <div className='w-100'>
