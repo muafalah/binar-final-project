@@ -15,16 +15,20 @@ import ListFavorit from '../Views/User/Favorit/ListFavorit/ListFavorit'
 import EditProfile from '../Views/User/Profile/EditProfile/EditProfile'
 import DashboardAdmin from '../Views/Admin/DashboardAdmin/DashboardAdmin'
 import CompleteProfile from '../Views/General/CompleteProfile/CompleteProfile'
-import ListCategoryAdmin from '../Views/Admin/CategoryAdmin/ListCategoryAdmin/ListCategoryAdmin'
+import ListCategoryAdmin from '../Views/Admin/Category/ListCategory/ListCategory'
 import ListCarouselAdmin from '../Views/Admin/CarouselAdmin/ListCarouselAdmin/ListCarouselAdmin'
 import ListUserAdmin from '../Views/Admin/UserAdmin/ListUserAdmin/ListUserAdmin'
 import ListProductAdmin from '../Views/Admin/ProductAdmin/ListProductAdmin/ListProductAdmin'
+import AddCategory from '../Views/Admin/Category/AddCategory/AddCategory'
+import EditCategory from '../Views/Admin/Category/EditCategory/EditCategory'
 import AddProduct from '../Views/User/Product/AddProduct/AddProduct'
 import EditProduct from '../Views/User/Product/EditProduct/EditProduct'
 import DetailOffer from '../Views/User/Offer/DetailOffer/DetailOffer'
 import ListTransaction from '../Views/User/Transaction/ListTransaction/ListTransaction'
 import AddCarouselAdmin from '../Views/Admin/CarouselAdmin/AddCarouselAdmin/AddCarouselAdmin'
 import EditCarouselAdmin from '../Views/Admin/CarouselAdmin/EditCarouselAdmin/EditCarouselAdmin'
+
+
 
 const Routers = () => {
     return (
@@ -62,6 +66,8 @@ const Routers = () => {
 
                 <Route path='/admin/category' element={<Navigate to="/admin/category/list" />} />
                 <Route path='/admin/category/list' element={<ListCategoryAdmin />} />
+                <Route path='/admin/category/list/addcategory' element={<AddCategory />}/>
+                <Route path='/admin/category/list/editcategory' element={<EditCategory />}/>
                 <Route path='/admin/product' element={<Navigate to="/admin/product/list" />} />
                 <Route path='/admin/product/list' element={<ListProductAdmin />} />
                 <Route path='/admin/carousel' element={<Navigate to="/admin/carousel/list" />} />
