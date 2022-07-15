@@ -58,8 +58,8 @@ const ListCategory = (ListKategori) => {
                             </Col>
                         </Row>
                     </Col>
-                    <Col  xs={12} className={'p-0'}>
-                        <Row  className={'m-0'}>
+                    <Col xs={12} className={'p-0'}>
+                        <Row className={'m-0'}>
                             <Col lg={3} className={'p-0 mt-4 pe-lg-3'}>
                                 <div className={'p-3 ' + style.box_profilAdmin}>
                                     <h5 className='mb-3'>Menu</h5>
@@ -84,7 +84,7 @@ const ListCategory = (ListKategori) => {
                                 </div>
                             </Col>
                             <Col xs={9} className={'p-0 mt-4 pe-lg-3 ' + style.box_list}>
-                                <Button variant='secondary'>
+                                <Button href='/admin/category/list/addcategory' variant='secondary'>
                                     <Plus className={'my-auto me-2 me-lg-2'} />
                                     Tambah Kategori
                                 </Button>
@@ -117,7 +117,7 @@ const ListCategory = (ListKategori) => {
                                                 <td>
                                                 <div className='p-3'>
                                                     <div>
-                                                        <Button variant='outline-secondary'>
+                                                        <Button href='/admin/category/list/editcategory' variant='outline-secondary'>
                                                             <PencilFill className={'my-auto me-2 me-lg-2'} />
                                                             Edit
                                                         </Button>
@@ -146,7 +146,7 @@ const ListCategory = (ListKategori) => {
                                                 <td>
                                                 <div className='p-3'>
                                                     <div>
-                                                        <Button variant='outline-secondary'>
+                                                        <Button href='/admin/category/list/editcategory' variant='outline-secondary'>
                                                             <PencilFill className={'my-auto me-2 me-lg-2'} />
                                                             Edit
                                                         </Button>
@@ -175,7 +175,7 @@ const ListCategory = (ListKategori) => {
                                                 <td>
                                                 <div className='p-3'>
                                                     <div>
-                                                        <Button variant='outline-secondary'>
+                                                        <Button href='/admin/category/list/editcategory' variant='outline-secondary'>
                                                             <PencilFill className={'my-auto me-2 me-lg-2'} />
                                                             Edit
                                                         </Button>
@@ -204,7 +204,7 @@ const ListCategory = (ListKategori) => {
                                                 <td>
                                                 <div className='p-3'>
                                                     <div>
-                                                        <Button variant='outline-secondary'>
+                                                        <Button href='/admin/category/list/editcategory' variant='outline-secondary'>
                                                             <PencilFill className={'my-auto me-2 me-lg-2'} />
                                                             Edit
                                                         </Button>
@@ -233,7 +233,7 @@ const ListCategory = (ListKategori) => {
                                                 <td>
                                                 <div className='p-3'>
                                                     <div>
-                                                        <Button variant='outline-secondary'>
+                                                        <Button href='/admin/category/list/editcategory' variant='outline-secondary'>
                                                             <PencilFill className={'my-auto me-2 me-lg-2'} />
                                                             Edit
                                                         </Button>
