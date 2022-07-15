@@ -60,7 +60,7 @@ const AddCategory = () => {
                             </div>
                         </Col>
                         <Col xs={9} className='mt-3'>
-                            <b style={{ fontSize: '1.25rem' }}>Tambah Kategori</b>
+                            <b style={{ fontSize: '1.25rem' }}>Tambah Kategori </b>
                             <hr className="mt-2 mb-2" />
                                 <Row className='mt-3 mb-3'>
                                     <div>
