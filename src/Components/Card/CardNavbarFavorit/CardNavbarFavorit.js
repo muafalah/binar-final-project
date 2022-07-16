@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { XCircle } from 'react-bootstrap-icons'
 import { formatRupiah } from '../../../Utils/helper'
+import style from './CardNavbarFavorit.module.css'
 
 const CardNavbarFavorit = ({ value }) => {
     return (

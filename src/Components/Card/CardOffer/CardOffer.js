@@ -1,5 +1,6 @@
 import React from 'react'
 import { Badge, Button, Col, Row } from 'react-bootstrap'
+import { Link } from 'react-bootstrap-icons'
 import { formatRupiah, formatTimestamp } from '../../../Utils/helper'
 import style from './CardOffer.module.css'
 
@@ -41,7 +42,7 @@ const CardOffer = ({ value }) => {
                                     <div style={{ color: "black" }}><b>{value.user.fullname}</b></div>
                                     <div><span style={{ fontSize: "0.875rem", color: "#8A8A8A" }}>{value.user.city.name}</span></div>
                                 </div>
-                                <div className={'my-auto ' + style.button_user}><a href={'/seller/' + value.user.username}><Button variant="outline-secondary">Lihat</Button></a></div>
+                                <div className={'my-auto ' + style.button_user}><Link to={'/seller/' + value.user.username}><Button variant="outline-secondary">Lihat</Button></Link></div>
                             </a>
                         </div>
                     </Col>

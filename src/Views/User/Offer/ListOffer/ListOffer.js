@@ -33,7 +33,7 @@ const ListOffer = () => {
                                     })}
                                 </Row>
                             </Tab.Pane>
-                            <Tab.Pane eventKey="2">
+                            <Tab.Pane eventKey="2" id="accepted">
                                 <Row>
                                     {dataOffer?.map((value, index) => {
                                         return (

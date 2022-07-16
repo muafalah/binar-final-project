@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { BoxSeam, ChevronRight, Collection, Folder, People } from 'react-bootstrap-icons'
+import { ChevronRight, Collection, Folder, Person } from 'react-bootstrap-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import Layout from '../../Layout'
 import style from './DashboardAdmin.module.css'
@@ -22,19 +22,14 @@ const DashboardAdmin = ({ children, menu }) => {
             icon: <Folder className='my-auto me-2 me-lg-2' size={16} />
         },
         {
-            value: 'product',
-            label: 'Produk',
-            icon: <BoxSeam className='my-auto me-2 me-lg-2' size={16} />
-        },
-        {
             value: 'carousel',
             label: 'Iklan',
             icon: <Collection className='my-auto me-2 me-lg-2' size={16} />
         },
         {
-            value: 'user',
-            label: 'Pengguna',
-            icon: <People className='my-auto me-2 me-lg-2' size={16} />
+            value: 'profile',
+            label: 'Akun Saya',
+            icon: <Person className='my-auto me-2 me-lg-2' size={16} />
         },
     ]
 
@@ -57,7 +52,7 @@ const DashboardAdmin = ({ children, menu }) => {
                                 </div>
                             </Col>
                             <Col lg={1} md={1} xs={2} className={'p-0 d-flex my-auto'}>
-                                <Button variant="outline-secondary" className="w-100">Edit</Button>
+                                <Button href="/admin/profile/edit" variant="outline-secondary" className="w-100">Edit</Button>
                             </Col>
                         </Row>
                     </Col>

@@ -1,14 +1,14 @@
 import React from 'react'
-import DashboardAdmin from '../../DashboardAdmin/DashboardAdmin'
 import { Button, Col, Form, Row } from 'react-bootstrap'
-import style from './AddCarouselAdmin.module.css'
+import DashboardAdmin from '../../DashboardAdmin/DashboardAdmin'
+import style from './EditCategoryAdmin.module.css'
 
-const AddCarouselAdmin = () => {
+const EditCategoryAdmin = () => {
     return (
-        <DashboardAdmin menu="carousel">
+        <DashboardAdmin menu="category">
             <Row className={'m-0 ' + style.box_temp}>
                 <Col xs={12} className='mt-3'>
-                    <b style={{ fontSize: "1.25rem" }}>Tambah Carousel</b>
+                    <b style={{ fontSize: "1.25rem" }}>Edit Carousel</b>
                     <hr className="mt-2 mb-2" />
                 </Col>
                 <Col xs={12} className="p-0">
@@ -18,10 +18,6 @@ const AddCarouselAdmin = () => {
                                 <Form className={'d-grid gap w-100'}>
                                     <Form.Group className="mb-3">
                                         <Form.Label>Nama Kategori <span style={{ color: "red" }}>*</span></Form.Label>
-                                        <Form.Control type="text" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Link Tujuan <span style={{ color: "red" }}>*</span></Form.Label>
                                         <Form.Control type="text" />
                                     </Form.Group>
                                     <Form.Group className="mb-3">
@@ -41,6 +37,4 @@ const AddCarouselAdmin = () => {
     )
 }
 
-
-
-export default AddCarouselAdmin
+export default EditCategoryAdmin

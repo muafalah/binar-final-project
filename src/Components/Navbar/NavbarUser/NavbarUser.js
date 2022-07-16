@@ -37,10 +37,10 @@ const NavbarUser = ({ dataUser }) => {
                                             </div>
                                             <hr className="p-0 m-0 mt-1 mb-3" />
                                             <div>
-                                                <Row className='m-0 gap-2'>
+                                                <Row className='m-0'>
                                                     {dataCardProduct?.map((value, index) => {
                                                         return (
-                                                            <Col xs={12} className='p-0'>
+                                                            <Col xs={12} className='p-0' key={index}>
                                                                 <CardNavbarFavorit value={value} />
                                                             </Col>
                                                         )

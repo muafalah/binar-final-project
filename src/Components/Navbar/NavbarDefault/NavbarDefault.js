@@ -19,9 +19,9 @@ const NavbarDefault = () => {
                         </Offcanvas.Title>
                     </Offcanvas.Header>
                     <Offcanvas.Body>
-                        <Nav className="justify-content-end flex-grow-1 gap-3">
-                            <a href="/register"><Button className="w-100" variant="dark">Daftar</Button></a>
-                            <a href="/login"><Button className="w-100" variant="light">Masuk</Button></a>
+                        <Nav className="ms-auto gap-3">
+                            <Button href="/register" className="w-100" variant="dark">Daftar</Button>
+                            <Button href="/login" className="w-100" variant="light">Masuk</Button>
                         </Nav>
                     </Offcanvas.Body>
                 </Navbar.Offcanvas>

@@ -39,7 +39,7 @@ const DetailSeller = () => {
                             </Col>
                             <Col lg={4} className='d-flex gap-3 my-auto'>
                                 <Button className="w-100 d-flex align-content-center justify-content-center" variant="dark"><StickiesFill className='my-auto me-2' size={16} /> Catatan</Button>
-                                <Button className="w-100 d-flex align-content-center justify-content-center" variant="success"><ChatDotsFill className='my-auto me-2' size={18} /> Hubungi</Button>
+                                <Button href={'https://wa.me/' + dataDetailSeller.no_hp} target="_blank" className="w-100 d-flex align-content-center justify-content-center" variant="success"><ChatDotsFill className='my-auto me-2' size={18} /> Hubungi</Button>
                             </Col>
                         </Row>
                     </Col>

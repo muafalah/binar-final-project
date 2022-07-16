@@ -1,9 +1,12 @@
 import React from 'react'
+import Dashboard from '../../Dashboard/Dashboard'
 import style from './DetailOffer.module.css'
 
 const DetailOffer = () => {
     return (
-        <div>DetailOffer</div>
+        <Dashboard menu="offer">
+            DetailOffer
+        </Dashboard>
     )
 }
 
