@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Select from 'react-select'
 import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import ImageUploader from 'react-image-upload'
@@ -10,12 +10,18 @@ import { dataCity } from '../../DataDummy'
 
 const CompleteProfile = () => {
 
-    const getImageFileObject = (imageFile) => {
-        console.log({ imageFile })
-    }
+    const [StatusAlert, setStatusAlert] = useState({ alert: false, invalid: false, success: false })
+    const [InputForm, setInputForm] = useState({ image: "", fullname: "", phone: "", city: "", address: "" })
 
-    const runAfterImageDelete = (file) => {
-        console.log({ file })
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (InputForm.image && InputForm.fullname && InputForm.phone && InputForm.city && InputForm.address) {
+            // await dispatch(postUserLogin({ email: InputForm.email, password: InputForm.password }))
+            console.log("ini")
+        } else {
+            console.log(InputForm)
+            setStatusAlert({ invalid: true })
+        }
     }
 
     const selectLocation = (data) => {
@@ -32,7 +38,9 @@ const CompleteProfile = () => {
         return dataOption
     }
 
-    const selectTheme = (theme) => ({ ...theme, colors: { ...theme.colors, primary25: '#E6E6E6', primary: '#1E1E1E', neutral20: '#ced4da' }, })
+    const defaultTheme = (theme) => ({ ...theme, colors: { ...theme.colors, primary25: '#E6E6E6', primary: '#1E1E1E', neutral20: '#ced4da' }, })
+
+    const errorTheme = (theme) => ({ ...theme, colors: { ...theme.colors, primary25: '#E6E6E6', primary: '#1E1E1E', neutral20: '#dc3545' }, })
 
     return (
         <>
@@ -46,31 +54,40 @@ const CompleteProfile = () => {
                             <p style={{ color: "#8A8A8A" }}>Yuk lengkapi data dirimu dan mulai<br /> menjelajah berbagai fitur di SecondGadget!</p>
                         </Col>
                         <Col xs={12}>
-                            <Form className={'d-grid gap '}>
+                            <Form className={'d-grid gap '} onSubmit={handleSubmit}>
                                 <div className="d-flex justify-content-center mb-3">
-                                    <ImageUploader
-                                        onFileAdded={(img) => getImageFileObject(img)} // function that runs to confirm that your image actually exists
-                                        onFileRemoved={(img) => runAfterImageDelete(img)} // function runs on once you delete your image
-                                    />
+                                    <ImageUploader onFileAdded={(img) => setInputForm({ ...InputForm, image: img.file })} isInvalid={StatusAlert.invalid} />
+                                    <Form.Control.Feedback type="invalid">
+                                        Masukkan nama lengkap kamu.
+                                    </Form.Control.Feedback>
                                 </div>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Nama Lengkap <span style={{ color: "red" }}>*</span></Form.Label>
-                                    <Form.Control type="text" />
+                                    <Form.Control type="text" onChange={(e) => setInputForm({ ...InputForm, fullname: e.target.value })} isInvalid={StatusAlert.invalid} />
+                                    <Form.Control.Feedback type="invalid">
+                                        Masukkan nama lengkap kamu.
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>No Handphone <span style={{ color: "red" }}>*</span></Form.Label>
-                                    <Form.Control type="number" />
+                                    <Form.Control type="number" onChange={(e) => setInputForm({ ...InputForm, phone: e.target.value })} isInvalid={StatusAlert.invalid} />
+                                    <Form.Control.Feedback type="invalid">
+                                        Masukkan no handphone kamu.
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Kota <span style={{ color: "red" }}>*</span></Form.Label>
-                                    <Select options={selectLocation(dataCity)} theme={selectTheme} placeholder="Kota / Kabupaten" />
+                                    <Select options={selectLocation(dataCity)} theme={StatusAlert.invalid == true ? defaultTheme : errorTheme} placeholder="Kota / Kabupaten" onChange={(e) => setInputForm({ ...InputForm, city: e.value })} />
+                                    {StatusAlert.invalid ? <div style={{ color: "#dc3545", fontSize: "0.875rem", marginTop: "5px" }}>Masukkan kota asal kamu.</div> : null}
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Alamat <span style={{ color: "red" }}>*</span></Form.Label>
-                                    <Form.Control as="textarea" />
+                                    <Form.Control as="textarea" onChange={(e) => setInputForm({ ...InputForm, address: e.target.value })} isInvalid={StatusAlert.invalid} />
+                                    <Form.Control.Feedback type="invalid">
+                                        Masukkan alamat lengkap kamu.
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                                 <div className="d-flex gap-2 justify-content-end">
-                                    <Button className="mt-2" variant="outline-secondary" type="submit">Hapus</Button>
                                     <Button className="mt-2" variant="dark" type="submit">Simpan</Button>
                                 </div>
                             </Form>

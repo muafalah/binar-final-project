@@ -509,6 +509,7 @@ export const dataOffer = [
             image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
             fullname: "Surya Mahendra",
             username: "suryamahendra",
+            no_hp: "081123456789",
             city: {
                 id_city: 1,
                 name: "Kota Jakarta Utara",
@@ -611,28 +612,14 @@ export const dataNotification = [
         product: {
             id_product: 1,
             name: "iPhone 11 Pro Max 256GB Space Gray",
-            category: {
-                id_category: 1,
-                name: "iPhone",
-            },
             price: 12400000,
             image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
-        },
-        user: {
-            id_user: 1,
-            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-            fullname: "Surya Mahendra",
-            username: "suryamahendra",
-            city: {
-                id_city: 1,
-                name: "Kota Jakarta Utara",
-            },
         },
         updatedAt: "2022-06-27 15:07:25.387",
         createdAt: "2022-08-27 15:07:25.387",
     },
     {
-        id_notification: 1,
+        id_notification: 2,
         offer: {
             id_offer: 1,
             status: "processed",
@@ -641,28 +628,14 @@ export const dataNotification = [
         product: {
             id_product: 1,
             name: "iPhone 11 Pro Max 256GB Space Gray",
-            category: {
-                id_category: 1,
-                name: "iPhone",
-            },
             price: 12400000,
             image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
-        },
-        user: {
-            id_user: 1,
-            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-            fullname: "Surya Mahendra",
-            username: "suryamahendra",
-            city: {
-                id_city: 1,
-                name: "Kota Jakarta Utara",
-            },
         },
         updatedAt: "2022-06-27 15:07:25.387",
         createdAt: "2022-08-27 15:07:25.387",
     },
     {
-        id_notification: 1,
+        id_notification: 3,
         offer: {
             id_offer: 1,
             status: "declined",
@@ -671,28 +644,14 @@ export const dataNotification = [
         product: {
             id_product: 1,
             name: "iPhone 11 Pro Max 256GB Space Gray",
-            category: {
-                id_category: 1,
-                name: "iPhone",
-            },
             price: 12400000,
             image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
-        },
-        user: {
-            id_user: 1,
-            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-            fullname: "Surya Mahendra",
-            username: "suryamahendra",
-            city: {
-                id_city: 1,
-                name: "Kota Jakarta Utara",
-            },
         },
         updatedAt: "2022-06-27 15:07:25.387",
         createdAt: "2022-08-27 15:07:25.387",
     },
     {
-        id_notification: 1,
+        id_notification: 4,
         offer: {
             id_offer: 1,
             status: "accepted",
@@ -701,24 +660,14 @@ export const dataNotification = [
         product: {
             id_product: 1,
             name: "iPhone 11 Pro Max 256GB Space Gray",
-            category: {
-                id_category: 1,
-                name: "iPhone",
-            },
             price: 12400000,
             image: "https://cdn.eraspace.com/pub/media/catalog/product/a/p/apple_iphone_11_pro_space_grey_new_1.jpg",
-        },
-        user: {
-            id_user: 1,
-            image: "https://sunrift.com/wp-content/uploads/2014/12/Blake-profile-photo-square.jpg",
-            fullname: "Surya Mahendra",
-            username: "suryamahendra",
-            city: {
-                id_city: 1,
-                name: "Kota Jakarta Utara",
-            },
         },
         updatedAt: "2022-06-27 15:07:25.387",
         createdAt: "2022-08-27 15:07:25.387",
     },
 ]
+
+export const checkWishlist = {
+    status: true,
+}

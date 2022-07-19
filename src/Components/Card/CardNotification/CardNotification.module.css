@@ -1,0 +1,17 @@
+.box {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #e4e4e7;
+}
+
+@media screen and (max-width: 576px) {
+    .box_md {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 577px) {
+    .box_sm {
+        display: none !important;
+    }
+}

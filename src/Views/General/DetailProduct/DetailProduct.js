@@ -4,7 +4,7 @@ import { ChatDotsFill, HeartFill } from 'react-bootstrap-icons'
 import CardProduct from '../../../Components/Card/CardProduct/CardProduct'
 import SliderProduct from '../../../Components/Slider/SliderProduct/SliderProduct'
 import { formatDate, formatRupiah } from '../../../Utils/helper'
-import { dataDetailProduct, dataRelatedProduct } from '../../DataDummy'
+import { checkWishlist, dataDetailProduct, dataRelatedProduct } from '../../DataDummy'
 import Layout from '../../Layout'
 import style from './DetailProduct.module.css'
 
@@ -67,7 +67,8 @@ const DetailProduct = () => {
                                         <Col xs={12} className="mt-2">
                                             <Row>
                                                 <Col lg={3} md={3} xs={5} className="mt-3">
-                                                    <Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="outline-dark" style={{ fontSize: "1.125rem" }}><HeartFill className='my-auto me-2' size={16} /> Favorit</Button>
+                                                    {checkWishlist.status === true ? <Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="dark" style={{ fontSize: "1.125rem" }}><HeartFill className='my-auto me-2' size={16} /> Favorit</Button> : null}
+                                                    {checkWishlist.status === false ? <Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="outline-dark" style={{ fontSize: "1.125rem" }}><HeartFill className='my-auto me-2' size={16} /> Favorit</Button> : null}
                                                 </Col>
                                                 <Col lg={4} md={4} xs={7} className="mt-3">
                                                     <a href={'https://wa.me/' + dataDetailProduct.seller.no_hp} target="_blank"><Button className="w-100 d-flex align-content-center justify-content-center" size="lg" variant="outline-dark" style={{ fontSize: "1.125rem" }}><ChatDotsFill className='my-auto me-2' size={16} /> Chat Penjual</Button></a>

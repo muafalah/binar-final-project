@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, Outlet } from 'react-router-dom'
 import LoginAdmin from '../Views/Auth/LoginAdmin/LoginAdmin'
 import LoginUser from '../Views/Auth/LoginUser/LoginUser'
 import RegisterUser from '../Views/Auth/RegisterUser/RegisterUser'
@@ -28,6 +28,7 @@ import EditProfileAdmin from '../Views/Admin/ProfileAdmin/EditProfileAdmin/EditP
 import PreviewProduct from '../Views/User/Product/PreviewProduct/PreviewProduct'
 
 const Routers = () => {
+
     return (
         <BrowserRouter>
             <Routes>
@@ -38,19 +39,11 @@ const Routers = () => {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/search/keyword=:keyword&type=:type&sort=:sort&category=:category&location=:location&minprice=:minprice&maxprice=:maxprice" element={<Search />} />
                 <Route path='/product/:id_product' element={<DetailProduct />} />
-                <Route path='/product/preview/:id_product' element={<PreviewProduct />} />
                 <Route path='/seller/:username_seller' element={<DetailSeller />} />
                 <Route path='/complete-profile' element={<CompleteProfile />} />
 
-                <Route path='/dashboard' element={<Navigate to="/dashboard/product" />} />
+                <Route path='/dashboard' element={<Navigate to="/dashboard/transaction" />} />
 
-                <Route path='/dashboard/product' element={<Navigate to="/dashboard/product/list" />} />
-                <Route path='/dashboard/product/list' element={<ListProduct />} />
-                <Route path='/dashboard/product/add' element={<AddProduct />} />
-                <Route path='/dashboard/product/edit/:id_product' element={<EditProduct />} />
-                <Route path='/dashboard/offer' element={<Navigate to="/dashboard/offer/list" />} />
-                <Route path='/dashboard/offer/list' element={<ListOffer />} />
-                <Route path='/dashboard/offer/detail/:id_offer' element={<DetailOffer />} />
                 <Route path='/dashboard/transaction' element={<Navigate to="/dashboard/transaction/list" />} />
                 <Route path='/dashboard/transaction/list' element={<ListTransaction />} />
                 <Route path='/dashboard/transaction/detail/:id_transaction' element={<DetailTransaction />} />
@@ -60,6 +53,14 @@ const Routers = () => {
                 <Route path='/dashboard/favorit/list' element={<ListFavorit />} />
                 <Route path='/dashboard/profile' element={<Navigate to="/dashboard/profile/edit" />} />
                 <Route path='/dashboard/profile/edit' element={<EditProfile />} />
+                <Route path='/dashboard/product' element={<Navigate to="/dashboard/product/list" />} />
+                <Route path='/dashboard/product/list' element={<ListProduct />} />
+                <Route path='/dashboard/product/add' element={<AddProduct />} />
+                <Route path='/dashboard/product/edit/:id_product' element={<EditProduct />} />
+                <Route path='/dashboard/product/preview/:id_product' element={<PreviewProduct />} />
+                <Route path='/dashboard/offer' element={<Navigate to="/dashboard/offer/list" />} />
+                <Route path='/dashboard/offer/list' element={<ListOffer />} />
+                <Route path='/dashboard/offer/detail/:id_offer' element={<DetailOffer />} />
 
                 <Route path='/admin' element={<Navigate to="/admin/category" />} />
 

@@ -1,6 +1,7 @@
 import React from "react"
 import { Badge, Button, Card, Col, Row } from "react-bootstrap"
 import { GeoAltFill, PencilSquare, PersonFill, Trash, GearFill } from "react-bootstrap-icons"
+import { Link } from "react-router-dom"
 import { formatRupiah } from "../../../Utils/helper"
 import style from "./CardProduct.module.css"
 
@@ -33,7 +34,7 @@ const CardProduct = ({ value, type }) => {
               {value.status === "sold" ? <div className="d-flex gap-2"><span style={{ fontSize: "1.25rem", fontWeight: "600", color: "#8A8A8A", paddingBottom: "5px", textDecoration: "line-through" }}>Rp. {formatRupiah(value.price)}</span><span><Badge style={{ fontSize: "0.75rem", fontWeight: "400" }} bg="danger">Habis</Badge></span></div> : <div style={{ fontSize: "1.25rem", fontWeight: "600", color: "#FB374F", paddingBottom: "5px" }}>Rp. {formatRupiah(value.price)}</div>}
               <Row className="m-0 mt-2">
                 <Col xs={6} className="p-0 pe-1">
-                  <a href={'/dashboard/product/edit/' + value.id_product} className="w-100"><Button className="w-100 d-flex align-content-center justify-content-center" variant="success"><PencilSquare className='my-auto me-2' size={16} /> Edit</Button></a>
+                  <Button className="w-100 d-flex align-content-center justify-content-center" variant="success" href={'/dashboard/product/edit/' + value.id_product}><PencilSquare className='my-auto me-2' size={16} /> Edit</Button>
                 </Col>
                 <Col xs={6} className="p-0 ps-1">
                   <Button className="w-100 d-flex align-content-center justify-content-center" variant="outline-danger"><Trash className='my-auto me-2' size={16} /> Hapus</Button>
