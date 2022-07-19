@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import CardCategory from '../../../Components/Card/CardCategory/CardCategory'
 import CardProduct from '../../../Components/Card/CardProduct/CardProduct'
@@ -6,8 +6,14 @@ import SliderCarousel from '../../../Components/Slider/SliderCarousel/SliderCaro
 import { dataCardProduct, dataCarousel, dataCategory, dataFeatured } from '../../DataDummy'
 import Layout from '../../Layout'
 import style from './LandingPage.module.css'
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+
 
 const LandingPage = () => {
+    useEffect(() => {
+        Aos.init({duration: 1800})
+    }, []);
 
     const space = "mt-lg-5 mb-lg-5 mt-md-5 mb-md-5 mt-4 mb-4"
 
@@ -19,6 +25,7 @@ const LandingPage = () => {
             <section id="Category-LandingPage" className={space}>
                 <Container>
                     <h4>Kategori</h4>
+                    <div data-aos="flip-down">
                     <Row className={'gap'}>
                         {dataCategory?.map((value, index) => {
                             return (
@@ -28,12 +35,16 @@ const LandingPage = () => {
                             )
                         })}
                     </Row>
+                    </div>
                 </Container>
             </section>
             <section id="NewProduct-LandingPage" className={space}>
                 <Container>
                     <h4>Produk Terbaru</h4>
-                    <Row>
+                    <div data-aos="zoom-in"
+                            data-aos-easing="ease-out-cubic"
+                    >
+                    <Row >
                         {dataCardProduct?.map((value, index) => {
                             return (
                                 <Col lg={3} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
@@ -42,6 +53,7 @@ const LandingPage = () => {
                             )
                         })}
                     </Row>
+                    </div>
                 </Container>
             </section>
             <section id="Featured-LandingPage" className={space}>
