@@ -3,3 +3,8 @@
     color: #000;
     margin-top: 10px;
 }
+
+.cardcategory:hover {
+    transform: scale(1.2);
+    transition: all ease 0.4s;
+}

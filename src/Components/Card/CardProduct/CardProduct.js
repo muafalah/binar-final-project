@@ -9,7 +9,7 @@ const CardProduct = ({ value, type }) => {
     <>
       {type === "default" ?
         <a href={'/product/' + value.id_product} style={{ color: "black", borderRadius: "8px" }}>
-          <Card className={'mt-1 mb-1 '}>
+          <Card className={`mt-1 mb-1 ${style.cardproduct}`}>
             <div className="d-grid justify-content-center pt-2 pb-2"><Card.Img variant="top" src={value.image} style={{ height: "10rem", width: "min-content" }} /></div>
             <Card.Body style={{ backgroundColor: "#FAFAFA" }} className="d-grid gap-1">
               <div style={{ fontSize: "1.125rem", fontWeight: "400" }}>{value.name}</div>

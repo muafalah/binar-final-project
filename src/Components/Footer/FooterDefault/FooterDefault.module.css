@@ -73,3 +73,8 @@
         margin-left: 2.4rem;
     }
 }
+
+.icon {
+    transform: scale(1.2);
+    transition: all ease 0.4s;
+}

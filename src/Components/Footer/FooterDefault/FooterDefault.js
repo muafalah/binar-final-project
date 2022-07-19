@@ -35,11 +35,11 @@ const FooterDefault = () => {
                     <Col lg={3} md={6} sm={12} xs={12} className={'pt-2 pb-2'}>
                         <h5>Temukan Kami di</h5>
                         <hr className="mt-3 mb-3" />
-                        <a href="#" style={{ color: "white" }}><Facebook size={24} className="me-3" /></a>
-                        <a href="#" style={{ color: "white" }}><Twitter size={24} className="me-3" /></a>
-                        <a href="#" style={{ color: "white" }}><Youtube size={24} className="me-3" /></a>
-                        <a href="#" style={{ color: "white" }}><Instagram size={24} className="me-3" /></a>
-                        <a href="#" style={{ color: "white" }}><Linkedin size={24} className="me-3" /></a>
+                        <a href="#" style={{ color: "white" }}><Facebook size={24} className={`me-3 ${style.icon}`} /></a>
+                        <a href="#" style={{ color: "white" }}><Twitter size={24} className={`me-3 ${style.icon}`} /></a>
+                        <a href="#" style={{ color: "white" }}><Youtube size={24} className={`me-3 ${style.icon}`} /></a>
+                        <a href="#" style={{ color: "white" }}><Instagram size={24} className={`me-3 ${style.icon}`} /></a>
+                        <a href="#" style={{ color: "white" }}><Linkedin size={24} className={`me-3 ${style.icon}`} /></a>
                     </Col>
                 </Row>
             </Container>

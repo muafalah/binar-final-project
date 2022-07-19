@@ -104,7 +104,7 @@ const NavbarUser = ({ dataUser }) => {
                                 </a>
                                 {dataUser.role[1] ? <a href="/dashboard/product/list"><Button variant="transparant" size="lg" className="d-flex w-100"><HouseFill size={18} className="me-3 my-auto" />Dashboard</Button></a> : <a href="/dashboard/notification/list"><Button variant="transparant" size="lg" className="d-flex w-100"><HouseFill size={18} className="me-3 my-auto" />Dashboard</Button></a>}
                                 {dataUser.role[1] ? <a href={'/seller/' + dataUser.username}><Button variant="transparant" size="lg" className="d-flex w-100"><BagCheckFill size={18} className="me-3 my-auto" />Lihat Toko</Button></a> : <Button variant="transparant" size="lg" className="d-flex w-100"><BagCheckFill size={18} className="me-3 my-auto" />Menjadi Penjual</Button>}
-                                <a href={'/dashboard/notification/list'}><Button variant="transparant" size="lg" className="d-flex w-100"><BellFill size={18} className="me-3 my-auto" />Notifikasi</Button></a>
+                                <a href={'/dashboard/notification/list'}><Button variant="transparant" size="lg" className={`d-flex w-100 ${style.notif}`}><BellFill size={18} className="me-3 my-auto" />Notifikasi</Button></a>
                                 <a href={'/dashboard/favorit/list'}><Button variant="transparant" size="lg" className="d-flex w-100"><StarFill size={18} className="me-3 my-auto" />Favorit</Button></a>
                                 <Button variant="transparant" size="lg" className="d-flex w-100" style={{ color: "red" }}><BoxArrowRight size={18} className="me-3 my-auto" />Keluar</Button>
                             </div>
