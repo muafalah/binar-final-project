@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import FooterDefault from '../Components/Footer/FooterDefault/FooterDefault'
 import NavbarDefault from '../Components/Navbar/NavbarDefault/NavbarDefault'
 import NavbarUser from '../Components/Navbar/NavbarUser/NavbarUser'
-import { dataUser } from './DataDummy'
+import { getUserVerification } from '../Redux/features/authUser'
 
 const Layout = ({ children }) => {
 
-    const role = "user"
+    const dispatch = useDispatch()
+    const { isLoading, isSuccess, isError, dataUserVerification } = useSelector(state => state.authUserReducer)
+    const getData = async () => {
+        await dispatch(getUserVerification())
+    }
+    useEffect(() => {
+        getData()
+    }, [dispatch])
+
 
     const Default = () => {
         return (
@@ -28,7 +37,7 @@ const Layout = ({ children }) => {
         return (
             <>
                 <header>
-                    <NavbarUser dataUser={dataUser} />
+                    <NavbarUser dataUser={dataUserVerification.data} />
                 </header>
                 <main>
                     {children}
@@ -58,9 +67,18 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            {role === "default" ? Default() : null}
-            {role === "user" ? User() : null}
-            {role === "Admin" ? User() : null}
+            {JSON.parse(localStorage.getItem("TokenSecondGadget")) ?
+                dataUserVerification ?
+                    <>
+                        {dataUserVerification.data.roles.length === 1 ? User() : null}
+                        {dataUserVerification.data.roles.length === 2 ? User() : null}
+                        {dataUserVerification.data.roles.length === 3 ? Admin() : null}
+                    </>
+                    :
+                    null
+                :
+                Default()
+            }
         </>
     )
 }

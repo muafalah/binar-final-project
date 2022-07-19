@@ -47,7 +47,7 @@ const ListProduct = () => {
                                 </Row>
                             </Tab.Pane>
                             <Tab.Pane eventKey="2">
-                                <Row>
+                                {/* <Row>
                                     {dataCardProduct?.map((value, index) => {
                                         return (
                                             <Col lg={4} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
@@ -55,10 +55,10 @@ const ListProduct = () => {
                                             </Col>
                                         )
                                     })}
-                                </Row>
+                                </Row> */}
                             </Tab.Pane>
                             <Tab.Pane eventKey="3">
-                                <Row>
+                                {/* <Row>
                                     {dataCardProduct?.map((value, index) => {
                                         return (
                                             <Col lg={4} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
@@ -66,7 +66,7 @@ const ListProduct = () => {
                                             </Col>
                                         )
                                     })}
-                                </Row>
+                                </Row> */}
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

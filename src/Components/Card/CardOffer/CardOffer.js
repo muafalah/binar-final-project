@@ -1,6 +1,6 @@
 import React from 'react'
 import { Badge, Button, Col, Row } from 'react-bootstrap'
-import { Link } from 'react-bootstrap-icons'
+import { Link } from 'react-router-dom'
 import { formatRupiah, formatTimestamp } from '../../../Utils/helper'
 import style from './CardOffer.module.css'
 
@@ -9,12 +9,18 @@ const CardOffer = ({ value }) => {
         <Row className="m-0">
             <Col xs={12} className={'p-0 pt-1 pb-1 ps-2 pe-2 ' + style.box_top}>
                 <div className="d-flex">
-                    <div className="w-100"><span style={{ fontSize: "0.875rem" }}>Ditawar Sejak : </span><span style={{ fontSize: "0.875rem", color: "#6c757d" }}>{formatTimestamp(value.createdAt)}</span></div>
+                    <div className="w-100">
+                        {value.status === "pending" ? <span style={{ fontSize: "0.875rem" }}>Ditawar Sejak : </span> : null}
+                        {value.status === "processed" ? <span style={{ fontSize: "0.875rem" }}>Diterima Sejak : </span> : null}
+                        {value.status === "declined" ? <span style={{ fontSize: "0.875rem" }}>Ditolak Sejak : </span> : null}
+                        {value.status === "accepted" ? <span style={{ fontSize: "0.875rem" }}>Selesai Sejak : </span> : null}
+                        <span style={{ fontSize: "0.875rem", color: "#6c757d" }}>{formatTimestamp(value.updatedAt)}</span>
+                    </div>
                     <div>
                         {value.status === "pending" ? <Badge style={{ fontSize: "0.875rem", fontWeight: "400" }} bg="secondary">Belum Direspon</Badge> : null}
-                        {value.status === "processed" ? <Badge style={{ fontSize: "0.875rem", fontWeight: "400" }} bg="secondary">Tawaran Diterima</Badge> : null}
-                        {value.status === "declined" ? <Badge style={{ fontSize: "0.875rem", fontWeight: "400" }} bg="secondary">Tawaran Ditolak</Badge> : null}
-                        {value.status === "accepted" ? <Badge style={{ fontSize: "0.875rem", fontWeight: "400" }} bg="secondary">Selesai</Badge> : null}
+                        {value.status === "processed" ? <Badge style={{ fontSize: "0.875rem", fontWeight: "400" }} bg="success">Tawaran Diterima</Badge> : null}
+                        {value.status === "declined" ? <Badge style={{ fontSize: "0.875rem", fontWeight: "400" }} bg="danger">Tawaran Ditolak</Badge> : null}
+                        {value.status === "accepted" ? <Badge style={{ fontSize: "0.875rem", fontWeight: "400" }} bg="dark">Selesai</Badge> : null}
                     </div>
                 </div>
             </Col>
@@ -22,7 +28,7 @@ const CardOffer = ({ value }) => {
                 <Row className="m-0">
                     <Col md={8} xs={12} className="p-0">
                         <a href={'/product/' + value.product.id_product} className="d-flex gap-3">
-                            <div className="my-auto"><img src={value.product.image} alt="Photo Product" height="90rem" width="90rem" /></div>
+                            <div className="my-auto"><img src={value.product.image} alt="Photo Product" height="90rem" width="90rem" style={{ borderRadius: "8px" }} /></div>
                             <div className="my-auto d-grid gap-1">
                                 <div>
                                     <div style={{ fontSize: "0.875rem", color: "#8A8A8A" }}>{value.product.category.name}</div>
@@ -51,29 +57,29 @@ const CardOffer = ({ value }) => {
             <Col xs={12} className={'p-2 ' + style.box_bottom}>
                 {value.status === "pending" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="outline-danger" type="submit">Tolak Tawaran</Button>
-                        <Button className={style.button_respon} variant="success" type="submit">Terima Tawaran</Button>
+                        <Button className={style.button_respon} variant="success">Beri Tanggapan</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.id_offer} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }
                 {value.status === "processed" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="success" type="submit">Ubah Status</Button>
-                        <Button className={style.button_respon} variant="dark" type="submit">Hubungi Pembeli</Button>
+                        <Button className={style.button_respon} variant="dark">Ubah Status</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.id_offer} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }
                 {value.status === "declined" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="outline-secondary" type="submit">Perbarui</Button>
-                        <Button className={style.button_respon} variant="dark" type="submit">Hubungi Pembeli</Button>
+                        <Button className={style.button_respon} variant="secondary">Perbarui Status</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.id_offer} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }
                 {value.status === "accepted" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        {/* <Button className={style.button_respon} variant="outline-secondary" type="submit">Lihat Produk</Button> */}
-                        <Button className={style.button_respon} variant="success" type="submit">Cetak Bukti</Button>
+                        <Button className={style.button_respon} variant="success">Cetak Bukti</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.id_offer} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }
