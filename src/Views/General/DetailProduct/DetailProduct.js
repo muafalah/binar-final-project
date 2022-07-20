@@ -1,4 +1,5 @@
-import React from 'react'
+import Aos from 'aos'
+import React, { useEffect } from 'react'
 import { Col, Container, Row, Button, Badge } from 'react-bootstrap'
 import { ChatDotsFill, HeartFill } from 'react-bootstrap-icons'
 import CardProduct from '../../../Components/Card/CardProduct/CardProduct'
@@ -9,11 +10,16 @@ import Layout from '../../Layout'
 import style from './DetailProduct.module.css'
 
 const DetailProduct = () => {
+
+    useEffect(() => {
+        Aos.init({ duration: 1800 })
+    }, []);
+
     return (
         <Layout>
             <Container>
                 <Row>
-                    <Col lg={5} className="mt-3" style={{ backgroundColor: "white" }}>
+                    <Col lg={5} className="mt-3" style={{ backgroundColor: "white" }} data-aos="fade-right">
                         <div className="p-3">
                             <SliderProduct data={dataDetailProduct.image} />
                         </div>
@@ -21,7 +27,7 @@ const DetailProduct = () => {
                     <Col lg={7}>
                         <div className='ps-lg-3'>
                             <Row>
-                                <Col md={12} className="mt-3" style={{ backgroundColor: "white", }}>
+                                <Col md={12} className="mt-3" style={{ backgroundColor: "white", }} data-aos="fade-left">
                                     <Row className="gap-3 pt-3 pb-3 ps-lg-2 pe-lg-2">
                                         <Col xs={12}>
                                             <h3 style={{ fontWeight: "500" }}>{dataDetailProduct.name}</h3>
@@ -80,7 +86,7 @@ const DetailProduct = () => {
                                         </Col>
                                     </Row>
                                 </Col>
-                                <Col md={12} className="mt-3" style={{ backgroundColor: "white", }}>
+                                <Col md={12} className="mt-3" style={{ backgroundColor: "white", }} data-aos="fade-left" data-aos-duration="3000">
                                     <Row className='mt-3 mb-3 ps-lg-2 pe-lg-2'>
                                         <Col md={2} xs={3}>
                                             <img src={dataDetailProduct.seller.image} alt="Profile Seller" style={{ borderRadius: "100px", width: "5rem", height: "5rem", overflow: "auto" }} />
@@ -99,7 +105,7 @@ const DetailProduct = () => {
                             </Row>
                         </div>
                     </Col>
-                    <Col lg={12} className="mt-3 pt-3 pb-3 ps-lg-3 pe-lg-3" style={{ backgroundColor: "white" }}>
+                    <Col lg={12} className="mt-3 pt-3 pb-3 ps-lg-3 pe-lg-3" style={{ backgroundColor: "white" }} data-aos="fade-up">
                         <h5 className="mt-2">Deskripsi</h5>
                         <hr />
                         <div>
@@ -118,13 +124,13 @@ const DetailProduct = () => {
                             </ul>
                         </div>
                     </Col>
-                    <Col lg={12} className="mt-3 mb-3 pt-3 pb-3 ps-lg-3 pe-lg-3" style={{ backgroundColor: "white" }}>
+                    <Col lg={12} className="mt-3 mb-3 pt-3 pb-3 ps-lg-3 pe-lg-3" style={{ backgroundColor: "white" }} data-aos="fade-up">
                         <h5 className="mt-2">Produk Lainnya</h5>
                         <hr />
                         <Row>
                             {dataRelatedProduct?.map((value, index) => {
                                 return (
-                                    <Col lg={3} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'}>
+                                    <Col lg={3} md={6} sm={12} xs={12} key={index} className={'pt-2 pb-2'} data-aos="fade-up" data-aos-duration="3000">
                                         <CardProduct value={value} type="default" />
                                     </Col>
                                 )

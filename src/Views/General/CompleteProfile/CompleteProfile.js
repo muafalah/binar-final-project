@@ -1,25 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
-import { Container, Form, Button, Row, Col } from 'react-bootstrap'
+import { Container, Form, Button, Row, Col, Spinner } from 'react-bootstrap'
 import ImageUploader from 'react-image-upload'
 import 'react-image-upload/dist/index.css'
 import style from './CompleteProfile.module.css'
 import NavbarBlank from '../../../Components/Navbar/NavbarBlank/NavbarBlank'
 import FooterDefault from '../../../Components/Footer/FooterDefault/FooterDefault'
 import { dataCity } from '../../DataDummy'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { putUserEdit } from '../../../Redux/features/authUser'
+import SweetAlert from 'react-bootstrap-sweetalert'
 
 const CompleteProfile = () => {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [StatusAlert, setStatusAlert] = useState({ alert: false, invalid: false, success: false })
     const [InputForm, setInputForm] = useState({ image: "", fullname: "", phone: "", city: "", address: "" })
+    const { isLoading, isSuccess, isError, dataUserEdit, dataUserVerification } = useSelector(state => state.authUserReducer)
+
+    useEffect(() => {
+        if (isSuccess) {
+            if (dataUserEdit) {
+                if (dataUserEdit.status === 200) {
+                    setStatusAlert({ success: true })
+                }
+            }
+        }
+    }, [isSuccess, dataUserEdit])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (InputForm.image && InputForm.fullname && InputForm.phone && InputForm.city && InputForm.address) {
-            // await dispatch(postUserLogin({ email: InputForm.email, password: InputForm.password }))
-            console.log("ini")
+            // await dispatch(putUserEdit({ dataProfile: dataUserVerification.data, image: InputForm.image, fullname: InputForm.fullname, phone: InputForm.phone, city: InputForm.city, address: InputForm.address }))
+            console.log(InputForm, "berhasil")
+            console.log(dataUserVerification.data)
         } else {
-            console.log(InputForm)
             setStatusAlert({ invalid: true })
         }
     }
@@ -54,12 +71,11 @@ const CompleteProfile = () => {
                             <p style={{ color: "#8A8A8A" }}>Yuk lengkapi data dirimu dan mulai<br /> menjelajah berbagai fitur di SecondGadget!</p>
                         </Col>
                         <Col xs={12}>
+                            {StatusAlert.success ? <SweetAlert success title="Selamat Datang!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard")}></SweetAlert> : null}
                             <Form className={'d-grid gap '} onSubmit={handleSubmit}>
-                                <div className="d-flex justify-content-center mb-3">
-                                    <ImageUploader onFileAdded={(img) => setInputForm({ ...InputForm, image: img.file })} isInvalid={StatusAlert.invalid} />
-                                    <Form.Control.Feedback type="invalid">
-                                        Masukkan nama lengkap kamu.
-                                    </Form.Control.Feedback>
+                                <div className="d-grid justify-content-center mb-3">
+                                    <div className="mx-auto"><ImageUploader onFileAdded={(img) => setInputForm({ ...InputForm, image: img.file })} isInvalid={StatusAlert.invalid} /></div>
+                                    {StatusAlert.invalid ? <div style={{ color: "#dc3545", fontSize: "0.875rem", marginTop: "5px" }} >Upload Foto kamu.</div> : null}
                                 </div>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Nama Lengkap <span style={{ color: "red" }}>*</span></Form.Label>
@@ -77,7 +93,7 @@ const CompleteProfile = () => {
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Kota <span style={{ color: "red" }}>*</span></Form.Label>
-                                    <Select options={selectLocation(dataCity)} theme={StatusAlert.invalid == true ? defaultTheme : errorTheme} placeholder="Kota / Kabupaten" onChange={(e) => setInputForm({ ...InputForm, city: e.value })} />
+                                    <Select options={selectLocation(dataCity)} theme={StatusAlert.invalid == false ? defaultTheme : errorTheme} placeholder="Kota / Kabupaten" onChange={(e) => setInputForm({ ...InputForm, city: e.value })} />
                                     {StatusAlert.invalid ? <div style={{ color: "#dc3545", fontSize: "0.875rem", marginTop: "5px" }}>Masukkan kota asal kamu.</div> : null}
                                 </Form.Group>
                                 <Form.Group className="mb-3">
@@ -88,7 +104,11 @@ const CompleteProfile = () => {
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <div className="d-flex gap-2 justify-content-end">
-                                    <Button className="mt-2" variant="dark" type="submit">Simpan</Button>
+                                    {isLoading ?
+                                        <Button variant="dark" disabled><Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" /> Loading...</Button>
+                                        :
+                                        <Button className="mt-2" variant="dark" type="submit">Simpan</Button>
+                                    }
                                 </div>
                             </Form>
                         </Col>

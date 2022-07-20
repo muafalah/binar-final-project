@@ -4,7 +4,11 @@
     margin-top: 10px;
 }
 
-.cardcategory:hover {
-    transform: scale(1.2);
+.image_category:hover {
+    transform: scale(1.07);
     transition: all ease 0.4s;
+}
+
+.card_category:hover {
+    
 }

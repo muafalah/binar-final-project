@@ -1,4 +1,4 @@
-.card:hover {
-    transform: scale(1.2);
+.cardseller:hover {
+    transform: scale(1.05);
     transition: all ease 0.4s;
 }

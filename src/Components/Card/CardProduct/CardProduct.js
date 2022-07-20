@@ -112,7 +112,6 @@ const CardProduct = ({ value, type }) => {
         : null
       }
     </>
-
   )
 }
 

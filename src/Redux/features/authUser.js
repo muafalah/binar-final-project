@@ -48,6 +48,48 @@ export const getUserVerification = createAsyncThunk("authUserThunk/getUserVerifi
     }
 })
 
+export const putUserEdit = createAsyncThunk("authUserThunk/putUserEdit", async ({ dataProfile, image, fullname, phone, city, address }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const response = await axios.put(process.env.REACT_APP_HOST + '/user/update-profile/' + dataProfile.userId,
+            {
+                "username": dataProfile.username,
+                "fullname": fullname,
+                "email": dataProfile.email,
+                "password": dataProfile.password,
+                "address": address,
+                "phone": phone,
+                "img": image,
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
+export const postRegisterSeller = createAsyncThunk("authUserThunk/postRegisterSeller", async ({ dataProfile, username, description }) => {
+    try {
+        const response = await axios.post(process.env.REACT_APP_HOST + '/user/register-seller',
+            {
+                "username": dataProfile.username,
+                "email": dataProfile.email,
+                "password": dataProfile.password,
+                "description": description,
+                "roles": 2,
+            },
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 const authUser = createSlice({
     name: "authUser",
     initialState: {
@@ -57,6 +99,7 @@ const authUser = createSlice({
         dataUserRegister: null,
         dataUserLogin: null,
         dataUserVerification: null,
+        dataUserEdit: null,
     },
     extraReducers: {
         [postUserRegister.pending]: (state) => {
@@ -97,6 +140,20 @@ const authUser = createSlice({
             state.dataUserVerification = action.payload
         },
         [getUserVerification.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putUserEdit.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putUserEdit.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataUserEdit = action.payload
+        },
+        [putUserEdit.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

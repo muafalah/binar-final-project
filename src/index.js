@@ -5,7 +5,7 @@ import { store } from './Redux/app/store';
 import Routers from './Routers/Routers';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Assets/css/index.css'
-
+import 'aos/dist/aos.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -13,7 +13,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Routers/>
+      <Routers />
     </Provider>
   </React.StrictMode>
 );

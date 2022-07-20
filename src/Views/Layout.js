@@ -9,13 +9,10 @@ const Layout = ({ children }) => {
 
     const dispatch = useDispatch()
     const { isLoading, isSuccess, isError, dataUserVerification } = useSelector(state => state.authUserReducer)
-    const getData = async () => {
-        await dispatch(getUserVerification())
-    }
-    useEffect(() => {
-        getData()
-    }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getUserVerification())
+    }, [])
 
     const Default = () => {
         return (
@@ -36,7 +33,7 @@ const Layout = ({ children }) => {
     const User = () => {
         return (
             <>
-                <header>
+                <header >
                     <NavbarUser dataUser={dataUserVerification.data} />
                 </header>
                 <main>
@@ -70,9 +67,25 @@ const Layout = ({ children }) => {
             {JSON.parse(localStorage.getItem("TokenSecondGadget")) ?
                 dataUserVerification ?
                     <>
-                        {dataUserVerification.data.roles.length === 1 ? User() : null}
-                        {dataUserVerification.data.roles.length === 2 ? User() : null}
-                        {dataUserVerification.data.roles.length === 3 ? Admin() : null}
+                        {dataUserVerification.data.roles.length === 1 ?
+                            dataUserVerification.data.roles[0].roleName === "BUYER" ?
+                                User()
+                                :
+                                dataUserVerification.data.roles[0].roleName === "ADMIN" ?
+                                    User()
+                                    :
+                                    null
+                            :
+                            null
+                        }
+                        {dataUserVerification.data.roles.length === 2 ?
+                            dataUserVerification.data.roles[1].roleName === "SELLER" ?
+                                User()
+                                :
+                                null
+                            :
+                            null
+                        }
                     </>
                     :
                     null
