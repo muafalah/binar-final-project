@@ -64,6 +64,30 @@ export const dataCategory = [
     },
 ]
 
+export const dataAdminByUser = [
+    {
+        id_adminbyuser: 1,
+        image: "https://divedigital.id/wp-content/uploads/2021/10/1-min.png",
+        namalengkap: "Surya Mahendra",
+        username: "suryamahendra",
+        kota: "Jakarta",
+    },
+    {
+        id_adminbyuser: 2,
+        image: "https://divedigital.id/wp-content/uploads/2021/10/1-min.png",
+        namalengkap: "Surya Mahendra",
+        username: "suryamahendra",
+        kota: "Jakarta",
+    },
+    {
+        id_adminbyuser: 3,
+        image: "https://divedigital.id/wp-content/uploads/2021/10/1-min.png",
+        namalengkap: "Surya Mahendra",
+        username: "suryamahendra",
+        kota: "Jakarta",
+    },
+]
+
 export const dataCardProduct = [
     {
         id_product: 1,

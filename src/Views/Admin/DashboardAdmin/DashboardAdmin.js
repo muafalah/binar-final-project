@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { ChevronRight, Collection, Folder, Person } from 'react-bootstrap-icons'
+import { ChevronRight, Collection, Folder, Person, PersonLinesFill } from 'react-bootstrap-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import Layout from '../../Layout'
 import style from './DashboardAdmin.module.css'
@@ -30,6 +30,11 @@ const DashboardAdmin = ({ children, menu }) => {
             value: 'profile',
             label: 'Akun Saya',
             icon: <Person className='my-auto me-2 me-lg-2' size={16} />
+        },
+        {
+            value: 'User',
+            label: 'User',
+            icon: <PersonLinesFill className='my-auto me-2 me-lg-2' size={16} />
         },
     ]
 

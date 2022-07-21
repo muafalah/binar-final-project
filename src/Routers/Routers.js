@@ -26,6 +26,9 @@ import EditCategoryAdmin from '../Views/Admin/CategoryAdmin/EditCategoryAdmin/Ed
 import DetailTransaction from '../Views/User/Transaction/DetailTransaction/DetailTransaction'
 import EditProfileAdmin from '../Views/Admin/ProfileAdmin/EditProfileAdmin/EditProfileAdmin'
 import PreviewProduct from '../Views/User/Product/PreviewProduct/PreviewProduct'
+import ListUser from '../Views/Admin/User/ListAdminbyUser/ListUser'
+import AddUser from '../Views/Admin/User/AddUser/AddUser'
+import EditUSer from '../Views/Admin/User/EditUSer/EditUSer'
 
 const Routers = () => {
 
@@ -74,6 +77,9 @@ const Routers = () => {
                 <Route path='/admin/carousel/edit/:id_carousel' element={<EditCarouselAdmin />} />
                 <Route path='/admin/profile' element={<Navigate to="/admin/profile/edit" />} />
                 <Route path='/admin/profile/edit' element={<EditProfileAdmin />} />
+                <Route path='/admin/user' element={<ListUser />} />
+                <Route path='/admin/user/add' element={<AddUser />} />
+                <Route path='/admin/user/edit/:id_adminbyuser' element={<EditUSer />}/>
             </Routes>
         </BrowserRouter>
     )
