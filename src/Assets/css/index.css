@@ -46,3 +46,13 @@ a {
     border: 0px !important;
     color: #6c757d !important;
 }
+
+[data-aos] {
+    pointer-events: none;
+  }
+  .aos-animate {
+    pointer-events: auto;
+  }
+  .aos-init[data-aos][data-aos].aos-animate {
+    transform: unset;
+  }

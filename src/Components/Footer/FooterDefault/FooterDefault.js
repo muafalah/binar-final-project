@@ -3,10 +3,17 @@ import { Col, Row, Container } from 'react-bootstrap'
 import Logo from '../../../Assets/image/Logo/img-logo-landscape-white.svg'
 import style from './FooterDefault.module.css'
 import { EnvelopeFill, Facebook, Instagram, Linkedin, TelephoneFill, Twitter, Youtube } from 'react-bootstrap-icons'
+import { useEffect } from 'react'
+import Aos from 'aos'
 
 const FooterDefault = () => {
+
+    useEffect(() => {
+        Aos.init({ duration: 1800 })
+    }, [])
+
     return (
-        <div style={{ backgroundColor: "#212529", color: "white" }} className={'pt-3 pb-2'}>
+        <div style={{ backgroundColor: "#212529", color: "white" }} className={'pt-3 pb-2'} data-aos="fade-zoom-in">
             <Container>
                 <Row>
                     <Col lg={3} md={6} sm={12} xs={12} className={'pt-2 pb-2'}>

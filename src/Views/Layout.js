@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FooterDefault from '../Components/Footer/FooterDefault/FooterDefault'
+import NavbarAdmin from '../Components/Navbar/NavbarAdmin/NavbarAdmin'
 import NavbarDefault from '../Components/Navbar/NavbarDefault/NavbarDefault'
 import NavbarUser from '../Components/Navbar/NavbarUser/NavbarUser'
 import { getUserVerification } from '../Redux/features/authUser'
@@ -50,49 +51,22 @@ const Layout = ({ children }) => {
         return (
             <>
                 <header>
-                    Navbar
+                    <NavbarAdmin dataUser={dataUserVerification.data} />
                 </header>
                 <main>
                     {children}
                 </main>
                 <footer>
-                    Footer
+                    <FooterDefault />
                 </footer>
             </>
         )
     }
 
     return (
-        <>
-            {JSON.parse(localStorage.getItem("TokenSecondGadget")) ?
-                dataUserVerification ?
-                    <>
-                        {dataUserVerification.data.roles.length === 1 ?
-                            dataUserVerification.data.roles[0].roleName === "BUYER" ?
-                                User()
-                                :
-                                dataUserVerification.data.roles[0].roleName === "ADMIN" ?
-                                    User()
-                                    :
-                                    null
-                            :
-                            null
-                        }
-                        {dataUserVerification.data.roles.length === 2 ?
-                            dataUserVerification.data.roles[1].roleName === "SELLER" ?
-                                User()
-                                :
-                                null
-                            :
-                            null
-                        }
-                    </>
-                    :
-                    null
-                :
-                Default()
-            }
-        </>
+        JSON.parse(localStorage.getItem("TokenSecondGadget")) ?
+            dataUserVerification ? dataUserVerification.data.roles[0].roleId === 3 ? Admin() : User() : null
+            : Default()
     )
 }
 

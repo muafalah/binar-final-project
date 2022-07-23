@@ -4,6 +4,7 @@ import { XCircle } from 'react-bootstrap-icons'
 import { formatRupiah } from '../../../Utils/helper'
 
 const CardNavbarNotification = ({ value }) => {
+
     return (
         <a href={'/dashboard/offer/detail/' + value.offer.id_offer}>
             <Row className='m-0'>

@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import Dashboard from '../../Dashboard/Dashboard'
 import style from './EditProduct.module.css'
 import { dataCategory } from '../../../DataDummy'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Aos from 'aos'
+import { getDetailProduct } from '../../../../Redux/features/productSlice'
 
 const EditProduct = () => {
+
+    const dispatch = useDispatch()
+    const { id_product } = useParams()
+    const { dataDetailProduct } = useSelector(state => state.productReducer)
+    const [InputForm, setInputForm] = useState({ image: "", fullname: "", phone: "", city: 0, address: "" })
+
+    useEffect(() => {
+        dispatch(getDetailProduct({ idProduct: id_product }))
+        Aos.init({ duration: 1800 })
+    }, []);
+
+    console.log(dataDetailProduct)
+
     const selectCategory = (data) => {
         const handleData = data ? data : "";
         const dataOption = []
@@ -24,49 +41,52 @@ const EditProduct = () => {
 
     return (
         <Dashboard menu="product">
-            <Row className={'m-0 ' + style.box_temp}>
-                <Col xs={12} className='mt-3'>
-                    <b style={{ fontSize: "1.25rem" }}>Edit Produk</b>
-                    <hr className="mt-2 mb-2" />
-                </Col>
-                <Col xs={12} className="p-0">
-                    <Row className={'m-0'}>
-                        <Col xs={12} className='mt-3 mb-3'>
-                            <div>
-                                <Form className={'d-grid gap w-100'}>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Nama Produk <span style={{ color: "red" }}>*</span></Form.Label>
-                                        <Form.Control type="text" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Kategori <span style={{ color: "red" }}>*</span></Form.Label>
-                                        <Select options={selectCategory(dataCategory)} theme={selectTheme} placeholder="Pilih Kategori" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Harga <span style={{ color: "red" }}>*</span></Form.Label>
-                                        <Form.Control type="number" />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Serial Number <span style={{ color: "red" }}>*</span></Form.Label>
-                                        <div className='d-flex'>
-                                            <Form.Control className="w-100 me-2" type="text" />
-                                            <Button variant="outline-success" type="submit">Periksa</Button>
+            {dataDetailProduct ?
+                <Row className={'m-0 ' + style.box_temp} data-aos="fade-up">
+                    <Col xs={12} className='mt-3'>
+                        <b style={{ fontSize: "1.25rem" }}>Edit Produk</b>
+                        <hr className="mt-2 mb-2" />
+                    </Col>
+                    <Col xs={12} className="p-0">
+                        <Row className={'m-0'}>
+                            <Col xs={12} className='mt-3 mb-3'>
+                                <div>
+                                    <Form className={'d-grid gap w-100'}>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Nama Produk <span style={{ color: "red" }}>*</span></Form.Label>
+                                            <Form.Control type="text" />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Kategori <span style={{ color: "red" }}>*</span></Form.Label>
+                                            <Select options={selectCategory(dataCategory)} theme={selectTheme} placeholder="Pilih Kategori" />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Harga <span style={{ color: "red" }}>*</span></Form.Label>
+                                            <Form.Control type="number" />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Serial Number <span style={{ color: "red" }}>*</span></Form.Label>
+                                            <div className='d-flex'>
+                                                <Form.Control className="w-100 me-2" type="text" />
+                                                <Button variant="outline-success" type="submit">Periksa</Button>
+                                            </div>
+                                        </Form.Group>
+                                        <Form.Group className="mb-3">
+                                            <Form.Label>Deskripsi <span style={{ color: "red" }}>*</span></Form.Label>
+                                            <Form.Control as="textarea" />
+                                        </Form.Group>
+                                        <div className="d-flex gap-2 justify-content-end">
+                                            <Button className="mt-2" variant="outline-dark" type="submit">Simpan & Preview</Button>
+                                            <Button className="mt-2" variant="dark" type="submit">Terbitkan Produk</Button>
                                         </div>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Deskripsi <span style={{ color: "red" }}>*</span></Form.Label>
-                                        <Form.Control as="textarea" />
-                                    </Form.Group>
-                                    <div className="d-flex gap-2 justify-content-end">
-                                        <Button className="mt-2" variant="outline-dark" type="submit">Simpan & Preview</Button>
-                                        <Button className="mt-2" variant="dark" type="submit">Terbitkan Produk</Button>
-                                    </div>
-                                </Form>
-                            </div>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+                                    </Form>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                : null
+            }
         </Dashboard>
     )
 }

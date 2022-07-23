@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Select from 'react-select'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import Dashboard from '../../Dashboard/Dashboard'
 import style from './AddProduct.module.css'
 import { dataCategory } from '../../../DataDummy'
+import Aos from 'aos'
 
 const AddProduct = () => {
+
+    useEffect(() => {
+        Aos.init({ duration: 1800 })
+    }, [])
 
     const selectCategory = (data) => {
         const handleData = data ? data : "";
@@ -25,7 +30,7 @@ const AddProduct = () => {
 
     return (
         <Dashboard menu="product">
-            <Row className={'m-0 ' + style.box_temp}>
+            <Row className={'m-0 ' + style.box_temp} data-aos="fade-up">
                 <Col xs={12} className='mt-3'>
                     <b style={{ fontSize: "1.25rem" }}>Tambah Produk</b>
                     <hr className="mt-2 mb-2" />

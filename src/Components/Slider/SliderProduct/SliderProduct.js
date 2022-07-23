@@ -9,7 +9,7 @@ const SliderProduct = ({ data }) => {
             {data?.map((value, index) => {
                 return (
                     <Carousel.Item key={index}>
-                        <ModalImage className="d-block w-100" small={value} large={value} showRotate={true} alt={'Product Image ' + index} />
+                        <ModalImage className="d-block w-100" small={value.imageUrl} large={value.imageUrl} showRotate={true} alt={'Product Image ' + index} />
                     </Carousel.Item>
                 )
             })}

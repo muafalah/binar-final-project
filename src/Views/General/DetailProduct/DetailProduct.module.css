@@ -3,6 +3,12 @@
     width: 0px;
 }
 
+.box {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #e4e4e7;
+}
+
 @media screen and (max-width: 576px) {
     .detail_lg {
         display: none;

@@ -3,7 +3,7 @@ import { Alert, Container, Row, Col, Form, Button, Spinner } from 'react-bootstr
 import SweetAlert from 'react-bootstrap-sweetalert'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { postUserLogin } from '../../../Redux/features/authUser'
+import { getUserVerification, postUserLogin } from '../../../Redux/features/authUser'
 import style from './LoginUser.module.css'
 
 const LoginUser = () => {
@@ -11,14 +11,28 @@ const LoginUser = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [StatusAlert, setStatusAlert] = useState({ alert: false, invalid: false, success: false })
+    const [LinkRedirect, setLinkRedirect] = useState("")
     const [InputForm, setInputForm] = useState({ email: "", password: "", })
-    const { isLoading, isSuccess, isError, dataUserLogin } = useSelector(state => state.authUserReducer)
+    const { isLoading, isSuccess, isError, dataUserLogin, dataUserVerification } = useSelector(state => state.authUserReducer)
 
     useEffect(() => {
         if (isSuccess) {
             if (dataUserLogin) {
-                if (dataUserLogin.status === 200) {
-                    setStatusAlert({ success: true })
+                if (dataUserLogin.status == 200) {
+                    dispatch(getUserVerification())
+                    if (dataUserVerification) {
+                        if (dataUserVerification.data.roles[0].roleId === 3) {
+                            setLinkRedirect("/admin/category/list")
+                            setStatusAlert({ success: true })
+                        } else if (dataUserVerification.data.roles[0].roleId === 1) {
+                            dataUserVerification.data.roles.length === 2 ? setLinkRedirect("/dashboard/product/list") : setLinkRedirect("/dashboard/transaction/list")
+                            setStatusAlert({ success: true })
+                        } else {
+                            localStorage.removeItem("TokenSecondGadget")
+                            navigate("/")
+                            window.location.reload()
+                        }
+                    }
                 }
             }
         }
@@ -27,7 +41,7 @@ const LoginUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
-        const regexPassword = /^(?=.{6,})/gm
+        const regexPassword = /^(?=.{4,})/gm
         if (regexEmail.test(InputForm.email) && regexPassword.test(InputForm.password)) {
             await dispatch(postUserLogin({ email: InputForm.email, password: InputForm.password }))
         } else {
@@ -47,7 +61,7 @@ const LoginUser = () => {
                         </Col>
                         <Col md={12}>
                             <Form className={'d-grid gap '} onSubmit={handleSubmit}>
-                                {StatusAlert.success ? <SweetAlert success title="Login Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/complete-profile")}></SweetAlert> : null}
+                                {StatusAlert.success ? <SweetAlert success title="Login Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate(LinkRedirect)}></SweetAlert> : null}
                                 {StatusAlert.alert ? <Alert variant="danger">Email atau Kata Sandi Salah</Alert> : null}
                                 <Form.Group className="mb-3">
                                     <Form.Label>Alamat Email <span style={{ color: "red" }}>*</span></Form.Label>

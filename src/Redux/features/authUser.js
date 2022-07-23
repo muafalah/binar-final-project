@@ -5,12 +5,13 @@ export const postUserRegister = createAsyncThunk("authUserThunk/postUserRegister
     try {
         const response = await axios.post(process.env.REACT_APP_HOST + '/user/register',
             {
-                "username": username,
-                "email": email,
+                "username": username.toLowerCase(),
+                "email": email.toLowerCase(),
                 "password": password,
                 "roleId": 1,
             }
         )
+        console.log(response.data, "sukses register")
         return response.data
     } catch (error) {
         return error.response.data
@@ -21,7 +22,7 @@ export const postUserLogin = createAsyncThunk("authUserThunk/postUserLogin", asy
     try {
         const response = await axios.post(process.env.REACT_APP_HOST + '/login',
             {
-                "email": email,
+                "email": email.toLowerCase(),
                 "password": password,
             },
         )
@@ -51,16 +52,16 @@ export const getUserVerification = createAsyncThunk("authUserThunk/getUserVerifi
 export const putUserEdit = createAsyncThunk("authUserThunk/putUserEdit", async ({ dataProfile, image, fullname, phone, city, address }) => {
     try {
         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
-        const response = await axios.put(process.env.REACT_APP_HOST + '/user/update-profile/' + dataProfile.userId,
-            {
-                "username": dataProfile.username,
-                "fullname": fullname,
-                "email": dataProfile.email,
-                "password": dataProfile.password,
-                "address": address,
-                "phone": phone,
-                "img": image,
-            },
+        const data = new FormData();
+        data.append('username', dataProfile.username);
+        data.append('fullName', fullname.toLowerCase());
+        data.append('email', dataProfile.email);
+        data.append('address', address);
+        data.append('phone', phone);
+        data.append('img', image);
+        data.append('idCity', city);
+        const response = await axios.put(process.env.REACT_APP_HOST + '/user/edit/' + dataProfile.userId,
+            data,
             {
                 headers: {
                     "Authorization": `Bearer ${UserToken.token}`
@@ -73,16 +74,26 @@ export const putUserEdit = createAsyncThunk("authUserThunk/putUserEdit", async (
     }
 })
 
-export const postRegisterSeller = createAsyncThunk("authUserThunk/postRegisterSeller", async ({ dataProfile, username, description }) => {
+export const postRegisterSeller = createAsyncThunk("authUserThunk/postRegisterSeller", async ({ dataProfile, description, password }) => {
     try {
         const response = await axios.post(process.env.REACT_APP_HOST + '/user/register-seller',
             {
                 "username": dataProfile.username,
                 "email": dataProfile.email,
-                "password": dataProfile.password,
+                "password": password,
                 "description": description,
-                "roles": 2,
+                "roleId": 2,
             },
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
+export const getUserByUsername = createAsyncThunk("authUserThunk/getUserByUsername", async ({ username }) => {
+    try {
+        const response = await axios.get(process.env.REACT_APP_HOST + '/user/profile/' + username,
         )
         return response.data
     } catch (error) {
@@ -100,6 +111,8 @@ const authUser = createSlice({
         dataUserLogin: null,
         dataUserVerification: null,
         dataUserEdit: null,
+        dataRegisterSeller: null,
+        dataUserByUsername: null,
     },
     extraReducers: {
         [postUserRegister.pending]: (state) => {
@@ -154,6 +167,34 @@ const authUser = createSlice({
             state.dataUserEdit = action.payload
         },
         [putUserEdit.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [postRegisterSeller.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [postRegisterSeller.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataRegisterSeller = action.payload
+        },
+        [postRegisterSeller.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [getUserByUsername.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [getUserByUsername.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataUserByUsername = action.payload
+        },
+        [getUserByUsername.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

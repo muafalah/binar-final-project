@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navbar, Container, Offcanvas, Nav, Button, } from 'react-bootstrap'
 import style from './NavbarDefault.module.css'
 import LogoBlack from '../../../Assets/image/Logo/img-logo-landscape-black.svg'
 import LogoWhite from '../../../Assets/image/Logo/img-logo-landscape-white.svg'
 import FormSearch from '../../Form/FormSearch/FormSearch'
+import Aos from 'aos'
 
 const NavbarDefault = () => {
+
+    useEffect(() => {
+        Aos.init({ duration: 1800 })
+    }, [])
+
     return (
-        <Navbar key="sm" bg="dark" expand="sm" variant="dark">
+        <Navbar key="sm" bg="dark" expand="sm" variant="dark" data-aos="fade-down">
             <Container>
                 <Navbar.Brand href="/" className="pe-3"><img src={LogoWhite} height="35" alt="SecondGadget" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar-expand-sm" />

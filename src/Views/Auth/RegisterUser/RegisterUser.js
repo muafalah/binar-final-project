@@ -17,7 +17,7 @@ const RegisterUser = () => {
     useEffect(() => {
         if (isSuccess) {
             if (dataUserRegister) {
-                if (dataUserRegister.status === 200) {
+                if (dataUserRegister.status == 200) {
                     setStatusAlert({ success: true })
                 }
             }
