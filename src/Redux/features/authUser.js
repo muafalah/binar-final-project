@@ -101,7 +101,7 @@ export const getUserByUsername = createAsyncThunk("authUserThunk/getUserByUserna
     }
 })
 
-export const getSearchSellerByKeyword = createAsyncThunk("productSliceThunk/getSearchSellerByKeyword", async ({ fullName }) => {
+export const getSearchSellerByKeyword = createAsyncThunk("authUserThunk/getSearchSellerByKeyword", async ({ fullName }) => {
     try {
         const response = await axios.get(process.env.REACT_APP_HOST + '/user/search/u?fullName=' + fullName,
         )
@@ -111,9 +111,60 @@ export const getSearchSellerByKeyword = createAsyncThunk("productSliceThunk/getS
     }
 })
 
-export const getSearchSellerByFilter = createAsyncThunk("productSliceThunk/getSearchSellerByFilter", async ({ fullName, idCity }) => {
+export const getSearchSellerByFilter = createAsyncThunk("authUserThunk/getSearchSellerByFilter", async ({ fullName, idCity }) => {
     try {
         const response = await axios.get(process.env.REACT_APP_HOST + '/user/search/ui?fullName=' + fullName + '&idCity=' + idCity,
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
+export const putEditUserNoImage = createAsyncThunk("authUserThunk/putEditUserNoImage", async ({ idUser, username, fullname, email, address, phone, city, description }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const data = new FormData();
+        data.append('username', username);
+        data.append('fullName', fullname.toLowerCase());
+        data.append('email', email);
+        data.append('address', address);
+        data.append('phone', phone);
+        data.append('idCity', city);
+        data.append('description', description);
+        const response = await axios.put(process.env.REACT_APP_HOST + '/user/edit/' + idUser,
+            data,
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
+export const putEditUserImage = createAsyncThunk("authUserThunk/putEditUserImage", async ({ idUser, username, fullname, email, address, phone, city, description, image }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const data = new FormData();
+        data.append('username', username);
+        data.append('fullName', fullname.toLowerCase());
+        data.append('email', email);
+        data.append('address', address);
+        data.append('phone', phone);
+        data.append('idCity', city);
+        data.append('description', description);
+        data.append('img', image);
+        const response = await axios.put(process.env.REACT_APP_HOST + '/user/edit/' + idUser,
+            data,
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
         )
         return response.data
     } catch (error) {
@@ -135,6 +186,8 @@ const authUser = createSlice({
         dataUserByUsername: null,
         dataSearchSellerByKeyword: null,
         dataSearchSellerByFilter: null,
+        dataEditUserNoImage: null,
+        dataEditUserImage: null,
     },
     extraReducers: {
         [postUserRegister.pending]: (state) => {
@@ -245,6 +298,34 @@ const authUser = createSlice({
             state.dataSearchSellerByFilter = action.payload
         },
         [getSearchSellerByFilter.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putEditUserNoImage.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putEditUserNoImage.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataEditUserNoImage = action.payload
+        },
+        [putEditUserNoImage.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putEditUserImage.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putEditUserImage.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataEditUserNoImage = action.payload
+        },
+        [putEditUserImage.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

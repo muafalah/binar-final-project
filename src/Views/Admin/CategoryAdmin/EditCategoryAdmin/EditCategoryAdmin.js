@@ -52,7 +52,7 @@ const EditCategoryAdmin = () => {
             {dataDetailCategory ?
                 <Row className={'m-0 ' + style.box_temp} data-aos="fade-up">
                     <Col xs={12} className='mt-3'>
-                        <b style={{ fontSize: "1.25rem" }}>Edit Carousel</b>
+                        <b style={{ fontSize: "1.25rem" }}>Edit Kategori</b>
                         <hr className="mt-2 mb-2" />
                     </Col>
                     <Col xs={12} className="p-0">

@@ -7,7 +7,7 @@ const SliderCarousel = ({ data }) => {
             {data?.map((value, index) => {
                 return (
                     <Carousel.Item key={index}>
-                        <a href={value.link}><img className="d-block w-100" src={value.image} alt={value.name} /></a>
+                        <a href={value.link}><img className="d-block w-100" src={value.img} alt={value.carouselName} /></a>
                     </Carousel.Item>
                 )
             })}

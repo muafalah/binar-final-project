@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authUser from '../features/authUser';
+import carouselSlice from '../features/carouselSlice';
 import categorySlice from '../features/categorySlice';
 import citySlice from '../features/citySlice';
 import notificationSlice from '../features/notificationSlice';
@@ -18,5 +19,6 @@ export const store = configureStore({
     transactionReducer: transactionSlice,
     wishlistReducer: wishlistSlice,
     notificationReducer: notificationSlice,
+    carouselReducer: carouselSlice,
   },
 });

@@ -6,18 +6,21 @@ import { getLatestProduct } from '../../../Redux/features/productSlice'
 import CardCategory from '../../../Components/Card/CardCategory/CardCategory'
 import CardProduct from '../../../Components/Card/CardProduct/CardProduct'
 import SliderCarousel from '../../../Components/Slider/SliderCarousel/SliderCarousel'
-import { dataCarousel, dataFeatured } from '../../DataDummy'
+import { dataFeatured } from '../../DataDummy'
 import Layout from '../../Layout'
 import style from './LandingPage.module.css'
 import Aos from 'aos'
+import { getAllCarousel } from '../../../Redux/features/carouselSlice'
 
 const LandingPage = () => {
 
     const dispatch = useDispatch()
+    const { dataAllCarousel } = useSelector(state => state.carouselReducer)
     const { dataAllCategory } = useSelector(state => state.categoryReducer)
     const { dataLatestProduct } = useSelector(state => state.productReducer)
 
     useEffect(() => {
+        dispatch(getAllCarousel())
         dispatch(getAllCategory())
         dispatch(getLatestProduct())
         Aos.init({ duration: 1800 })
@@ -27,10 +30,10 @@ const LandingPage = () => {
 
     return (
         <Layout>
-            {dataAllCategory && dataLatestProduct ?
+            {dataAllCategory && dataLatestProduct && dataAllCarousel ?
                 <>
                     <section id="Slider-LandingPage" data-aos="zoom-out">
-                        <SliderCarousel data={dataCarousel} />
+                        <SliderCarousel data={dataAllCarousel.data} />
                     </section>
                     <section id="Category-LandingPage" className={space}>
                         <Container>

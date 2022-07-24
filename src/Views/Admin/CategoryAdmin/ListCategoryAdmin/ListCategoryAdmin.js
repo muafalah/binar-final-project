@@ -1,3 +1,4 @@
+import Aos from 'aos'
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Row, Spinner, Table, } from 'react-bootstrap'
 import { PencilSquare, PlusLg, Trash } from 'react-bootstrap-icons'
@@ -27,6 +28,7 @@ const ListCategoryAdmin = () => {
 
     useEffect(() => {
         dispatch(getAllCategory())
+        Aos.init({ duration: 1800 })
     }, [])
 
     const handleRemoveCategory = async (e) => {
@@ -39,7 +41,7 @@ const ListCategoryAdmin = () => {
     return (
         dataAllCategory ?
             <DashboardAdmin menu="category">
-                {RemoveCategory.alert ? <SweetAlert warning showCancel confirmBtnText="Hapus" cancelBtnText="Batal" confirmBtnBsStyle="danger" cancelBtnBsStyle="outline-secondary" title="Apakah Kamu Yakin?" onConfirm={handleRemoveCategory} onCancel={() => setRemoveCategory({ ...RemoveCategory, alert: false })}>Kategori yang sudah dihapus tidak akan bisa dikembalikan lagi!</SweetAlert> : null}
+                {RemoveCategory.alert ? <SweetAlert danger showCancel confirmBtnText="Hapus" cancelBtnText="Batal" confirmBtnBsStyle="danger" cancelBtnBsStyle="outline-secondary" title="Apakah Kamu Yakin?" onConfirm={handleRemoveCategory} onCancel={() => setRemoveCategory({ ...RemoveCategory, alert: false })}>Kategori yang sudah dihapus tidak akan bisa dikembalikan lagi!</SweetAlert> : null}
                 {Load ? <SweetAlert title="" onConfirm={handleRemoveCategory} confirmBtnText="" confirmBtnStyle={{ display: "none" }}><Spinner animation="border" size="lg" /></SweetAlert> : RemoveCategory.success ? <SweetAlert success title="Kategori Dihapus!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
                 <Row className="m-0 gap-3">
                     <Col xs={12} className="p-0">

@@ -1,3 +1,9 @@
 .width_table {
     width: 7rem;
 }
+
+.box_temp {
+    background-color: white;
+    border-radius: 0.375rem;
+    border: 1px solid #CED4DA;
+}
