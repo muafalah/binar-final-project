@@ -24,7 +24,7 @@ const DashboardAdmin = ({ children, menu }) => {
         },
         {
             value: 'carousel',
-            label: 'Iklan',
+            label: 'Carousel',
             icon: <Collection className='my-auto me-2 me-lg-2' size={16} />
         },
         {

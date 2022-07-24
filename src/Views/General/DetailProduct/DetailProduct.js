@@ -8,6 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import CardProduct from '../../../Components/Card/CardProduct/CardProduct'
 import SliderProduct from '../../../Components/Slider/SliderProduct/SliderProduct'
 import { getUserVerification } from '../../../Redux/features/authUser'
+import { postAddNotification } from '../../../Redux/features/notificationSlice'
 import { getDetailProduct, getRelatedProduct } from '../../../Redux/features/productSlice'
 import { postAddTransaction } from '../../../Redux/features/transactionSlice'
 import { delRemoveWishlist, getCheckWishlist, postAddWishlist } from '../../../Redux/features/wishlistSlice'
@@ -49,6 +50,7 @@ const DetailProduct = () => {
     useEffect(() => {
         if (dataAddTransaction) {
             if (dataAddTransaction.status == 201) {
+                dispatch(postAddNotification({ idBid: parseInt(dataAddTransaction.data.bidId) }))
                 setStatusAlert({ success: true })
             }
         }

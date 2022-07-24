@@ -41,6 +41,25 @@ export const getRelatedProduct = createAsyncThunk("productSliceThunk/getRelatedP
     }
 })
 
+export const putEditStatusProduct = createAsyncThunk("productSliceThunk/putEditStatusProduct", async ({ idProduct, productStatus }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const response = await axios.put(process.env.REACT_APP_HOST + '/prodcut/edit/status' + idProduct,
+            {
+                "productStatus": productStatus,
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 // export const delRemoveProduct = createAsyncThunk("productSliceThunk/delRemoveProduct", async ({idProduct}) => {
 //     try {
 //         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
@@ -67,6 +86,7 @@ const productSlice = createSlice({
         dataLatestProduct: null,
         dataDetailProduct: null,
         dataRelatedProduct: null,
+        dataEditStatusProduct: null,
     },
     extraReducers: {
         [getProductByUsername.pending]: (state) => {
@@ -121,6 +141,20 @@ const productSlice = createSlice({
             state.dataRelatedProduct = action.payload
         },
         [getRelatedProduct.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putEditStatusProduct.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putEditStatusProduct.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataEditStatusProduct = action.payload
+        },
+        [putEditStatusProduct.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

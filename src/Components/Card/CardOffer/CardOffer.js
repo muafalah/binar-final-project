@@ -4,6 +4,7 @@ import { formatCamelCase, formatRupiah, formatTimestamp } from '../../../Utils/h
 import style from './CardOffer.module.css'
 
 const CardOffer = ({ value }) => {
+
     return (
         <Row className="m-0">
             <Col xs={12} className={'p-0 pt-1 pb-1 ps-2 pe-2 ' + style.box_top}>
@@ -58,29 +59,29 @@ const CardOffer = ({ value }) => {
             <Col xs={12} className={'p-2 ' + style.box_bottom}>
                 {value.bidStatus === "pending" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="success">Beri Tanggapan</Button>
-                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
+                        <Button href={'https://wa.me/' + value.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Pembeli</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }
                 {value.bidStatus === "processed" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="dark">Ubah Status</Button>
-                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
+                        <Button href={'https://wa.me/' + value.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Pembeli</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }
                 {value.bidStatus === "declined" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="secondary">Perbarui Status</Button>
-                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
+                        <Button href={'https://wa.me/' + value.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Pembeli</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }
                 {value.bidStatus === "accepted" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="success">Cetak Bukti</Button>
-                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Penawaran</Button>
+                        <Button href={'https://wa.me/' + value.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Pembeli</Button>
+                        <Button href={'/dashboard/offer/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Penawaran</Button>
                     </div>
                     : null
                 }

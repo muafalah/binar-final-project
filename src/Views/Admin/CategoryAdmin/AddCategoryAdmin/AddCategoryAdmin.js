@@ -1,3 +1,4 @@
+import Aos from 'aos'
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Row, Spinner } from 'react-bootstrap'
 import SweetAlert from 'react-bootstrap-sweetalert'
@@ -23,6 +24,7 @@ const AddCategoryAdmin = () => {
                 }
             }
         }
+        Aos.init({ duration: 1800 })
     }, [isSuccess, dataAddCategory])
 
     const handleSubmit = async (e) => {
@@ -35,7 +37,7 @@ const AddCategoryAdmin = () => {
     return (
         <DashboardAdmin menu="category">
             {StatusAlert.success ? <SweetAlert success title="Kategori Ditambahkan!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/admin/category/list")}></SweetAlert> : null}
-            <Row className={'m-0 ' + style.box_temp}>
+            <Row className={'m-0 ' + style.box_temp} data-aos="fade-up">
                 <Col xs={12} className='mt-3'>
                     <b style={{ fontSize: "1.25rem" }}>Tambah Kategori</b>
                     <hr className="mt-2 mb-2" />

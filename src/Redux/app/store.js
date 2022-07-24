@@ -1,6 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authCategory from '../features/authCategory';
-import authProduct from '../features/authProduct';
 import authUser from '../features/authUser';
 import categorySlice from '../features/categorySlice';
 import citySlice from '../features/citySlice';
@@ -13,8 +11,6 @@ import wishlistSlice from '../features/wishlistSlice';
 export const store = configureStore({
   reducer: {
     authUserReducer: authUser,
-    authCategoryReducer: authCategory,
-    authProductReducer: authProduct,
     cityReducer: citySlice,
     categoryReducer: categorySlice,
     productReducer: productSlice,

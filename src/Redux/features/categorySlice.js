@@ -11,6 +11,16 @@ export const getAllCategory = createAsyncThunk("categorySliceThunk/getAllCategor
     }
 })
 
+export const getDetailCategory = createAsyncThunk("categorySliceThunk/getDetailCategory", async ({ idCategory }) => {
+    try {
+        const response = await axios.get(process.env.REACT_APP_HOST + '/category/show/' + idCategory,
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 export const postAddCategory = createAsyncThunk("categorySliceThunk/postAddCategory", async ({ name, image }) => {
     try {
         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
@@ -33,19 +43,34 @@ export const postAddCategory = createAsyncThunk("categorySliceThunk/postAddCateg
 
 export const putEditCategory = createAsyncThunk("categorySliceThunk/putEditCategory", async ({ idCategory, name, image }) => {
     try {
-        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
-        const data = new FormData();
-        data.append('categoryName', name);
-        data.append('image', image);
-        const response = await axios.put(process.env.REACT_APP_HOST + '/category/edit/' + idCategory,
-            data,
-            {
-                headers: {
-                    "Authorization": `Bearer ${UserToken.token}`
+        if (image) {
+            const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+            const data = new FormData();
+            data.append('categoryName', name);
+            data.append('image', image);
+            const response = await axios.put(process.env.REACT_APP_HOST + '/category/edit/' + idCategory,
+                data,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${UserToken.token}`
+                    }
                 }
-            }
-        )
-        return response.data
+            )
+            return response.data
+        } else {
+            const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+            const data = new FormData();
+            data.append('categoryName', name);
+            const response = await axios.put(process.env.REACT_APP_HOST + '/category/edit/' + idCategory,
+                data,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${UserToken.token}`
+                    }
+                }
+            )
+            return response.data
+        }
     } catch (error) {
         return error.response.data
     }
@@ -74,8 +99,10 @@ const categorySlice = createSlice({
         isSuccess: false,
         isError: null,
         dataAllCategory: null,
+        dataDetailCategory: null,
         dataAddCategory: null,
-        dataRemoveCategory: null
+        dataEditCategory: null,
+        dataRemoveCategory: null,
     },
     extraReducers: {
         [getAllCategory.pending]: (state) => {
@@ -88,6 +115,34 @@ const categorySlice = createSlice({
             state.dataAllCategory = action.payload
         },
         [getAllCategory.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [getDetailCategory.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [getDetailCategory.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataDetailCategory = action.payload
+        },
+        [getDetailCategory.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putEditCategory.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putEditCategory.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataEditCategory = action.payload
+        },
+        [putEditCategory.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

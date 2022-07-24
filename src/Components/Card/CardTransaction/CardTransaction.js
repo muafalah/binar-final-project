@@ -59,29 +59,29 @@ const CardTransaction = ({ value }) => {
             <Col xs={12} className={'p-2 ' + style.box_bottom}>
                 {value.bidStatus === "pending" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="danger" >Batalkan Transaksi</Button>
-                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Transaksi</Button>
+                        <Button href={'https://wa.me/' + value.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
+                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Transaksi</Button>
                     </div>
                     : null
                 }
                 {value.bidStatus === "processed" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="dark">Hubungi Penjual</Button>
-                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Transaksi</Button>
+                        <Button href={'https://wa.me/' + value.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
+                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Transaksi</Button>
                     </div>
                     : null
                 }
                 {value.bidStatus === "declined" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="success">Tawar Ulang</Button>
-                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Transaksi</Button>
+                        <Button href={'https://wa.me/' + value.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
+                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Transaksi</Button>
                     </div>
                     : null
                 }
                 {value.bidStatus === "accepted" ?
                     <div className="d-flex gap-2 justify-content-end">
-                        <Button className={style.button_respon} variant="success">Cetak Bukti</Button>
-                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="outline-dark">Detail Transaksi</Button>
+                        <Button href={'https://wa.me/' + value.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
+                        <Button href={'/dashboard/transaction/detail/' + value.bidId} className={style.button_respon} variant="dark">Detail Transaksi</Button>
                     </div>
                     : null
                 }

@@ -4,7 +4,7 @@ import axios from "axios";
 export const getAllTransaction = createAsyncThunk("transactionSliceThunk/getAllTransaction", async ({ idBuyer }) => {
     try {
         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
-        const response = await axios.get(process.env.REACT_APP_HOST + '/bid/seller/all/' + idBuyer,
+        const response = await axios.get(process.env.REACT_APP_HOST + '/bid/buyer/all/' + idBuyer,
             {
                 headers: {
                     "Authorization": `Bearer ${UserToken.token}`
@@ -24,6 +24,26 @@ export const postAddTransaction = createAsyncThunk("transactionSliceThunk/postAd
             {
                 "userId": idUser,
                 "productId": idProduct,
+                "bidPrice": bidPrice,
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
+export const putEditTransaction = createAsyncThunk("transactionSliceThunk/putEditTransaction", async ({ idBid, bidStatus, bidPrice }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const response = await axios.put(process.env.REACT_APP_HOST + '/bid/buyer/edit/' + idBid,
+            {
+                "bidStatus": bidStatus,
                 "bidPrice": bidPrice,
             },
             {
@@ -62,6 +82,7 @@ const transactionSlice = createSlice({
         isError: null,
         dataAllTransaction: null,
         dataAddTransaction: null,
+        dataEditTransaction: null,
         dataRemoveTransaction: null,
     },
     extraReducers: {
@@ -89,6 +110,20 @@ const transactionSlice = createSlice({
             state.dataAddTransaction = action.payload
         },
         [postAddTransaction.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putEditTransaction.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putEditTransaction.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataEditTransaction = action.payload
+        },
+        [putEditTransaction.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

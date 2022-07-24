@@ -1,5 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const carouselSlice = createSlice({
     name: "carouselSlice",
@@ -7,7 +6,6 @@ const carouselSlice = createSlice({
         isLoading: false,
         isSuccess: false,
         isError: null,
-        dataAllCarousel: null,
     },
 
 })

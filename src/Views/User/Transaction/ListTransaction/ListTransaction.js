@@ -43,7 +43,7 @@ const ListTransaction = () => {
                                 <Tab.Pane eventKey="1">
                                     <Row>
                                         {dataAllTransaction.data.filter(obj => obj.bidStatus === "pending").length > 0 ?
-                                            dataAllTransaction.data?.filter(obj => obj.bidStatus === "pending").map((value, index) => {
+                                            dataAllTransaction.data?.filter(obj => obj.bidStatus === "pending").reverse().map((value, index) => {
                                                 return (
                                                     <Col xs={12} className={'pt-2 pb-2'} key={index} data-aos="fade-up">
                                                         <CardTransaction value={value} />
@@ -58,37 +58,49 @@ const ListTransaction = () => {
                                     </Row>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="2">
-                                    {/* <Row>
-                                        {dataOffer?.map((value, index) => {
+                                    {dataAllTransaction.data.filter(obj => obj.bidStatus === "processed").length > 0 ?
+                                        dataAllTransaction.data?.filter(obj => obj.bidStatus === "processed").reverse().map((value, index) => {
                                             return (
-                                                <Col xs={12} className={'pt-2 pb-2'} key={index}>
+                                                <Col xs={12} className={'pt-2 pb-2'} key={index} data-aos="fade-up">
                                                     <CardTransaction value={value} />
                                                 </Col>
                                             )
-                                        })}
-                                    </Row> */}
+                                        })
+                                        :
+                                        <div className={'mt-1 ' + style.box} data-aos="fade-up">
+                                            <img src={noProduct} width="100%" alt="product not found" />
+                                        </div>
+                                    }
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="3">
-                                    {/* <Row>
-                                        {dataOffer?.map((value, index) => {
+                                    {dataAllTransaction.data.filter(obj => obj.bidStatus === "declined").length > 0 ?
+                                        dataAllTransaction.data?.filter(obj => obj.bidStatus === "declined").reverse().map((value, index) => {
                                             return (
-                                                <Col xs={12} className={'pt-2 pb-2'} key={index}>
+                                                <Col xs={12} className={'pt-2 pb-2'} key={index} data-aos="fade-up">
                                                     <CardTransaction value={value} />
                                                 </Col>
                                             )
-                                        })}
-                                    </Row> */}
+                                        })
+                                        :
+                                        <div className={'mt-1 ' + style.box} data-aos="fade-up">
+                                            <img src={noProduct} width="100%" alt="product not found" />
+                                        </div>
+                                    }
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="4">
-                                    {/* <Row>
-                                        {dataOffer?.map((value, index) => {
+                                    {dataAllTransaction.data.filter(obj => obj.bidStatus === "accepted").length > 0 ?
+                                        dataAllTransaction.data?.filter(obj => obj.bidStatus === "accepted").reverse().map((value, index) => {
                                             return (
-                                                <Col xs={12} className={'pt-2 pb-2'} key={index}>
+                                                <Col xs={12} className={'pt-2 pb-2'} key={index} data-aos="fade-up">
                                                     <CardTransaction value={value} />
                                                 </Col>
                                             )
-                                        })}
-                                    </Row> */}
+                                        })
+                                        :
+                                        <div className={'mt-1 ' + style.box} data-aos="fade-up">
+                                            <img src={noProduct} width="100%" alt="product not found" />
+                                        </div>
+                                    }
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>

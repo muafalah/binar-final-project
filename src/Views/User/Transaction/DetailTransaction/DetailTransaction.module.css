@@ -4,6 +4,12 @@
     border: 1px solid #CED4DA;
 }
 
+.box {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #e4e4e7;
+}
+
 @media screen and (max-width: 576px) {
     .line_vertical {
         display: none;

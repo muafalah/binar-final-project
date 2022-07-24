@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Navbar, Offcanvas, Button, Dropdown, Badge, Row, Col, Form, Spinner } from 'react-bootstrap'
+import { Container, Navbar, Offcanvas, Button, Dropdown, Badge, Row, Col, Form, Spinner, Tab, Nav } from 'react-bootstrap'
 import { BagCheckFill, BagHeartFill, BellFill, BoxArrowRight, HouseFill, StarFill } from 'react-bootstrap-icons'
 import FormSearch from '../../Form/FormSearch/FormSearch'
 import style from './NavbarUser.module.css'
@@ -14,6 +14,8 @@ import SweetAlert from 'react-bootstrap-sweetalert'
 import { postRegisterSeller } from '../../../Redux/features/authUser'
 import Aos from 'aos'
 import { getMiniWishlist } from '../../../Redux/features/wishlistSlice'
+import { getMiniBuyerNotification, getMiniSellerNotification } from '../../../Redux/features/notificationSlice'
+import { formatCamelCase } from '../../../Utils/helper'
 
 const NavbarUser = ({ dataUser }) => {
 
@@ -23,6 +25,7 @@ const NavbarUser = ({ dataUser }) => {
     const [StatusAlert, setStatusAlert] = useState({ registerSeller: false, invalid: false, success: false })
     const { isLoading, isSuccess, isError, dataRegisterSeller, dataUserVerification } = useSelector(state => state.authUserReducer)
     const { dataMiniWishlist } = useSelector(state => state.wishlistReducer)
+    const { dataMiniBuyerNotification, dataMiniSellerNotification } = useSelector(state => state.notificationReducer)
 
     useEffect(() => {
         if (isSuccess) {
@@ -36,6 +39,8 @@ const NavbarUser = ({ dataUser }) => {
 
     useEffect(() => {
         dispatch(getMiniWishlist({ idUser: dataUserVerification.data.userId }))
+        dispatch(getMiniBuyerNotification({ idUser: dataUserVerification.data.userId }))
+        dispatch(getMiniSellerNotification({ idUser: dataUserVerification.data.userId }))
         Aos.init({ duration: 1800 })
     }, [])
 
@@ -103,7 +108,7 @@ const NavbarUser = ({ dataUser }) => {
                 : null
             }
             {StatusAlert.success ? <SweetAlert success title="Pendaftaran Penjual Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/product/list")}></SweetAlert> : null}
-            {dataMiniWishlist ?
+            {dataMiniWishlist && dataMiniBuyerNotification && dataMiniSellerNotification ?
                 <Container>
                     <Navbar.Brand href="/" className="pe-3"><img src={LogoWhite} height="35" alt="SecondGadget" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar-expand-sm" />
@@ -149,26 +154,61 @@ const NavbarUser = ({ dataUser }) => {
                                         </Dropdown>
                                         <Dropdown align="end" className="ms-auto p-0">
                                             <Dropdown.Toggle variant="transparant" className="pe-0 h-100 d-flex">
-                                                <span className="my-auto d-flex" style={{ color: "white" }}><BellFill size={16} className="my-auto" /><Badge pill className="ms-1" bg="danger">{dataNotification.length}</Badge></span>
+                                                <span className="my-auto d-flex" style={{ color: "white" }}><BellFill size={16} className="my-auto" /><Badge pill className="ms-1" bg="danger">{dataMiniBuyerNotification.data.length + dataMiniSellerNotification.data.length}</Badge></span>
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu variant="secondary" className="p-2" style={{ width: "20rem" }}>
-                                                <div className="d-flex justify-content-between">
-                                                    <div><b>Notifikasi</b></div>
-                                                    <div className="my-auto"><a href="/dashboard/notification" style={{ fontSize: "0.75rem", color: "#8A8A8A", textDecoration: "underline" }}>Lihat Semua</a></div>
-                                                </div>
-                                                <hr className="p-0 m-0 mt-1 mb-3" />
-                                                <div>
-                                                    <Row className='m-0 gap-2'>
-                                                        {dataNotification?.map((value, index) => {
-                                                            return (
-                                                                <Col xs={12} className='p-0' key={index}>
-                                                                    {index > 0 ? <hr className="m-0 p-0 mt-1 mb-2" /> : null}
-                                                                    <CardNavbarNotification value={value} />
-                                                                </Col>
-                                                            )
-                                                        })}
+                                                <Tab.Container defaultActiveKey="1">
+                                                    <Row className="m-0 gap-3">
+                                                        <Col xs={12} className="p-0">
+                                                            <Nav variant="tabs" className={style.scroll_menu}>
+                                                                <Nav.Item className="d-flex">
+                                                                    <Nav.Link style={{ color: "#1E1E1E", fontSize: "0.875rem" }} eventKey="1">Notifikasi Pengguna ({dataMiniBuyerNotification.data.length})</Nav.Link>
+                                                                    <Nav.Link style={{ color: "#1E1E1E", fontSize: "0.875rem" }} eventKey="2">Notifikasi Toko ({dataMiniSellerNotification.data.length})</Nav.Link>
+                                                                </Nav.Item>
+                                                            </Nav>
+                                                        </Col>
+                                                        <Col xs={12} className="p-0">
+                                                            <Tab.Content>
+                                                                <Tab.Pane eventKey="1">
+                                                                    <Row className='m-0 gap-2'>
+                                                                        {dataMiniBuyerNotification.data.length > 0 ?
+                                                                            dataMiniBuyerNotification.data?.map((value, index) => {
+                                                                                return (
+                                                                                    <Col xs={12} className='p-0' key={index}>
+                                                                                        {index > 0 ? <hr className="m-0 p-0 mt-1 mb-2" /> : null}
+                                                                                        <CardNavbarNotification value={value} type="buyer" />
+                                                                                    </Col>
+                                                                                )
+                                                                            })
+                                                                            :
+                                                                            <div className={'mt-1 ' + style.box} data-aos="fade-zoom-out">
+                                                                                <img src={noProduct} width="100%" alt="product not found" />
+                                                                            </div>
+                                                                        }
+                                                                    </Row>
+                                                                </Tab.Pane>
+                                                                <Tab.Pane eventKey="2">
+                                                                    <Row className='m-0 gap-2'>
+                                                                        {dataMiniSellerNotification.data.length > 0 ?
+                                                                            dataMiniSellerNotification.data?.map((value, index) => {
+                                                                                return (
+                                                                                    <Col xs={12} className='p-0' key={index}>
+                                                                                        {index > 0 ? <hr className="m-0 p-0 mt-1 mb-2" /> : null}
+                                                                                        <CardNavbarNotification value={value} type="seller" />
+                                                                                    </Col>
+                                                                                )
+                                                                            })
+                                                                            :
+                                                                            <div className={'mt-1 ' + style.box} data-aos="fade-zoom-out">
+                                                                                <img src={noProduct} width="100%" alt="product not found" />
+                                                                            </div>
+                                                                        }
+                                                                    </Row>
+                                                                </Tab.Pane>
+                                                            </Tab.Content>
+                                                        </Col>
                                                     </Row>
-                                                </div>
+                                                </Tab.Container>
                                             </Dropdown.Menu>
                                         </Dropdown>
                                         <Dropdown align="end" className="ms-auto p-0">
@@ -180,7 +220,7 @@ const NavbarUser = ({ dataUser }) => {
                                                     <div className="d-flex">
                                                         <div className="my-auto me-3"><img src={dataUser.img} alt="User Profile" style={{ borderRadius: "100px", width: "38px", height: "38px" }} /></div>
                                                         <div className='w-100'>
-                                                            <div><b>{dataUser.fullName}</b></div>
+                                                            <div><b>{formatCamelCase(dataUser.fullName)}</b></div>
                                                             <div style={{ fontSize: "0.75rem", color: "#8A8A8A" }}>@{dataUser.username}</div>
                                                         </div>
                                                     </div>
@@ -200,7 +240,7 @@ const NavbarUser = ({ dataUser }) => {
                                         <Button variant="transparant" className="d-flex pt-3 pb-3">
                                             <div className='me-4'><img src={dataUser.img} alt="User Profile" style={{ borderRadius: "100px", width: "60px", height: "60px" }} /></div>
                                             <div className='w-100 text-start'>
-                                                <div style={{ fontSize: "1.25rem" }}><b>{dataUser.fullName}</b></div>
+                                                <div style={{ fontSize: "1.25rem" }}><b>{formatCamelCase(dataUser.fullName)}</b></div>
                                                 <div style={{ color: "#8A8A8A" }}>@{dataUser.username}</div>
                                             </div>
                                         </Button>

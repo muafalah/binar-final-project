@@ -67,6 +67,22 @@ export const delRemoveWishlist = createAsyncThunk("wishlistSliceThunk/delRemoveW
     }
 })
 
+export const delRemoveAllWishlist = createAsyncThunk("wishlistSliceThunk/delRemoveWishlist", async ({ idUser }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const response = await axios.delete(process.env.REACT_APP_HOST + '/wishlist/delete-all/' + idUser,
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 const wishlistSlice = createSlice({
     name: "wishlistSlice",
     initialState: {
@@ -77,7 +93,8 @@ const wishlistSlice = createSlice({
         dataMiniWishlist: null,
         dataCheckWishlist: null,
         dataAddWishlist: null,
-        dataRemoveWishlist: null
+        dataRemoveWishlist: null,
+        dataRemoveAllWishlist: null,
     },
     extraReducers: {
         [getAllWishlist.pending]: (state) => {
@@ -146,6 +163,20 @@ const wishlistSlice = createSlice({
             state.dataRemoveWishlist = action.payload
         },
         [delRemoveWishlist.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [delRemoveAllWishlist.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [delRemoveAllWishlist.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataRemoveAllWishlist = action.payload
+        },
+        [delRemoveAllWishlist.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

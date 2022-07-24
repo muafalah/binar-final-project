@@ -1,17 +1,19 @@
 import Aos from 'aos'
-import React, { useEffect } from 'react'
-import { Button, Col, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Button, Col, Row, Spinner } from 'react-bootstrap'
+import SweetAlert from 'react-bootstrap-sweetalert'
 import { useDispatch, useSelector } from 'react-redux'
 import CardProduct from '../../../../Components/Card/CardProduct/CardProduct'
-import { getAllWishlist } from '../../../../Redux/features/wishlistSlice'
+import { delRemoveAllWishlist, getAllWishlist } from '../../../../Redux/features/wishlistSlice'
 import Dashboard from '../../Dashboard/Dashboard'
 import style from './ListFavorit.module.css'
 
 const ListFavorit = () => {
 
     const dispatch = useDispatch()
+    const [StatusAlert, setStatusAlert] = useState({ loading: false, success: false })
     const { dataUserVerification } = useSelector(state => state.authUserReducer)
-    const { dataAllWishlist } = useSelector(state => state.wishlistReducer)
+    const { dataAllWishlist, dataRemoveAllWishlist } = useSelector(state => state.wishlistReducer)
 
     useEffect(() => {
         if (dataUserVerification) {
@@ -20,16 +22,31 @@ const ListFavorit = () => {
         Aos.init({ duration: 1800 })
     }, [dataUserVerification])
 
+    useEffect(() => {
+        if (dataRemoveAllWishlist) {
+            if (dataRemoveAllWishlist.status == 200) {
+                setStatusAlert({ loading: false, success: true })
+            }
+        }
+    }, [dataRemoveAllWishlist])
+
+    const handleRemoveAllWishlist = async () => {
+        setStatusAlert({ ...StatusAlert, loading: true })
+        await dispatch(delRemoveAllWishlist({ idUser: dataUserVerification.data.userId }))
+    }
+
     const noProduct = "https://cdn.dribbble.com/users/2382015/screenshots/6065978/no_result.gif"
 
     return (
         <Dashboard menu="favorit">
+            {StatusAlert.success ? <SweetAlert success title="Produk Telah Dihapus Dari Favorit!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
+            {StatusAlert.loading ? <SweetAlert title="" confirmBtnStyle={{ display: "none" }} onConfirm={() => null}><Spinner animation="border" size="lg" /></SweetAlert> : null}
             {dataAllWishlist ?
                 <Row className="m-0 gap-3">
                     <Col xs={12} className="p-0" data-aos="zoom-out-left">
                         <div className='d-flex'>
                             <div className='w-100 my-auto'><b style={{ fontSize: "1.25rem" }}>Favorit</b></div>
-                            <div className='w-100 my-auto text-end'><Button size="sm" variant="outline-secondary">Hapus Semua</Button></div>
+                            <div className='w-100 my-auto text-end'>{dataAllWishlist.data.length > 0 ? <Button size="sm" variant="outline-secondary" onClick={handleRemoveAllWishlist}>Hapus Semua</Button> : <Button size="sm" variant="outline-secondary" disabled>Hapus Semua</Button>}</div>
                         </div>
                         <hr className="mt-2 mb-1" />
                     </Col>

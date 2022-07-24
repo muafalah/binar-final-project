@@ -3,32 +3,56 @@ import { Col, Row } from 'react-bootstrap'
 import { XCircle } from 'react-bootstrap-icons'
 import { formatRupiah } from '../../../Utils/helper'
 
-const CardNavbarNotification = ({ value }) => {
+const CardNavbarNotification = ({ value, type }) => {
 
-    return (
-        <a href={'/dashboard/offer/detail/' + value.offer.id_offer}>
+    const contentNotification = () => {
+        return (
             <Row className='m-0'>
-                <Col md={3} className='p-0'>
-                    <img src={value.product.image} alt="Photo Product" height="70rem" width="70rem" />
+                <Col md={3} className='p-0 my-auto'>
+                    <img src={value.bids.products.imageProductsSet[0].imageUrl} alt="Photo Product" height="70rem" width="70rem" />
                 </Col>
-                <Col md={8} className='p-0'>
-                    <div style={{ fontSize: "0.875rem", color: "#8A8A8A", fontWeight: "400" }}>
-                        {value.offer.status === "pending" ? "Penawaran Baru" : null}
-                        {value.offer.status === "processed" ? "Penawaran Diterima" : null}
-                        {value.offer.status === "declined" ? "Penawaran Ditolak" : null}
-                        {value.offer.status === "accepted" ? "Produk Berhasil Dijual" : null}
-                    </div>
-                    <div style={{ fontSize: "0.875rem", color: "black" }}>{value.product.name}</div>
-                    <span style={{ fontSize: "0.75rem", color: "#8A8A8A", textDecoration: "line-through" }}>Rp. {formatRupiah(value.product.price)}</span>
-                    <span className="ms-2" style={{ fontSize: "0.875rem", color: "#fb374f", fontWeight: "600" }}>Rp. {formatRupiah(value.offer.price)}</span>
-                </Col>
-                <Col md={1} className='p-0' >
-                    <div className="d-flex align-content-center justify-content-center">
-                        <XCircle className='m-0 p-0' style={{ color: "#8A8A8A" }} size={18} />
-                    </div>
+                <Col md={9} className='p-0 my-auto ps-2'>
+                    {type === "buyer" ?
+                        <div style={{ fontSize: "0.875rem", color: "#8A8A8A", fontWeight: "400" }}>
+                            {value.bids.bidStatus === "pending" ? "Penawaran sedang diproses" : null}
+                            {value.bids.bidStatus === "processed" ? "Produk berhasil ditawar" : null}
+                            {value.bids.bidStatus === "declined" ? "Penawaran kamu ditolak" : null}
+                            {value.bids.bidStatus === "accepted" ? "Produk berhasil dibeli" : null}
+                        </div>
+                        : null
+                    }
+                    {type === "seller" ?
+                        <div style={{ fontSize: "0.875rem", color: "#8A8A8A", fontWeight: "400" }}>
+                            {value.bids.bidStatus === "pending" ? "Penawaran baru" : null}
+                            {value.bids.bidStatus === "processed" ? "Penawaran diterima" : null}
+                            {value.bids.bidStatus === "declined" ? "Penawaran ditolak" : null}
+                            {value.bids.bidStatus === "accepted" ? "Produk telah terjual" : null}
+                        </div>
+                        : null
+                    }
+                    <div style={{ fontSize: "0.875rem", color: "black" }}>{value.bids.products.productName}</div>
+                    <span style={{ fontSize: "0.75rem", color: "#8A8A8A", textDecoration: "line-through" }}>Rp. {formatRupiah(value.bids.products.price)}</span>
+                    <span className="ms-2" style={{ fontSize: "0.875rem", color: "#fb374f", fontWeight: "600" }}>Rp. {formatRupiah(value.bids.bidPrice)}</span>
                 </Col>
             </Row>
-        </a>
+        )
+    }
+
+    return (
+        <>
+            {type === "buyer" ?
+                <a href={'/dashboard/offer/detail/' + value.bids.bidId}>
+                    {contentNotification()}
+                </a>
+                : null
+            }
+            {type === "seller" ?
+                <a href={'/dashboard/offer/detail/' + value.bids.bidId}>
+                    {contentNotification()}
+                </a>
+                : null
+            }
+        </>
     )
 }
 

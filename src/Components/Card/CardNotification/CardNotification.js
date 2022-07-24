@@ -16,16 +16,16 @@ const CardNotification = ({ value, type }) => {
                                 <div className="my-auto d-grid gap-1">
                                     <div>
                                         {type === "buyer" ?
-                                            <div style={{ color: "#8A8A8A", fontWeight: "500" }} className="mb-2">
+                                            <div style={{ color: "#8A8A8A", fontWeight: "400" }} className="mb-1">
                                                 {value.bids.bidStatus === "pending" ? "Penawaran sedang diproses" : null}
                                                 {value.bids.bidStatus === "processed" ? "Produk berhasil ditawar" : null}
                                                 {value.bids.bidStatus === "declined" ? "Penawaran kamu ditolak" : null}
-                                                {value.bids.bidStatus === "accepted" ? "Produk Berhasil Dibeli" : null}
+                                                {value.bids.bidStatus === "accepted" ? "Produk berhasil dibeli" : null}
                                             </div>
                                             : null
                                         }
                                         {type === "seller" ?
-                                            <div style={{ color: "#8A8A8A", fontWeight: "500" }} className="mb-2">
+                                            <div style={{ color: "#8A8A8A", fontWeight: "400" }} className="mb-1">
                                                 {value.bids.bidStatus === "pending" ? "Penawaran baru" : null}
                                                 {value.bids.bidStatus === "processed" ? "Penawaran diterima" : null}
                                                 {value.bids.bidStatus === "declined" ? "Penawaran ditolak" : null}
@@ -33,9 +33,9 @@ const CardNotification = ({ value, type }) => {
                                             </div>
                                             : null
                                         }
-                                        <div style={{ fontWeight: "500", color: "black" }}>{value.bids.products.productName}</div>
+                                        <div style={{ fontWeight: "500", color: "black", fontSize: "1.125rem" }}>{value.bids.products.productName}</div>
                                     </div>
-                                    <div><span style={{ fontWeight: "400", color: "#8A8A8A", textDecoration: "line-through" }}>Rp. {formatRupiah(value.bids.products.price)}</span>  <span style={{ fontWeight: "600", color: "#fb374f" }}>Rp. {formatRupiah(value.bids.bidPrice)}</span></div>
+                                    <div><span style={{ fontWeight: "500", color: "#8A8A8A", textDecoration: "line-through" }}>Rp. {formatRupiah(value.bids.products.price)}</span>  <span style={{ fontWeight: "600", color: "#fb374f" }}>Rp. {formatRupiah(value.bids.bidPrice)}</span></div>
                                 </div>
                             </div>
                         </Col>

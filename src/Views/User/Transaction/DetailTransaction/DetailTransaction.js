@@ -4,8 +4,9 @@ import { Badge, Button, Col, Form, Row, Spinner } from 'react-bootstrap'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { postAddNotification } from '../../../../Redux/features/notificationSlice'
 import { getDetailOffer } from '../../../../Redux/features/offerSlice'
-import { delRemoveTransaction } from '../../../../Redux/features/transactionSlice'
+import { delRemoveTransaction, putEditTransaction } from '../../../../Redux/features/transactionSlice'
 import { formatCamelCase, formatRupiah, formatTimestamp } from '../../../../Utils/helper'
 import Dashboard from '../../Dashboard/Dashboard'
 import style from './DetailTransaction.module.css'
@@ -16,7 +17,9 @@ const DetailTransaction = () => {
     const dispatch = useDispatch()
     const { id_transaction } = useParams()
     const { dataDetailOffer } = useSelector(state => state.offerReducer)
+    const { dataEditTransaction } = useSelector(state => state.transactionReducer)
     const { dataRemoveTransaction } = useSelector(state => state.transactionReducer)
+    const [TawarUlang, setTawarUlang] = useState({ modal: false, invalid: false, success: false, loading: false, bidPrice: 0 })
     const [CancelTransaction, setCancelTransaction] = useState({ modal: false, success: false, invalid: false, loading: false })
 
     useEffect(() => {
@@ -31,6 +34,14 @@ const DetailTransaction = () => {
             }
         }
     }, [dataRemoveTransaction])
+
+    useEffect(() => {
+        if (dataEditTransaction) {
+            if (dataEditTransaction.status == 200) {
+                setTawarUlang({ modal: false, invalid: false, success: true, loading: false, bidPrice: 0 })
+            }
+        }
+    }, [dataEditTransaction])
 
     const HandleCancelTransaction = async () => {
         setCancelTransaction({ ...CancelTransaction, loading: true })
@@ -62,8 +73,55 @@ const DetailTransaction = () => {
         )
     }
 
+    const handleTawarUlang = async () => {
+        if (TawarUlang.bidPrice) {
+            setTawarUlang({ ...TawarUlang, modal: false, loading: true })
+            await dispatch(putEditTransaction({ idBid: parseInt(id_transaction), bidStatus: "pending", bidPrice: TawarUlang.bidPrice }))
+            await dispatch(postAddNotification({ idBid: parseInt(id_transaction) }))
+        } else {
+            setTawarUlang({ ...TawarUlang, invalid: true })
+        }
+    }
+
     return (
         <Dashboard menu="transaction">
+            {TawarUlang.modal ?
+                <SweetAlert
+                    showCancel
+                    cancelBtnText="Batal"
+                    confirmBtnText="Tawar Ulang"
+                    cancelBtnBsStyle="light"
+                    confirmBtnBsStyle="success"
+                    placeHolder="Deskripsi singkat tokomu"
+                    title="Tawar Ulang"
+                    onConfirm={handleTawarUlang}
+                    onCancel={() => setTawarUlang({ modal: false, invalid: false, success: false, loading: false, bidPrice: 0 })}
+                >
+                    <div className={'d-flex gap-3 p-2 mt-2 ' + style.box}>
+                        <div className="my-auto"><img src={dataDetailOffer.data.products.imageProductsSet[0].imageUrl} alt="Photo Product" height="90rem" width="90rem" style={{ borderRadius: "5px" }} /></div>
+                        <div className="my-auto d-grid gap-2 text-start">
+                            <div style={{ fontSize: "0.875rem", color: "#8A8A8A" }}>{dataDetailOffer.data.products.categories.categoryName}</div>
+                            <div style={{ fontWeight: "500", color: "black" }}>{dataDetailOffer.data.products.productName}</div>
+                            <span style={{ fontSize: "1.125rem", fontWeight: "600", color: "#fb374f" }}>Rp. {formatRupiah(dataDetailOffer.data.products.price)}</span>
+                        </div>
+                    </div>
+                    <div className="mt-2">
+                        <p className='text-start' style={{ fontSize: "0.875rem" }}>Harga tawaranmu akan diketahui penjual, jika penjual cocok kamu akan segera dihubungi penjual.</p>
+                    </div>
+                    <Form>
+                        <Form.Group className="mt-3 text-start">
+                            <Form.Label style={{ fontSize: "1rem" }}><b style={{ fontWeight: "500" }}>Harga Tawar</b></Form.Label>
+                            <Form.Control type="number" name="price" placeholder="Rp. 00.000" onChange={(e) => setTawarUlang({ ...TawarUlang, bidPrice: e.target.value })} isInvalid={TawarUlang.invalid} />
+                            <Form.Control.Feedback type="invalid">
+                                Masukkan harga yang kamu tawarkan.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form>
+                </SweetAlert>
+                : null
+            }
+            {TawarUlang.loading ? <SweetAlert title="" confirmBtnStyle={{ display: "none" }} onConfirm={() => null}><Spinner animation="border" size="lg" /></SweetAlert> : null}
+            {TawarUlang.success ? <SweetAlert success title="Status Penawaran Diperbarui!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
             {CancelTransaction.modal ? ModalCancelTransaction() : null}
             {CancelTransaction.success ? <SweetAlert success title="Transaksi Dihapus!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/transaction/list")}></SweetAlert> : null}
             {dataDetailOffer ?
@@ -170,28 +228,28 @@ const DetailTransaction = () => {
                             <Col xs={12}>
                                 {dataDetailOffer.data.bidStatus === "pending" ?
                                     <div className="pt-2 d-flex gap-2 justify-content-end">
-                                        <Button className={style.button_respon} variant="outline-danger" onClick={() => setCancelTransaction({ ...CancelTransaction, modal: true })}>Batalkan Transaksi</Button>
-                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="dark">Hubungi Penjual</Button>
+                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
+                                        <Button className={style.button_respon} variant="danger" onClick={() => setCancelTransaction({ ...CancelTransaction, modal: true })}>Batalkan Transaksi</Button>
                                     </div>
                                     : null
                                 }
                                 {dataDetailOffer.data.bidStatus === "processed" ?
                                     <div className="pt-2 d-flex gap-2 justify-content-end">
-                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="dark">Hubungi Penjual</Button>
+                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
                                     </div>
                                     : null
                                 }
                                 {dataDetailOffer.data.bidStatus === "declined" ?
                                     <div className="pt-2 d-flex gap-2 justify-content-end">
-                                        <Button className={style.button_respon} variant="secondary">Tawar Ulang</Button>
-                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="dark">Hubungi Penjual</Button>
+                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
+                                        <Button className={style.button_respon} variant="dark" onClick={() => setTawarUlang({ ...TawarUlang, modal: true })}>Tawar Ulang</Button>
                                     </div>
                                     : null
                                 }
                                 {dataDetailOffer.data.bidStatus === "accepted" ?
                                     <div className="pt-2 d-flex gap-2 justify-content-end">
+                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="outline-secondary">Hubungi Penjual</Button>
                                         <Button className={style.button_respon} variant="success">Cetak Bukti</Button>
-                                        <Button href={'https://wa.me/' + dataDetailOffer.data.products.users.phone} target="_blank" className={style.button_respon} variant="dark">Hubungi Penjual</Button>
                                     </div>
                                     : null
                                 }
