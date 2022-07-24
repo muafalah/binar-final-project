@@ -1,3 +1,4 @@
+import React from 'react'
 import moment from "moment";
 moment.updateLocale('id', require('moment/locale/id'))
 
@@ -28,7 +29,8 @@ export const formatDate = (value) => {
 }
 
 export const formatCamelCase = (value) => {
-    var splitValue = value.toLowerCase().split(' ');
+    var lowerValue = value.toLowerCase()
+    var splitValue = lowerValue.toLowerCase().split(' ');
     for (var i = 0; i < splitValue.length; i++) {
         splitValue[i] = splitValue[i].charAt(0).toUpperCase() + splitValue[i].substring(1);
     }
