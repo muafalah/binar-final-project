@@ -12,7 +12,9 @@ const EditProfile = () => {
     const [InputForm, setInputForm] = useState({ fullname: "", username: "", email: "", address: "", phone: "", city: "", description: "" })
 
     useEffect(() => {
-        setInputForm({ fullname: dataUserVerification.data.fullName, username: dataUserVerification.data.username, email: dataUserVerification.data.email, address: dataUserVerification.data.address, phone: dataUserVerification.data.phone, city: dataUserVerification.data.cities.idCity })
+        if (dataUserVerification) {
+            setInputForm({ fullname: dataUserVerification.data.fullName, username: dataUserVerification.data.username, email: dataUserVerification.data.email, address: dataUserVerification.data.address, phone: dataUserVerification.data.phone, city: dataUserVerification.data.cities.idCity })
+        }
     }, [])
 
     const selectLocation = (data) => {
