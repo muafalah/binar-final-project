@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import style from './CardFilter.module.css'
 import { dataCategory, dataCity } from '../../../Views/DataDummy'
+import { getAllCity } from '../../../Redux/features/citySlice'
+import { formatCamelCase } from '../../../Utils/helper'
 
 const CardFilter = (props) => {
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { dataAllCity } = useSelector(state => state.cityReducer)
     const [InputFilter, setInputFilter] = useState({
         sort: props.sort,
         category: props.category,
@@ -15,6 +20,10 @@ const CardFilter = (props) => {
         minprice: props.minprice,
         maxprice: props.maxprice,
     })
+
+    useEffect(() => {
+        dispatch(getAllCity())
+    }, [])
 
     const handleFilter = () => {
         if (InputFilter.sort && InputFilter.category && InputFilter.location && InputFilter.maxprice && InputFilter.minprice) {
@@ -50,14 +59,6 @@ const CardFilter = (props) => {
             value: 2,
             label: "Terlama",
         },
-        {
-            value: 3,
-            label: "Harga Tertinggi",
-        },
-        {
-            value: 4,
-            label: "Harga Terendah",
-        },
     ]
 
     const sortStore = [
@@ -86,13 +87,12 @@ const CardFilter = (props) => {
     }
 
     const selectLocation = (data) => {
-        const handleData = data ? data : "";
         const dataOption = []
-        handleData?.map((value) => {
+        data?.map((value) => {
             const dataConvert =
             {
-                value: value.id_city,
-                label: value.name,
+                value: value.idCity,
+                label: formatCamelCase(value.cityName),
             }
             dataOption.push(dataConvert)
         })
@@ -103,72 +103,77 @@ const CardFilter = (props) => {
 
     return (
         <>
-            {props.show === "desktop" ?
+            {dataAllCity ?
                 <>
-                    {props.type === "product" ?
-                        <div className={'mt-0 mt-md-5 d-grid gap-3'}>
-                            <Form className={style.box} onSubmit={handleFilter}>
-                                <h5 className="mb-3">Filter & Urutkan</h5>
-                                <Select className="mt-2" options={sortProduct} defaultValue={sortProduct.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
-                                <Select className="mt-2" options={selectCategory(dataCategory)} defaultValue={selectCategory(dataCategory).filter(option => option.value == InputFilter.category)} placeholder="Kategori" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, category: e.value })} />
-                                <Select className="mt-2" options={selectLocation(dataCity)} defaultValue={selectLocation(dataCity).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
-                                <Form.Group className="mt-2 d-flex gap-1">
-                                    <Form.Control type="number" placeholder="Terendah" onChange={(e) => setInputFilter({ ...InputFilter, minprice: e.target.value })} value={InputFilter.minprice} />
-                                    <Form.Control type="number" placeholder="Tertinggi" onChange={(e) => setInputFilter({ ...InputFilter, maxprice: e.target.value })} value={InputFilter.maxprice} />
-                                </Form.Group>
-                                <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
-                                <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
-                            </Form>
-                        </div>
-                        : null
-                    }
-                    {props.type === "store" ?
-                        <div className={'mt-0 mt-md-5 d-grid gap-3'}>
-                            <Form className={style.box} onSubmit={handleFilter}>
-                                <h5 className="mb-3">Filter & Urutkan</h5>
-                                <Select className="mt-2" options={sortStore} defaultValue={sortStore.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
-                                <Select className="mt-2" options={selectLocation(dataCity)} defaultValue={selectLocation(dataCity).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
-                                <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
-                                <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
-                            </Form>
-                        </div>
-                        : null
-                    }
+                    {props.show === "desktop" ?
+                        <>
+                            {props.type === "product" ?
+                                <div className={'mt-0 mt-md-5 d-grid gap-3'}>
+                                    <Form className={style.box} onSubmit={handleFilter}>
+                                        <h5 className="mb-3">Filter & Urutkan</h5>
+                                        <Select className="mt-2" options={sortProduct} defaultValue={sortProduct.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
+                                        <Select className="mt-2" options={selectCategory(dataCategory)} defaultValue={selectCategory(dataCategory).filter(option => option.value == InputFilter.category)} placeholder="Kategori" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, category: e.value })} />
+                                        <Select className="mt-2" options={selectLocation(dataAllCity.data)} defaultValue={selectLocation(dataAllCity.data).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
+                                        <Form.Group className="mt-2 d-flex gap-1">
+                                            <Form.Control type="number" placeholder="Terendah" onChange={(e) => setInputFilter({ ...InputFilter, minprice: e.target.value })} value={InputFilter.minprice} />
+                                            <Form.Control type="number" placeholder="Tertinggi" onChange={(e) => setInputFilter({ ...InputFilter, maxprice: e.target.value })} value={InputFilter.maxprice} />
+                                        </Form.Group>
+                                        <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
+                                        <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
+                                    </Form>
+                                </div>
+                                : null
+                            }
+                            {props.type === "store" ?
+                                <div className={'mt-0 mt-md-5 d-grid gap-3'}>
+                                    <Form className={style.box} onSubmit={handleFilter}>
+                                        <h5 className="mb-3">Filter & Urutkan</h5>
+                                        <Select className="mt-2" options={sortStore} defaultValue={sortStore.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
+                                        <Select className="mt-2" options={selectLocation(dataAllCity.data)} defaultValue={selectLocation(dataAllCity.data).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
+                                        <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
+                                        <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
+                                    </Form>
+                                </div>
+                                : null
+                            }
+                        </>
+                        : null}
+                    {props.show === "mobile" ?
+                        <>
+                            {props.type === "product" ?
+                                <div className={'mt-0 d-grid gap-3'}>
+                                    <Form className={style.box} onSubmit={handleFilter}>
+                                        <h5 className='mb-3'>Filter & Urutkan</h5>
+                                        <Select className="mt-2" options={sortProduct} defaultValue={sortProduct.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
+                                        <Select className="mt-2" options={selectCategory(dataCategory)} defaultValue={selectCategory(dataCategory).filter(option => option.value == InputFilter.category)} placeholder="Kategori" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, category: e.value })} />
+                                        <Select className="mt-2" options={selectLocation(dataAllCity.data)} defaultValue={selectLocation(dataAllCity.data).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
+                                        <Form.Group className="mt-2 d-flex gap-1">
+                                            <Form.Control type="number" placeholder="Terendah" onChange={(e) => setInputFilter({ ...InputFilter, minprice: e.target.value })} value={InputFilter.minprice} />
+                                            <Form.Control type="number" placeholder="Tertinggi" onChange={(e) => setInputFilter({ ...InputFilter, maxprice: e.target.value })} value={InputFilter.maxprice} />
+                                        </Form.Group>
+                                        <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
+                                        <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
+                                    </Form>
+                                </div>
+                                : null
+                            }
+                            {props.type === "store" ?
+                                <div className={'d-grid gap-3'}>
+                                    <Form className={'pt-4 pb-4 ' + style.box} onSubmit={handleFilter}>
+                                        <h5 className='mb-3'>Filter & Urutkan</h5>
+                                        <Select className="mt-2" options={sortStore} defaultValue={sortStore.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
+                                        <Select className="mt-2" options={selectLocation(dataAllCity.data)} defaultValue={selectLocation(dataAllCity.data).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
+                                        <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
+                                        <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
+                                    </Form>
+                                </div>
+                                : null
+                            }
+                        </>
+                        : null}
                 </>
-                : null}
-            {props.show === "mobile" ?
-                <>
-                    {props.type === "product" ?
-                        <div className={'mt-0 d-grid gap-3'}>
-                            <Form className={style.box} onSubmit={handleFilter}>
-                                <h5 className='mb-3'>Filter & Urutkan</h5>
-                                <Select className="mt-2" options={sortProduct} defaultValue={sortProduct.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
-                                <Select className="mt-2" options={selectCategory(dataCategory)} defaultValue={selectCategory(dataCategory).filter(option => option.value == InputFilter.category)} placeholder="Kategori" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, category: e.value })} />
-                                <Select className="mt-2" options={selectLocation(dataCity)} defaultValue={selectLocation(dataCity).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
-                                <Form.Group className="mt-2 d-flex gap-1">
-                                    <Form.Control type="number" placeholder="Terendah" onChange={(e) => setInputFilter({ ...InputFilter, minprice: e.target.value })} value={InputFilter.minprice} />
-                                    <Form.Control type="number" placeholder="Tertinggi" onChange={(e) => setInputFilter({ ...InputFilter, maxprice: e.target.value })} value={InputFilter.maxprice} />
-                                </Form.Group>
-                                <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
-                                <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
-                            </Form>
-                        </div>
-                        : null
-                    }
-                    {props.type === "store" ?
-                        <div className={'d-grid gap-3'}>
-                            <Form className={'pt-4 pb-4 ' + style.box} onSubmit={handleFilter}>
-                                <h5 className='mb-3'>Filter & Urutkan</h5>
-                                <Select className="mt-2" options={sortStore} defaultValue={sortStore.filter(option => option.value == props.sort)} placeholder="Urutan" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, sort: e.value })} />
-                                <Select className="mt-2" options={selectLocation(dataCity)} defaultValue={selectLocation(dataCity).filter(option => option.value == InputFilter.location)} placeholder="Lokasi" theme={selectTheme} onChange={(e) => setInputFilter({ ...InputFilter, location: e.value })} />
-                                <Button variant="dark" className="mt-3 w-100" type="submit">Filter</Button>
-                                <Button variant="outline-secondary" className="mt-2 w-100" onClick={handleClear}>Hapus</Button>
-                            </Form>
-                        </div>
-                        : null
-                    }
-                </>
-                : null}
+                : null
+            }
         </>
     )
 }

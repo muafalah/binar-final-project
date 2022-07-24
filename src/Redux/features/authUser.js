@@ -101,6 +101,26 @@ export const getUserByUsername = createAsyncThunk("authUserThunk/getUserByUserna
     }
 })
 
+export const getSearchSellerByKeyword = createAsyncThunk("productSliceThunk/getSearchSellerByKeyword", async ({ fullName }) => {
+    try {
+        const response = await axios.get(process.env.REACT_APP_HOST + '/user/search/u?fullName=' + fullName,
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
+export const getSearchSellerByFilter = createAsyncThunk("productSliceThunk/getSearchSellerByFilter", async ({ fullName, idCity }) => {
+    try {
+        const response = await axios.get(process.env.REACT_APP_HOST + '/user/search/ui?fullName=' + fullName + '&idCity=' + idCity,
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 const authUser = createSlice({
     name: "authUser",
     initialState: {
@@ -113,6 +133,8 @@ const authUser = createSlice({
         dataUserEdit: null,
         dataRegisterSeller: null,
         dataUserByUsername: null,
+        dataSearchSellerByKeyword: null,
+        dataSearchSellerByFilter: null,
     },
     extraReducers: {
         [postUserRegister.pending]: (state) => {
@@ -195,6 +217,34 @@ const authUser = createSlice({
             state.dataUserByUsername = action.payload
         },
         [getUserByUsername.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [getSearchSellerByKeyword.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [getSearchSellerByKeyword.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataSearchSellerByKeyword = action.payload
+        },
+        [getSearchSellerByKeyword.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [getSearchSellerByFilter.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [getSearchSellerByFilter.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataSearchSellerByFilter = action.payload
+        },
+        [getSearchSellerByFilter.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

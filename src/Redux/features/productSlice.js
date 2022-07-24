@@ -41,6 +41,34 @@ export const getRelatedProduct = createAsyncThunk("productSliceThunk/getRelatedP
     }
 })
 
+export const postAddProduct = createAsyncThunk("productSliceThunk/postAddProduct", async ({ userId, name, category, price, serialNumber, description, image }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const data = new FormData();
+        data.append('userId', userId);
+        data.append('productName', name);
+        data.append('categoryId', category);
+        data.append('price', price);
+        data.append('serialNumber', serialNumber);
+        data.append('description', description);
+        data.append('photo1', image[0]);
+        data.append('photo2', image[1]);
+        data.append('photo3', image[2]);
+        data.append('photo4', image[3]);
+        const response = await axios.post(process.env.REACT_APP_HOST + '/product/add',
+            data,
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 export const putEditStatusProduct = createAsyncThunk("productSliceThunk/putEditStatusProduct", async ({ idProduct, productStatus }) => {
     try {
         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
@@ -60,21 +88,25 @@ export const putEditStatusProduct = createAsyncThunk("productSliceThunk/putEditS
     }
 })
 
-// export const delRemoveProduct = createAsyncThunk("productSliceThunk/delRemoveProduct", async ({idProduct}) => {
-//     try {
-//         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
-//         const response = await axios.delete(process.env.REACT_APP_HOST + '/category/delete/' + idProduct,
-//             {
-//                 headers: {
-//                     "Authorization": `Bearer ${UserToken.token}`
-//                 }
-//             }
-//         )
-//         return response.data
-//     } catch (error) {
-//         return error.response.data
-//     }
-// })
+export const getSearchProductByKeyword = createAsyncThunk("productSliceThunk/getSearchProductByKeyword", async ({ fullName }) => {
+    try {
+        const response = await axios.get(process.env.REACT_APP_HOST + '/product/filter-by?productName=' + fullName,
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
+export const getSearchProductByFilter = createAsyncThunk("productSliceThunk/getSearchProductByFilter", async ({ fullName, idCategory, idCity }) => {
+    try {
+        const response = await axios.get(process.env.REACT_APP_HOST + '/product/all?productName=' + fullName + '&categoryId=' + idCategory + '&idCity=' + idCity,
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
 
 const productSlice = createSlice({
     name: "productSlice",
@@ -86,7 +118,10 @@ const productSlice = createSlice({
         dataLatestProduct: null,
         dataDetailProduct: null,
         dataRelatedProduct: null,
+        dataAddProduct: null,
         dataEditStatusProduct: null,
+        dataSearchProductByKeyword: null,
+        dataSearchProductByFilter: null,
     },
     extraReducers: {
         [getProductByUsername.pending]: (state) => {
@@ -145,6 +180,20 @@ const productSlice = createSlice({
             state.isError = action.payload
         },
 
+        [postAddProduct.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [postAddProduct.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataAddProduct = action.payload
+        },
+        [postAddProduct.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
         [putEditStatusProduct.pending]: (state) => {
             state.isLoading = true
             state.isSuccess = false
@@ -155,6 +204,34 @@ const productSlice = createSlice({
             state.dataEditStatusProduct = action.payload
         },
         [putEditStatusProduct.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [getSearchProductByKeyword.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [getSearchProductByKeyword.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataSearchProductByKeyword = action.payload
+        },
+        [getSearchProductByKeyword.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [getSearchProductByFilter.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [getSearchProductByFilter.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataSearchProductByFilter = action.payload
+        },
+        [getSearchProductByFilter.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },
