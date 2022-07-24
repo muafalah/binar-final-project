@@ -68,8 +68,7 @@ const Dashboard = ({ children, menu }) => {
         Aos.init({ duration: 1800 })
     }, [isSuccess, dataRegisterSeller])
 
-    const handleRegisterSeller = async (e) => {
-        e.preventDefault()
+    const handleRegisterSeller = async () => {
         if (InputForm.description && InputForm.password) {
             await dispatch(postRegisterSeller({ dataProfile: dataUserVerification.data, description: InputForm.description, password: InputForm.password }))
         } else {
