@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { useDropzone } from 'react-dropzone';
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Button, Col, Form, Row, Spinner } from 'react-bootstrap'
 import Dashboard from '../../Dashboard/Dashboard'
 import style from './EditProduct.module.css'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Aos from 'aos'
-import { getDetailProduct } from '../../../../Redux/features/productSlice'
+import { getDetailProduct, putEditProduct } from '../../../../Redux/features/productSlice'
 import { getAllCategory } from '../../../../Redux/features/categorySlice'
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 const thumbsContainer = {
     display: 'flex',
@@ -44,10 +46,13 @@ const img = {
 const EditProduct = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { id_product } = useParams()
-    const { dataDetailProduct } = useSelector(state => state.productReducer)
+    const { dataDetailProduct, dataEditProduct } = useSelector(state => state.productReducer)
     const { dataAllCategory } = useSelector(state => state.categoryReducer)
+    const { dataUserVerification } = useSelector(state => state.authUserReducer)
     const [InputForm, setInputForm] = useState({ name: "", category: "", price: "", serialNumber: "", description: "" })
+    const [Load, setLoad] = useState(false)
     const [StatusAlert, setStatusAlert] = useState({ alert: false, invalid: false, success: false })
 
     useEffect(() => {
@@ -59,8 +64,37 @@ const EditProduct = () => {
     useEffect(() => {
         if (dataDetailProduct) {
             setInputForm({ name: dataDetailProduct.data.productName, category: dataDetailProduct.data.categories.categoryId, price: dataDetailProduct.data.price, serialNumber: dataDetailProduct.data.serialNumber, description: dataDetailProduct.data.serialNumber })
+            setFiles([{
+                name: "image 1",
+                preview: dataDetailProduct.data.imageProductsSet[0].imageUrl,
+                check: 1,
+            },
+            {
+                name: "image 2",
+                preview: dataDetailProduct.data.imageProductsSet[1].imageUrl,
+                check: 1,
+            },
+            {
+                name: "image 3",
+                preview: dataDetailProduct.data.imageProductsSet[2].imageUrl,
+                check: 1,
+            },
+            {
+                name: "image 4",
+                preview: dataDetailProduct.data.imageProductsSet[3].imageUrl,
+                check: 1,
+            },])
         }
     }, [dataDetailProduct])
+
+    useEffect(() => {
+        if (dataEditProduct) {
+            if (dataEditProduct.status == 200) {
+                setLoad(false)
+                setStatusAlert({ alert: false, invalid: false, success: true })
+            }
+        }
+    }, [dataEditProduct])
 
     const selectCategory = (data) => {
         const dataOption = []
@@ -109,8 +143,20 @@ const EditProduct = () => {
         return () => files.forEach(file => URL.revokeObjectURL(file.preview));
     }, []);
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (InputForm.name && InputForm.category && InputForm.price && InputForm.serialNumber && InputForm.description && files.length == 4) {
+            setLoad(true)
+            await dispatch(putEditProduct({ idProduct: id_product, idCategory: InputForm.category, idUser: dataUserVerification.data.userId, productName: InputForm.name, serialNumber: InputForm.serialNumber, price: InputForm.price, description: InputForm.description, image: files, productStatus: dataDetailProduct.data.productStatus }))
+        } else {
+            setStatusAlert({ invalid: true })
+        }
+    }
+
     return (
         <Dashboard menu="product">
+            {StatusAlert.success ? <SweetAlert success title="Produk Diperbarui!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/product/list")}></SweetAlert> : null}
+            {Load ? <SweetAlert title="" confirmBtnStyle={{ display: "none" }} onConfirm={() => null}><Spinner animation="border" size="lg" /></SweetAlert> : null}
             {dataDetailProduct && dataAllCategory ?
                 <Row className={'m-0 ' + style.box_temp} data-aos="fade-up">
                     <Col xs={12} className='mt-3'>
@@ -133,14 +179,14 @@ const EditProduct = () => {
                         <Row className={'m-0'}>
                             <Col xs={12} className='mt-3 mb-3'>
                                 <div>
-                                    <Form className={'d-grid gap w-100'}>
+                                    <Form className={'d-grid gap w-100'} onSubmit={handleSubmit}>
                                         <Form.Group className="mb-3">
                                             <Form.Label>Nama Produk <span style={{ color: "red" }}>*</span></Form.Label>
                                             <Form.Control type="text" value={InputForm.name} onChange={(e) => { setInputForm({ ...InputForm, name: e.target.value }) }} isInvalid={StatusAlert.invalid} />
                                         </Form.Group>
                                         <Form.Group className="mb-3">
                                             <Form.Label>Kategori <span style={{ color: "red" }}>*</span></Form.Label>
-                                            <Select options={selectCategory(dataAllCategory.data)} theme={StatusAlert.invalid == false ? defaultTheme : errorTheme} placeholder="Pilih Kategori" value={InputForm.category} onChange={(e) => setInputForm({ ...InputForm, category: e.value })} />
+                                            <Select options={selectCategory(dataAllCategory.data)} theme={StatusAlert.invalid == false ? defaultTheme : errorTheme} defaultValue={selectCategory(dataAllCategory.data).filter(option => option.value == InputForm.category)} placeholder="Pilih Kategori" onChange={(e) => setInputForm({ ...InputForm, category: e.value })} />
                                         </Form.Group>
                                         <Form.Group className="mb-3">
                                             <Form.Label>Harga <span style={{ color: "red" }}>*</span></Form.Label>

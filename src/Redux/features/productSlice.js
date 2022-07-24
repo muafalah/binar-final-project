@@ -88,6 +88,56 @@ export const putEditStatusProduct = createAsyncThunk("productSliceThunk/putEditS
     }
 })
 
+export const putEditProduct = createAsyncThunk("categorySliceThunk/putEditProduct", async ({ idProduct, idCategory, idUser, productName, serialNumber, price, description, image, productStatus }) => {
+    try {
+        if (image[0].check || image[1].check || image[2].check || image[3].check) {
+            const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+            const data = new FormData();
+            data.append('categoryId', idCategory);
+            data.append('userId', idUser);
+            data.append('productName', productName);
+            data.append('serialNumber', serialNumber);
+            data.append('price', price);
+            data.append('description', description);
+            data.append('productStatus', productStatus);
+            const response = await axios.put(process.env.REACT_APP_HOST + '/product/edit/' + idProduct,
+                data,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${UserToken.token}`
+                    }
+                }
+            )
+            return response.data
+        } else {
+            const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+            const data = new FormData();
+            data.append('categoryId', idCategory);
+            data.append('userId', idUser);
+            data.append('productName', productName);
+            data.append('serialNumber', serialNumber);
+            data.append('price', price);
+            data.append('description', description);
+            data.append('photo1', image[0]);
+            data.append('photo2', image[1]);
+            data.append('photo3', image[2]);
+            data.append('photo4', image[3]);
+            data.append('productStatus', productStatus);
+            const response = await axios.put(process.env.REACT_APP_HOST + '/product/edit/' + idProduct,
+                data,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${UserToken.token}`
+                    }
+                }
+            )
+            return response.data
+        }
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 export const getSearchProductByKeyword = createAsyncThunk("productSliceThunk/getSearchProductByKeyword", async ({ fullName }) => {
     try {
         const response = await axios.get(process.env.REACT_APP_HOST + '/product/filter-by?productName=' + fullName,
@@ -120,6 +170,7 @@ const productSlice = createSlice({
         dataRelatedProduct: null,
         dataAddProduct: null,
         dataEditStatusProduct: null,
+        dataEditProduct: null,
         dataSearchProductByKeyword: null,
         dataSearchProductByFilter: null,
     },
@@ -204,6 +255,20 @@ const productSlice = createSlice({
             state.dataEditStatusProduct = action.payload
         },
         [putEditStatusProduct.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putEditProduct.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putEditProduct.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataEditProduct = action.payload
+        },
+        [putEditProduct.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },
