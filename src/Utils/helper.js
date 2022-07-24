@@ -29,8 +29,8 @@ export const formatDate = (value) => {
 }
 
 export const formatCamelCase = (value) => {
-    var lowerValue = value.toLowerCase()
-    var splitValue = lowerValue.toLowerCase().split(' ');
+    // var lowerValue = value.toLowerCase()
+    var splitValue = value.split(' ');
     for (var i = 0; i < splitValue.length; i++) {
         splitValue[i] = splitValue[i].charAt(0).toUpperCase() + splitValue[i].substring(1);
     }
