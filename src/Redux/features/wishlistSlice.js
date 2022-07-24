@@ -51,10 +51,10 @@ export const postAddWishlist = createAsyncThunk("wishlistSliceThunk/postAddWishl
     }
 })
 
-export const delRemoveWishlist = createAsyncThunk("wishlistSliceThunk/delRemoveWishlist", async ({ idProduct }) => {
+export const delRemoveWishlist = createAsyncThunk("wishlistSliceThunk/delRemoveWishlist", async ({ idProduct, idUser }) => {
     try {
         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
-        const response = await axios.delete(process.env.REACT_APP_HOST + '/wishlist/delete/' + idProduct,
+        const response = await axios.delete(process.env.REACT_APP_HOST + '/wishlist/delete/' + idProduct + '/' + idUser,
             {
                 headers: {
                     "Authorization": `Bearer ${UserToken.token}`

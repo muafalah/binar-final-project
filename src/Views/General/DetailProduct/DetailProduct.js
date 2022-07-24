@@ -1,6 +1,6 @@
 import Aos from 'aos'
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row, Button, Badge, Form, Spinner } from 'react-bootstrap'
+import { Col, Container, Row, Button, Badge, Form, Spinner, Modal } from 'react-bootstrap'
 import { ChatDotsFill, HeartFill } from 'react-bootstrap-icons'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import { useDispatch, useSelector } from 'react-redux'
@@ -57,20 +57,20 @@ const DetailProduct = () => {
     }, [dataAddTransaction])
 
     useEffect(() => {
-        if (dataAddWishlist) {
-            if (dataAddWishlist.status == 201) {
-                setStatusAddWishlist({ success: true, loading: false })
-            }
-        }
-    }, [dataAddWishlist])
-
-    useEffect(() => {
         if (dataRemoveWishlist) {
             if (dataRemoveWishlist.status == 200) {
                 setStatusRemoveWishlist({ success: true, loading: false })
             }
         }
     }, [dataRemoveWishlist])
+
+    useEffect(() => {
+        if (dataAddWishlist) {
+            if (dataAddWishlist.status == 201) {
+                setStatusAddWishlist({ success: true, loading: false })
+            }
+        }
+    }, [dataAddWishlist])
 
     const handleTawarHarga = async () => {
         if (BidPrice) {
@@ -87,7 +87,8 @@ const DetailProduct = () => {
 
     const handleRemoveWishlist = async () => {
         setStatusRemoveWishlist({ ...StatusRemoveWishlist, loading: true })
-        await dispatch(delRemoveWishlist({ idProduct: parseInt(id_product) }))
+        await dispatch(delRemoveWishlist({ idProduct: id_product, idUser: dataUserVerification.data.userId }))
+        window.location.reload()
     }
 
     return (
@@ -138,9 +139,11 @@ const DetailProduct = () => {
             {StatusAlert.success ? <SweetAlert success title="Penawaran Berhasil Dikirimkan!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/transaction/list")}></SweetAlert> : null}
             {StatusAddWishlist.success ? <SweetAlert success title="Produk Ditambahkan ke Favorit!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
             {StatusRemoveWishlist.success ? <SweetAlert danger title="Produk Dihapus dari Favorit!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
-            {StatusAddWishlist.loading || StatusRemoveWishlist.loading ? <SweetAlert title="" confirmBtnStyle={{ display: "none" }} onConfirm={() => null}><Spinner animation="border" size="lg" /></SweetAlert> : null}
             {dataDetailProduct && dataRelatedProduct ?
                 <Container>
+                    <Modal show={StatusAddWishlist.loading || StatusRemoveWishlist.loading} onHide={StatusAddWishlist.success || StatusRemoveWishlist.success} centered>
+                        <Modal.Body className="text-center" size="sm"><Spinner animation="border" size="lg" /></Modal.Body>
+                    </Modal>
                     <Row>
                         <Col lg={5} className="mt-3" style={{ backgroundColor: "white" }} data-aos="fade-right">
                             <div className="p-3">

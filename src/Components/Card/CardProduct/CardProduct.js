@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Badge, Button, Card, Col, Row, Spinner } from "react-bootstrap"
+import { Badge, Button, Card, Col, Row, Spinner, Modal } from "react-bootstrap"
 import { GeoAltFill, PencilSquare, PersonFill, Trash, GearFill } from "react-bootstrap-icons"
 import SweetAlert from "react-bootstrap-sweetalert"
 import { useDispatch, useSelector } from "react-redux"
@@ -14,34 +14,36 @@ const CardProduct = ({ value, type }) => {
   const [StatusRemoveWishlist, setStatusRemoveWishlist] = useState({ success: false, loading: false })
   const [RemoveProduct, setRemoveProduct] = useState({ alert: false, success: false, failed: false, idProduct: 0 })
   const { dataRemoveWishlist } = useSelector(state => state.wishlistReducer)
-
-  const handleRemoveProduct = async (e) => {
-    if (RemoveProduct.idProduct) {
-      setLoad(true)
-      setRemoveProduct({ ...RemoveProduct, alert: false })
-      console.log(RemoveProduct.idProduct)
-    }
-  }
+  const { dataUserVerification } = useSelector(state => state.authUserReducer)
 
   useEffect(() => {
     if (dataRemoveWishlist) {
       if (dataRemoveWishlist.status == 200) {
-        setStatusRemoveWishlist({ success: true, loading: false })
+        setStatusRemoveWishlist({ loading: false, success: true })
       }
     }
   }, [dataRemoveWishlist])
 
   const handleRemoveWishlist = async () => {
     setStatusRemoveWishlist({ ...StatusRemoveWishlist, loading: true })
-    await dispatch(delRemoveWishlist({ idProduct: value.productId }))
+    await dispatch(delRemoveWishlist({ idProduct: value.productId, idUser: dataUserVerification.data.userId }))
+  }
+
+  const handleRemoveProduct = async (e) => {
+    if (RemoveProduct.idProduct) {
+      setLoad(true)
+      setRemoveProduct({ ...RemoveProduct, alert: false })
+    }
   }
 
   return (
     <>
+      {StatusRemoveWishlist.success ? <SweetAlert danger title="Produk Dihapus dari Favorit!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
       {RemoveProduct.alert ? <SweetAlert danger showCancel confirmBtnText="Hapus" cancelBtnText="Batal" confirmBtnBsStyle="danger" cancelBtnBsStyle="outline-secondary" title="Apakah Kamu Yakin?" onConfirm={handleRemoveProduct} onCancel={() => setRemoveProduct({ ...RemoveProduct, alert: false })}>Produk yang sudah dihapus tidak akan bisa dikembalikan lagi!</SweetAlert> : null}
       {Load ? <SweetAlert title="" onConfirm={handleRemoveProduct} confirmBtnText="" confirmBtnStyle={{ display: "none" }}><Spinner animation="border" size="lg" /></SweetAlert> : RemoveProduct.success ? <SweetAlert success title="Kategori Dihapus!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
-      {StatusRemoveWishlist.success ? <SweetAlert danger title="Produk Dihapus dari Favorit!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
-      {StatusRemoveWishlist.loading ? <SweetAlert title="" confirmBtnStyle={{ display: "none" }} onConfirm={() => null}><Spinner animation="border" size="lg" /></SweetAlert> : null}
+      <Modal show={StatusRemoveWishlist.loading} onHide={StatusRemoveWishlist.success} centered>
+        <Modal.Body className="text-center" size="sm"><Spinner animation="border" size="lg" /></Modal.Body>
+      </Modal>
       {type === "default" ?
         <div>
           <a href={'/product/' + value.productId} style={{ color: "black", borderRadius: "8px", height: "100%" }}>
