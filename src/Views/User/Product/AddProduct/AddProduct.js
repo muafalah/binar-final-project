@@ -190,7 +190,7 @@ const AddProduct = () => {
                                             <Form.Label>Serial Number <span style={{ color: "red" }}>*</span></Form.Label>
                                             <div className='d-flex'>
                                                 <Form.Control className="w-100 me-2" type="text" onChange={(e) => setInputForm({ ...InputForm, serialNumber: e.target.value })} isInvalid={StatusAlert.invalid} />
-                                                <Button variant="outline-success" type="submit">Periksa</Button>
+                                                <Button href={'https://www.imei.info/apple-sn-check/?sn=' + InputForm.serialNumber} target="_blank" variant="outline-success" type="submit">Periksa</Button>
                                             </div>
                                             <Form.Control.Feedback type="invalid">
                                                 Masukkan serial number produk kamu.

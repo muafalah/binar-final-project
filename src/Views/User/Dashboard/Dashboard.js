@@ -61,7 +61,7 @@ const Dashboard = ({ children, menu }) => {
         if (isSuccess) {
             if (dataRegisterSeller) {
                 if (dataRegisterSeller.status === 200) {
-                    setStatusAlert({ success: true })
+                    setStatusAlert({ registerSeller: false, invalid: false, success: true })
                 }
             }
         }
@@ -117,12 +117,17 @@ const Dashboard = ({ children, menu }) => {
         )
     }
 
+    const handleSuccess = () => {
+        setStatusAlert({ registerSeller: false, invalid: false, success: false })
+        window.location.reload()
+    }
+
     return (
         <Layout>
             {dataUserVerification ?
                 <Container>
                     {StatusAlert.registerSeller ? RegisterSeller() : null}
-                    {StatusAlert.success ? <SweetAlert success title="Pendaftaran Penjual Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/product/list")}></SweetAlert> : null}
+                    {StatusAlert.success ? <SweetAlert success title="Pendaftaran Penjual Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={handleSuccess}></SweetAlert> : null}
                     <Row className={'w-100 m-0 mt-4 mb-4'}>
                         <Col xs={12} className={'p-0'}>
                             <Row className={'m-0 p-3 ' + style.box_temp} data-aos="zoom-out">
