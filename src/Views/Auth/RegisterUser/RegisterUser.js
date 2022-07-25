@@ -13,12 +13,22 @@ const RegisterUser = () => {
     const [StatusAlert, setStatusAlert] = useState({ alert: false, invalid: false, success: false })
     const [InputForm, setInputForm] = useState({ username: "", email: "", password: "", })
     const { isLoading, isSuccess, isError, dataUserRegister } = useSelector(state => state.authUserReducer)
+    const [StatusErrorEmail, setStatusErrorEmail] = useState(false)
+    const [StatusErrorUsername, setStatusErrorUsername] = useState(false)
 
     useEffect(() => {
         if (isSuccess) {
             if (dataUserRegister) {
                 if (dataUserRegister.status == 200) {
                     setStatusAlert({ success: true })
+                }
+                if (dataUserRegister.status == 411) {
+                    setStatusAlert({ invalid: true })
+                    setStatusErrorEmail(true)
+                }
+                if (dataUserRegister.status == 412) {
+                    setStatusAlert({ invalid: true })
+                    setStatusErrorUsername(true)
                 }
             }
         }
@@ -30,6 +40,9 @@ const RegisterUser = () => {
         const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
         const regexPassword = /^(?=.{6,})/gm
         if (regexUsername.test(InputForm.username) && regexEmail.test(InputForm.email) && regexPassword.test(InputForm.password)) {
+            setStatusAlert({ invalid: false })
+            setStatusErrorEmail(false)
+            setStatusErrorUsername(false)
             await dispatch(postUserRegister({ username: InputForm.username, email: InputForm.email, password: InputForm.password }))
         } else {
             setStatusAlert({ invalid: true })
@@ -50,6 +63,18 @@ const RegisterUser = () => {
                             <Form className={'d-grid gap '} onSubmit={handleSubmit}>
                                 {StatusAlert.success ? <SweetAlert success title="Pendaftaran Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/login")}> Silahkan login dengan akun yang sudah didaftarkan! </SweetAlert> : null}
                                 {StatusAlert.alert ? <Alert variant="danger">Email atau Kata Sandi Salah</Alert> : null}
+                                {StatusErrorEmail ?
+                                    <Alert variant="danger">
+                                        Email sudah terdaftar menjadi akun, silahkan login!
+                                    </Alert>
+                                    : null
+                                }
+                                {StatusErrorUsername ?
+                                    <Alert variant="danger">
+                                        Username sudah pernah digunakan sebelumnya!
+                                    </Alert>
+                                    : null
+                                }
                                 <Form.Group className="mb-3">
                                     <Form.Label>Username <span style={{ color: "red" }}>*</span></Form.Label>
                                     <Form.Control type="text" name="username" placeholder="Contoh: johndee" onChange={(e) => setInputForm({ ...InputForm, username: e.target.value })} isInvalid={StatusAlert.invalid} />

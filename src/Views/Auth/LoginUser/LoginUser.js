@@ -14,6 +14,7 @@ const LoginUser = () => {
     const [LinkRedirect, setLinkRedirect] = useState("")
     const [InputForm, setInputForm] = useState({ email: "", password: "", })
     const { isLoading, isSuccess, isError, dataUserLogin, dataUserVerification } = useSelector(state => state.authUserReducer)
+    const [StatusError, setStatusError] = useState(false)
 
     useEffect(() => {
         if (isSuccess) {
@@ -34,6 +35,10 @@ const LoginUser = () => {
                         }
                     }
                 }
+                if (dataUserLogin.status == 500) {
+                    setStatusAlert({ invalid: true })
+                    setStatusError(true)
+                }
             }
         }
     }, [isSuccess, dataUserLogin])
@@ -41,8 +46,10 @@ const LoginUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
-        const regexPassword = /^(?=.{4,})/gm
+        const regexPassword = /^(?=.{6,})/gm
         if (regexEmail.test(InputForm.email) && regexPassword.test(InputForm.password)) {
+            setStatusAlert({ invalid: false })
+            setStatusError(false)
             await dispatch(postUserLogin({ email: InputForm.email, password: InputForm.password }))
         } else {
             setStatusAlert({ invalid: true })
@@ -63,6 +70,12 @@ const LoginUser = () => {
                             <Form className={'d-grid gap '} onSubmit={handleSubmit}>
                                 {StatusAlert.success ? <SweetAlert success title="Login Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate(LinkRedirect)}></SweetAlert> : null}
                                 {StatusAlert.alert ? <Alert variant="danger">Email atau Kata Sandi Salah</Alert> : null}
+                                {StatusError ?
+                                    <Alert variant="danger">
+                                        Silahkan periksa kembali email/kata sandi kamu dan coba kembali!
+                                    </Alert>
+                                    : null
+                                }
                                 <Form.Group className="mb-3">
                                     <Form.Label>Alamat Email <span style={{ color: "red" }}>*</span></Form.Label>
                                     <Form.Control type="email" name="email" placeholder="Contoh: johndee@gmail.com" onChange={(e) => setInputForm({ ...InputForm, email: e.target.value })} isInvalid={StatusAlert.invalid} />
