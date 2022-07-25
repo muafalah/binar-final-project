@@ -107,7 +107,7 @@ const NavbarUser = ({ dataUser }) => {
                 RegisterSeller()
                 : null
             }
-            {StatusAlert.success ? <SweetAlert success title="Pendaftaran Penjual Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/product/list")}></SweetAlert> : null}
+            {StatusAlert.success ? <SweetAlert success title="Pendaftaran Penjual Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
             {dataMiniWishlist && dataMiniBuyerNotification && dataMiniSellerNotification ?
                 <Container>
                     <Navbar.Brand href="/" className="pe-3"><img src={LogoWhite} height="35" alt="SecondGadget" /></Navbar.Brand>

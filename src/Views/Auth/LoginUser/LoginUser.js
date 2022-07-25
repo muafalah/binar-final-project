@@ -72,7 +72,7 @@ const LoginUser = () => {
                                 {StatusAlert.alert ? <Alert variant="danger">Email atau Kata Sandi Salah</Alert> : null}
                                 {StatusError ?
                                     <Alert variant="danger">
-                                        Silahkan periksa kembali email/kata sandi kamu dan coba kembali!
+                                        Silahkan periksa kembali email / kata sandi kamu dan coba kembali!
                                     </Alert>
                                     : null
                                 }

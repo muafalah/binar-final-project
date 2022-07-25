@@ -8,7 +8,6 @@ import CardProduct from '../../../Components/Card/CardProduct/CardProduct'
 import { getUserByUsername } from '../../../Redux/features/authUser'
 import { getProductByUsername } from '../../../Redux/features/productSlice'
 import { formatDate, formatCamelCase } from '../../../Utils/helper'
-import { dataCardProduct } from '../../DataDummy'
 import Layout from '../../Layout'
 import style from './DetailSeller.module.css'
 
@@ -37,6 +36,8 @@ const DetailSeller = () => {
     const noProduct = "https://cdn.dribbble.com/users/2382015/screenshots/6065978/no_result.gif"
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    console.log()
 
     return (
         dataUserByUsername ?

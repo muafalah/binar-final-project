@@ -145,6 +145,7 @@ const DetailProduct = () => {
                         <Modal.Body className="text-center" size="sm"><Spinner animation="border" size="lg" /></Modal.Body>
                     </Modal>
                     <Row>
+                        {console.log(dataDetailProduct)}
                         <Col lg={5} className="mt-3" style={{ backgroundColor: "white" }} data-aos="fade-right">
                             <div className="p-3">
                                 <SliderProduct data={dataDetailProduct.data.imageProductsSet} />

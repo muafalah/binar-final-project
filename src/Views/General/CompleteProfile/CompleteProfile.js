@@ -75,7 +75,7 @@ const CompleteProfile = () => {
                                 <p style={{ color: "#8A8A8A" }}>Yuk lengkapi data dirimu dan mulai<br /> menjelajah berbagai fitur di SecondGadget!</p>
                             </Col>
                             <Col xs={12}>
-                                {StatusAlert.success ? <SweetAlert success title="Selamat Datang!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/transaction/list")}></SweetAlert> : null}
+                                {StatusAlert.success ? <SweetAlert success title="Selamat Datang!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/")}></SweetAlert> : null}
                                 <Form className={'d-grid gap '} onSubmit={handleSubmit}>
                                     <div className="d-grid justify-content-center mb-3">
                                         <div className="mx-auto"><ImageUploader onFileAdded={(img) => setInputForm({ ...InputForm, image: img.file })} isInvalid={StatusAlert.invalid} /></div>
