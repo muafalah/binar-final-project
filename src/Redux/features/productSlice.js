@@ -72,7 +72,7 @@ export const postAddProduct = createAsyncThunk("productSliceThunk/postAddProduct
 export const putEditStatusProduct = createAsyncThunk("productSliceThunk/putEditStatusProduct", async ({ idProduct, productStatus }) => {
     try {
         const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
-        const response = await axios.put(process.env.REACT_APP_HOST + '/prodcut/edit/status' + idProduct,
+        const response = await axios.put(process.env.REACT_APP_HOST + '/product/edit/status/' + idProduct,
             {
                 "productStatus": productStatus,
             },

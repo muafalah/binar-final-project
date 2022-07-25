@@ -97,7 +97,7 @@ const CardProduct = ({ value, type }) => {
               </a>
               <Row className="m-0 mt-2">
                 <Col xs={6} className="p-0 pe-1">
-                  <Button className="w-100 d-flex align-content-center justify-content-center" variant="success"><GearFill className='my-auto me-2' size={16} /> Status</Button>
+                  <Button className="w-100 d-flex align-content-center justify-content-center" variant="success" href={'/dashboard/product/edit/' + value.productId}><PencilSquare className='my-auto me-2' size={16} /> Edit</Button>
                 </Col>
                 <Col xs={6} className="p-0 ps-1">
                   <Button className="w-100 d-flex align-content-center justify-content-center" variant="outline-danger" value={value.productId} onClick={(e) => setRemoveProduct({ ...RemoveProduct, alert: true, idProduct: e.target.value })}><Trash className='my-auto me-2' size={16} /> Hapus</Button>
@@ -120,7 +120,7 @@ const CardProduct = ({ value, type }) => {
               </a>
               <Row className="m-0 mt-2">
                 <Col xs={6} className="p-0 pe-1">
-                  <Button className="w-100 d-flex align-content-center justify-content-center" variant="success">Terbitkan</Button>
+                  <Button className="w-100 d-flex align-content-center justify-content-center" variant="success" href={'/dashboard/product/edit/' + value.productId}><PencilSquare className='my-auto me-2' size={16} /> Edit</Button>
                 </Col>
                 <Col xs={6} className="p-0 ps-1">
                   <Button className="w-100 d-flex align-content-center justify-content-center" variant="outline-danger" value={value.productId} onClick={(e) => setRemoveProduct({ ...RemoveProduct, alert: true, idProduct: e.target.value })}><Trash className='my-auto me-2' size={16} /> Hapus</Button>

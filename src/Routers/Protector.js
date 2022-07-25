@@ -102,28 +102,11 @@ const CheckAuth = () => {
     }
 }
 
-const CompleteProfile = () => {
-    const { dataUserVerification } = useSelector(state => state.authUserReducer)
-
-    if (JSON.parse(localStorage.getItem("TokenSecondGadget"))) {
-        if (dataUserVerification) {
-            if (dataUserVerification.data.fullName) {
-                return <Navigate to="/" />
-            } else {
-                <Outlet />
-            }
-        }
-    } else {
-        return <Navigate to="/login" />
-    }
-}
-
 const Protector = {
     BuyerAuth,
     SellerAuth,
     AdminAuth,
     CheckAuth,
-    CompleteProfile,
 }
 
 export default Protector

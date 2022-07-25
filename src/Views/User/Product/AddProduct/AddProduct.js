@@ -8,7 +8,7 @@ import Dashboard from '../../Dashboard/Dashboard'
 import style from './AddProduct.module.css'
 import Aos from 'aos'
 import { getAllCategory } from '../../../../Redux/features/categorySlice';
-import { postAddProduct } from '../../../../Redux/features/productSlice';
+import { postAddProduct, putEditStatusProduct } from '../../../../Redux/features/productSlice';
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 const thumbsContainer = {
@@ -51,7 +51,8 @@ const AddProduct = () => {
     const [StatusAlert, setStatusAlert] = useState({ alert: false, invalid: false, success: false })
     const { dataAllCategory } = useSelector(state => state.categoryReducer)
     const { dataUserVerification } = useSelector(state => state.authUserReducer)
-    const { dataAddProduct } = useSelector(state => state.productReducer)
+    const { dataAddProduct, dataEditStatusProduct } = useSelector(state => state.productReducer)
+    const [Archive, setArchive] = useState(false)
 
     useEffect(() => {
         dispatch(getAllCategory())
@@ -61,11 +62,25 @@ const AddProduct = () => {
     useEffect(() => {
         if (dataAddProduct) {
             if (dataAddProduct.status == 201) {
-                setLoad(false)
-                setStatusAlert({ alert: false, invalid: false, success: true })
+                if (Archive) {
+                    dispatch(putEditStatusProduct({ idProduct: dataAddProduct.data.productId, productStatus: "archive" }))
+                } else {
+                    setLoad(false)
+                    setStatusAlert({ alert: false, invalid: false, success: true })
+                }
             }
         }
     }, [dataAddProduct])
+
+    useEffect(() => {
+        if (dataEditStatusProduct) {
+            if (dataEditStatusProduct.status == 200) {
+                setLoad(false)
+                setStatusAlert({ alert: false, invalid: false, success: true })
+                navigate('/product/' + dataAddProduct.data.productId)
+            }
+        }
+    }, [dataEditStatusProduct])
 
 
     const selectCategory = (data) => {
@@ -189,7 +204,7 @@ const AddProduct = () => {
                                             </Form.Control.Feedback>
                                         </Form.Group>
                                         <div className="d-flex gap-2 justify-content-end">
-                                            <Button className="mt-2" variant="outline-dark">Simpan & Preview</Button>
+                                            <Button className="mt-2" variant="outline-dark" type="submit" onClick={() => { setArchive(true) }}>Simpan & Preview</Button>
                                             <Button className="mt-2" variant="dark" type="submit">Terbitkan Produk</Button>
                                         </div>
                                     </Form>

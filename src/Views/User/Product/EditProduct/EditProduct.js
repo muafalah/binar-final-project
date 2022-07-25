@@ -153,6 +153,26 @@ const EditProduct = () => {
         }
     }
 
+    const handleSaleProduct = async (e) => {
+        e.preventDefault()
+        if (InputForm.name && InputForm.category && InputForm.price && InputForm.serialNumber && InputForm.description && files.length == 4) {
+            setLoad(true)
+            await dispatch(putEditProduct({ idProduct: id_product, idCategory: InputForm.category, idUser: dataUserVerification.data.userId, productName: InputForm.name, serialNumber: InputForm.serialNumber, price: InputForm.price, description: InputForm.description, image: files, productStatus: "available" }))
+        } else {
+            setStatusAlert({ invalid: true })
+        }
+    }
+
+    const handleArchiveProduct = async (e) => {
+        e.preventDefault()
+        if (InputForm.name && InputForm.category && InputForm.price && InputForm.serialNumber && InputForm.description && files.length == 4) {
+            setLoad(true)
+            await dispatch(putEditProduct({ idProduct: id_product, idCategory: InputForm.category, idUser: dataUserVerification.data.userId, productName: InputForm.name, serialNumber: InputForm.serialNumber, price: InputForm.price, description: InputForm.description, image: files, productStatus: "archive" }))
+        } else {
+            setStatusAlert({ invalid: true })
+        }
+    }
+
     return (
         <Dashboard menu="product">
             {StatusAlert.success ? <SweetAlert success title="Produk Diperbarui!" confirmBtnBsStyle={'dark'} onConfirm={() => navigate("/dashboard/product/list")}></SweetAlert> : null}
@@ -186,7 +206,7 @@ const EditProduct = () => {
                                         </Form.Group>
                                         <Form.Group className="mb-3">
                                             <Form.Label>Kategori <span style={{ color: "red" }}>*</span></Form.Label>
-                                            <Select options={selectCategory(dataAllCategory.data)} theme={StatusAlert.invalid == false ? defaultTheme : errorTheme} defaultValue={selectCategory(dataAllCategory.data).filter(option => option.value == InputForm.category)} placeholder="Pilih Kategori" onChange={(e) => setInputForm({ ...InputForm, category: e.value })} />
+                                            <Select options={selectCategory(dataAllCategory.data)} theme={StatusAlert.invalid == false ? defaultTheme : errorTheme} defaultValue={selectCategory(dataAllCategory.data).filter(option => option.value == dataDetailProduct.data.categories.categoryId)} placeholder="Pilih Kategori" onChange={(e) => setInputForm({ ...InputForm, category: e.value })} />
                                         </Form.Group>
                                         <Form.Group className="mb-3">
                                             <Form.Label>Harga <span style={{ color: "red" }}>*</span></Form.Label>
@@ -204,7 +224,9 @@ const EditProduct = () => {
                                             <Form.Control as="textarea" value={InputForm.description} onChange={(e) => { setInputForm({ ...InputForm, description: e.target.value }) }} isInvalid={StatusAlert.invalid} />
                                         </Form.Group>
                                         <div className="d-flex gap-2 justify-content-end">
-                                            {dataDetailProduct.data.productStatus == "archive" ? <Button className="mt-2" variant="outline-dark">Simpan & Terbitkan</Button> : null}
+                                            {dataDetailProduct.data.productStatus == "archive" ? <Button className="mt-2" variant="outline-dark" onClick={handleSaleProduct}>Simpan & Terbitkan</Button> : null}
+                                            {dataDetailProduct.data.productStatus == "sold" ? <Button className="mt-2" variant="outline-dark" onClick={handleSaleProduct}>Jual Kembali</Button> : null}
+                                            {dataDetailProduct.data.productStatus == "available" ? <Button className="mt-2" variant="outline-dark" onClick={handleArchiveProduct}>Simpan & Sembunyikan</Button> : null}
                                             <Button className="mt-2" variant="dark" type="submit">Simpan</Button>
                                         </div>
                                     </Form>
