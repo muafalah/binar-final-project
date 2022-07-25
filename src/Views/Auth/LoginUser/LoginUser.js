@@ -25,13 +25,14 @@ const LoginUser = () => {
                         if (dataUserVerification.data.roles[0].roleId === 3) {
                             setLinkRedirect("/admin/category/list")
                             setStatusAlert({ success: true })
-                        } else if (dataUserVerification.data.roles[0].roleId === 1) {
-                            dataUserVerification.data.roles.length === 2 ? setLinkRedirect("/dashboard/product/list") : setLinkRedirect("/dashboard/transaction/list")
-                            setStatusAlert({ success: true })
                         } else {
-                            localStorage.removeItem("TokenSecondGadget")
-                            navigate("/")
-                            window.location.reload()
+                            if (dataUserVerification.data.fullName) {
+                                setLinkRedirect("/")
+                                setStatusAlert({ alert: false, invalid: false, success: true })
+                            } else {
+                                setLinkRedirect("/complete-profile")
+                                setStatusAlert({ alert: false, invalid: false, success: true })
+                            }
                         }
                     }
                 }

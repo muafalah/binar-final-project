@@ -36,6 +36,7 @@ const Routers = () => {
                 <Route path="/search/keyword=:keyword&type=:type&sort=:sort&category=:category&location=:location&minprice=:minprice&maxprice=:maxprice" element={<Search />} />
                 <Route path='/product/:id_product' element={<DetailProduct />} />
                 <Route path='/seller/:username_seller' element={<DetailSeller />} />
+                <Route path='/complete-profile' element={<CompleteProfile />} />
 
                 <Route element={<Protector.CheckAuth />}>
                     <Route path="/register" element={<RegisterUser />} />
@@ -43,9 +44,6 @@ const Routers = () => {
                 </Route>
 
                 <Route element={<Protector.BuyerAuth />}>
-                    <Route element={<Protector.CompleteProfile />}>
-                        <Route path='/complete-profile' element={<CompleteProfile />} />
-                    </Route>
 
                     <Route path='/dashboard' element={<Navigate to="/dashboard/transaction" />} />
 

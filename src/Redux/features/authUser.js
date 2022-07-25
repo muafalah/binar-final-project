@@ -11,7 +11,6 @@ export const postUserRegister = createAsyncThunk("authUserThunk/postUserRegister
                 "roleId": 1,
             }
         )
-        console.log(response.data, "sukses register")
         return response.data
     } catch (error) {
         return error.response.data

@@ -204,8 +204,8 @@ const EditProduct = () => {
                                             <Form.Control as="textarea" value={InputForm.description} onChange={(e) => { setInputForm({ ...InputForm, description: e.target.value }) }} isInvalid={StatusAlert.invalid} />
                                         </Form.Group>
                                         <div className="d-flex gap-2 justify-content-end">
-                                            <Button className="mt-2" variant="outline-dark">Simpan</Button>
-                                            <Button className="mt-2" variant="dark" type="submit">Terbitkan Produk</Button>
+                                            {dataDetailProduct.data.productStatus == "archive" ? <Button className="mt-2" variant="outline-dark">Simpan & Terbitkan</Button> : null}
+                                            <Button className="mt-2" variant="dark" type="submit">Simpan</Button>
                                         </div>
                                     </Form>
                                 </div>

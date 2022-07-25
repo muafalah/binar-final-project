@@ -31,7 +31,7 @@ const NavbarUser = ({ dataUser }) => {
         if (isSuccess) {
             if (dataRegisterSeller) {
                 if (dataRegisterSeller.status === 200) {
-                    setStatusAlert({ success: true })
+                    setStatusAlert({ registerSeller: false, invalid: false, success: true })
                 }
             }
         }
@@ -101,13 +101,18 @@ const NavbarUser = ({ dataUser }) => {
 
     const noProduct = "https://cdn.dribbble.com/users/2382015/screenshots/6065978/no_result.gif"
 
+    const handleSuccess = () => {
+        setStatusAlert({ registerSeller: false, invalid: false, success: false })
+        window.location.reload()
+    }
+
     return (
         <Navbar key="sm" bg="dark" expand="sm" variant="dark" data-aos="fade-down">
             {StatusAlert.registerSeller ?
                 RegisterSeller()
                 : null
             }
-            {StatusAlert.success ? <SweetAlert success title="Pendaftaran Penjual Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
+            {StatusAlert.success ? <SweetAlert success title="Pendaftaran Penjual Berhasil!" confirmBtnBsStyle={'dark'} onConfirm={handleSuccess}></SweetAlert> : null}
             {dataMiniWishlist && dataMiniBuyerNotification && dataMiniSellerNotification ?
                 <Container>
                     <Navbar.Brand href="/" className="pe-3"><img src={LogoWhite} height="35" alt="SecondGadget" /></Navbar.Brand>
