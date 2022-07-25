@@ -63,7 +63,7 @@ const EditProduct = () => {
 
     useEffect(() => {
         if (dataDetailProduct) {
-            setInputForm({ name: dataDetailProduct.data.productName, category: dataDetailProduct.data.categories.categoryId, price: dataDetailProduct.data.price, serialNumber: dataDetailProduct.data.serialNumber, description: dataDetailProduct.data.serialNumber })
+            setInputForm({ name: dataDetailProduct.data.productName, category: dataDetailProduct.data.categories.categoryId, price: dataDetailProduct.data.price, serialNumber: dataDetailProduct.data.serialNumber, description: dataDetailProduct.data.description })
             setFiles([{
                 name: "image 1",
                 preview: dataDetailProduct.data.imageProductsSet[0].imageUrl,
