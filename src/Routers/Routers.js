@@ -26,54 +26,66 @@ import EditCategoryAdmin from '../Views/Admin/CategoryAdmin/EditCategoryAdmin/Ed
 import DetailTransaction from '../Views/User/Transaction/DetailTransaction/DetailTransaction'
 import EditProfileAdmin from '../Views/Admin/ProfileAdmin/EditProfileAdmin/EditProfileAdmin'
 import PreviewProduct from '../Views/User/Product/PreviewProduct/PreviewProduct'
+import Protector from './Protector'
 
 const Routers = () => {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/register" element={<RegisterUser />} />
-                <Route path="/login" element={<LoginUser />} />
-                <Route path="/login-admin" element={<LoginAdmin />} />
+                <Route element={<Protector.CheckAuth />}>
+                    <Route path="/register" element={<RegisterUser />} />
+                    <Route path="/login" element={<LoginUser />} />
+                    <Route path="/login-admin" element={<LoginAdmin />} />
+                </Route>
 
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/search/keyword=:keyword&type=:type&sort=:sort&category=:category&location=:location&minprice=:minprice&maxprice=:maxprice" element={<Search />} />
                 <Route path='/product/:id_product' element={<DetailProduct />} />
                 <Route path='/seller/:username_seller' element={<DetailSeller />} />
-                <Route path='/complete-profile' element={<CompleteProfile />} />
 
-                <Route path='/dashboard' element={<Navigate to="/dashboard/transaction" />} />
+                <Route element={<Protector.BuyerAuth />}>
+                    <Route element={<Protector.CompleteProfile />}>
+                        <Route path='/complete-profile' element={<CompleteProfile />} />
+                    </Route>
 
-                <Route path='/dashboard/transaction' element={<Navigate to="/dashboard/transaction/list" />} />
-                <Route path='/dashboard/transaction/list' element={<ListTransaction />} />
-                <Route path='/dashboard/transaction/detail/:id_transaction' element={<DetailTransaction />} />
-                <Route path='/dashboard/notification' element={<Navigate to="/dashboard/notification/list" />} />
-                <Route path='/dashboard/notification/list' element={<ListNotification />} />
-                <Route path='/dashboard/favorit' element={<Navigate to="/dashboard/favorit/list" />} />
-                <Route path='/dashboard/favorit/list' element={<ListFavorit />} />
-                <Route path='/dashboard/profile' element={<Navigate to="/dashboard/profile/edit" />} />
-                <Route path='/dashboard/profile/edit' element={<EditProfile />} />
-                <Route path='/dashboard/product' element={<Navigate to="/dashboard/product/list" />} />
-                <Route path='/dashboard/product/list' element={<ListProduct />} />
-                <Route path='/dashboard/product/add' element={<AddProduct />} />
-                <Route path='/dashboard/product/edit/:id_product' element={<EditProduct />} />
-                <Route path='/dashboard/product/preview/:id_product' element={<PreviewProduct />} />
-                <Route path='/dashboard/offer' element={<Navigate to="/dashboard/offer/list" />} />
-                <Route path='/dashboard/offer/list' element={<ListOffer />} />
-                <Route path='/dashboard/offer/detail/:id_offer' element={<DetailOffer />} />
+                    <Route path='/dashboard' element={<Navigate to="/dashboard/transaction" />} />
 
-                <Route path='/admin' element={<Navigate to="/admin/category" />} />
+                    <Route path='/dashboard/transaction' element={<Navigate to="/dashboard/transaction/list" />} />
+                    <Route path='/dashboard/transaction/list' element={<ListTransaction />} />
+                    <Route path='/dashboard/transaction/detail/:id_transaction' element={<DetailTransaction />} />
+                    <Route path='/dashboard/notification' element={<Navigate to="/dashboard/notification/list" />} />
+                    <Route path='/dashboard/notification/list' element={<ListNotification />} />
+                    <Route path='/dashboard/favorit' element={<Navigate to="/dashboard/favorit/list" />} />
+                    <Route path='/dashboard/favorit/list' element={<ListFavorit />} />
+                    <Route path='/dashboard/profile' element={<Navigate to="/dashboard/profile/edit" />} />
+                    <Route path='/dashboard/profile/edit' element={<EditProfile />} />
+                    <Route element={<Protector.SellerAuth />}>
+                        <Route path='/dashboard/product' element={<Navigate to="/dashboard/product/list" />} />
+                        <Route path='/dashboard/product/list' element={<ListProduct />} />
+                        <Route path='/dashboard/product/add' element={<AddProduct />} />
+                        <Route path='/dashboard/product/edit/:id_product' element={<EditProduct />} />
+                        <Route path='/dashboard/product/preview/:id_product' element={<PreviewProduct />} />
+                        <Route path='/dashboard/offer' element={<Navigate to="/dashboard/offer/list" />} />
+                        <Route path='/dashboard/offer/list' element={<ListOffer />} />
+                        <Route path='/dashboard/offer/detail/:id_offer' element={<DetailOffer />} />
+                    </Route>
+                </Route>
 
-                <Route path='/admin/category' element={<Navigate to="/admin/category/list" />} />
-                <Route path='/admin/category/list' element={<ListCategoryAdmin />} />
-                <Route path='/admin/category/add' element={<AddCategoryAdmin />} />
-                <Route path='/admin/category/edit/:id_category' element={<EditCategoryAdmin />} />
-                <Route path='/admin/carousel' element={<Navigate to="/admin/carousel/list" />} />
-                <Route path='/admin/carousel/list' element={<ListCarouselAdmin />} />
-                <Route path='/admin/carousel/add' element={<AddCarouselAdmin />} />
-                <Route path='/admin/carousel/edit/:id_carousel' element={<EditCarouselAdmin />} />
-                <Route path='/admin/profile' element={<Navigate to="/admin/profile/edit" />} />
-                <Route path='/admin/profile/edit' element={<EditProfileAdmin />} />
+                <Route element={<Protector.AdminAuth />}>
+                    <Route path='/admin' element={<Navigate to="/admin/category" />} />
+
+                    <Route path='/admin/category' element={<Navigate to="/admin/category/list" />} />
+                    <Route path='/admin/category/list' element={<ListCategoryAdmin />} />
+                    <Route path='/admin/category/add' element={<AddCategoryAdmin />} />
+                    <Route path='/admin/category/edit/:id_category' element={<EditCategoryAdmin />} />
+                    <Route path='/admin/carousel' element={<Navigate to="/admin/carousel/list" />} />
+                    <Route path='/admin/carousel/list' element={<ListCarouselAdmin />} />
+                    <Route path='/admin/carousel/add' element={<AddCarouselAdmin />} />
+                    <Route path='/admin/carousel/edit/:id_carousel' element={<EditCarouselAdmin />} />
+                    <Route path='/admin/profile' element={<Navigate to="/admin/profile/edit" />} />
+                    <Route path='/admin/profile/edit' element={<EditProfileAdmin />} />
+                </Route>
             </Routes>
         </BrowserRouter>
     )
