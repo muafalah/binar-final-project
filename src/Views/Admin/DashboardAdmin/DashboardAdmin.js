@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Select from 'react-select'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { ChevronRight, Collection, Folder, Person } from 'react-bootstrap-icons'
@@ -6,11 +6,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import Layout from '../../Layout'
 import style from './DashboardAdmin.module.css'
 import { useSelector } from 'react-redux'
+import Aos from 'aos'
 
 const DashboardAdmin = ({ children, menu }) => {
 
     const navigate = useNavigate()
     const { dataUserVerification } = useSelector(state => state.authUserReducer)
+
+    useEffect(() => {
+        Aos.init({ duration: 1800 })
+    }, [])
 
     const navigateMenu = (value) => {
         navigate("/dashboard/" + value)
@@ -43,7 +48,7 @@ const DashboardAdmin = ({ children, menu }) => {
                 <Container>
                     <Row className={'w-100 m-0 mt-4 mb-4'}>
                         <Col xs={12} className={'p-0'}>
-                            <Row className={'m-0 p-3 ' + style.box_temp}>
+                            <Row className={'m-0 p-3 ' + style.box_temp} data-aos="zoom-out">
                                 <Col lg={11} md={11} xs={10} className={'p-0'}>
                                     <div className='d-flex gap-3 w-100 '>
                                         <div><img src={dataUserVerification.data.img} alt="Profile Seller" width="60rem" style={{ borderRadius: "0.375rem" }} /></div>
@@ -60,7 +65,7 @@ const DashboardAdmin = ({ children, menu }) => {
                         </Col>
                         <Col xs={12} className={'p-0'}>
                             <Row className={'m-0'}>
-                                <Col lg={3} className={'p-0 mt-4 pe-lg-3 ' + style.box_lg}>
+                                <Col lg={3} className={'p-0 mt-4 pe-lg-3 ' + style.box_lg} data-aos="fade-right">
                                     <div className={'p-3 ' + style.box_temp}>
                                         <h5 className="mb-3">Menu</h5>
                                         <div className="d-grid gap-2 w-100">
@@ -80,7 +85,7 @@ const DashboardAdmin = ({ children, menu }) => {
                                         </div>
                                     </div>
                                 </Col>
-                                <Col xs={12} className={'p-0 mt-4 pe-lg-3 ' + style.box_sm}>
+                                <Col xs={12} className={'p-0 mt-4 pe-lg-3 ' + style.box_sm} data-aos="fade-right">
                                     <div className={'p-3 ' + style.box_temp}>
                                         <h5 className="mb-3">Menu</h5>
                                         <Select className="mt-2" options={menuAdmin} defaultValue={menuAdmin.filter(option => option.value == menu)} placeholder="Menu" theme={selectTheme} onChange={(e) => navigateMenu(e.value)} />

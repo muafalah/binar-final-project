@@ -43,7 +43,7 @@ const ListCategoryAdmin = () => {
             <DashboardAdmin menu="category">
                 {RemoveCategory.alert ? <SweetAlert danger showCancel confirmBtnText="Hapus" cancelBtnText="Batal" confirmBtnBsStyle="danger" cancelBtnBsStyle="outline-secondary" title="Apakah Kamu Yakin?" onConfirm={handleRemoveCategory} onCancel={() => setRemoveCategory({ ...RemoveCategory, alert: false })}>Kategori yang sudah dihapus tidak akan bisa dikembalikan lagi!</SweetAlert> : null}
                 {Load ? <SweetAlert title="" onConfirm={handleRemoveCategory} confirmBtnText="" confirmBtnStyle={{ display: "none" }}><Spinner animation="border" size="lg" /></SweetAlert> : RemoveCategory.success ? <SweetAlert success title="Kategori Dihapus!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
-                <Row className="m-0 gap-3">
+                <Row className={'m-0 gap-3 p-3 ' + style.box_temp} data-aos="fade-up">
                     <Col xs={12} className="p-0">
                         <div className='d-flex'>
                             <div className='w-100 my-auto'><b style={{ fontSize: "1.25rem" }}>Kategori</b></div>

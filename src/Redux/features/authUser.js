@@ -172,6 +172,25 @@ export const putEditUserImage = createAsyncThunk("authUserThunk/putEditUserImage
     }
 })
 
+export const putEditUserPassword = createAsyncThunk("authUserThunk/putEditUserPassword", async ({ idUser, newPassword, oldPassword }) => {
+    try {
+        const UserToken = JSON.parse(localStorage.getItem("TokenSecondGadget"))
+        const data = new FormData();
+        data.append('password', newPassword);
+        const response = await axios.put(process.env.REACT_APP_HOST + '/user/edit/password/' + idUser,
+            data,
+            {
+                headers: {
+                    "Authorization": `Bearer ${UserToken.token}`
+                }
+            }
+        )
+        return response.data
+    } catch (error) {
+        return error.response.data
+    }
+})
+
 const authUser = createSlice({
     name: "authUser",
     initialState: {
@@ -188,6 +207,7 @@ const authUser = createSlice({
         dataSearchSellerByFilter: null,
         dataEditUserNoImage: null,
         dataEditUserImage: null,
+        dataEditUserPassword: null,
     },
     extraReducers: {
         [postUserRegister.pending]: (state) => {
@@ -326,6 +346,20 @@ const authUser = createSlice({
             state.dataEditUserNoImage = action.payload
         },
         [putEditUserImage.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        },
+
+        [putEditUserPassword.pending]: (state) => {
+            state.isLoading = true
+            state.isSuccess = false
+        },
+        [putEditUserPassword.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.dataEditUserPassword = action.payload
+        },
+        [putEditUserPassword.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },

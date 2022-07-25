@@ -5,7 +5,7 @@ import ImageUploader from 'react-image-upload'
 import Dashboard from '../../Dashboard/Dashboard'
 import style from './EditProfile.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserByUsername, putEditUserImage, putEditUserNoImage } from '../../../../Redux/features/authUser'
+import { getUserByUsername, putEditUserImage, putEditUserNoImage, putEditUserPassword } from '../../../../Redux/features/authUser'
 import { getAllCity } from '../../../../Redux/features/citySlice'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import Aos from 'aos'
@@ -13,11 +13,11 @@ import Aos from 'aos'
 const EditProfile = () => {
 
     const dispatch = useDispatch()
-    const { dataUserVerification, dataUserByUsername, dataEditUserNoImage, dataEditUserImage } = useSelector(state => state.authUserReducer)
+    const { dataUserVerification, dataUserByUsername, dataEditUserNoImage, dataEditUserImage, dataEditUserPassword } = useSelector(state => state.authUserReducer)
     const [InputForm, setInputForm] = useState({ fullname: "", username: "", email: "", address: "", phone: "", city: "", description: "" })
     const [StatusAlert, setStatusAlert] = useState({ modal: false, invalid: false, success: false, loading: false })
     const [ChangeImage, setChangeImage] = useState({ modal: false, invalid: false, loading: false, file: null })
-    const [ChangePassword, setChangePassword] = useState({ modal: false, invalid: false, loading: false, newPassword: null, oldPassword: null })
+    const [ChangePassword, setChangePassword] = useState({ modal: false, success: false, invalid: false, loading: false, newPassword: null, oldPassword: null })
     const { dataAllCity } = useSelector(state => state.cityReducer)
 
     useEffect(() => {
@@ -49,6 +49,14 @@ const EditProfile = () => {
             }
         }
     }, [dataEditUserImage])
+
+    useEffect(() => {
+        if (dataEditUserPassword) {
+            if (dataEditUserPassword.status == 200) {
+                setChangePassword({ modal: false, invalid: false, loading: false, success: true, newPassword: null, oldPassword: null })
+            }
+        }
+    }, [dataEditUserPassword])
 
     const selectLocation = (data) => {
         const dataOption = []
@@ -91,7 +99,7 @@ const EditProfile = () => {
         e.preventDefault()
         if (ChangePassword.newPassword && ChangePassword.oldPassword) {
             setChangePassword({ ...ChangePassword, modal: false, loading: true })
-            console.log(ChangePassword)
+            await dispatch(putEditUserPassword({ idUser: dataUserByUsername.data.userId, newPassword: ChangePassword.newPassword, oldPassword: ChangePassword.oldPassword }))
         } else {
             setChangePassword({ ...ChangeImage, modal: true, invalid: true })
         }
@@ -99,14 +107,14 @@ const EditProfile = () => {
 
     return (
         <Dashboard menu="profile">
-            {StatusAlert.success || ChangeImage.success ? <SweetAlert success title="Profil Berhasil Diperbarui!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
+            {StatusAlert.success || ChangeImage.success || ChangePassword.success ? <SweetAlert success title="Profil Berhasil Diperbarui!" confirmBtnBsStyle={'dark'} onConfirm={() => window.location.reload()}></SweetAlert> : null}
             {dataUserVerification && dataUserByUsername && dataAllCity ?
                 <Row className={'m-0 ' + style.box_temp} data-aos="fade-up">
                     <Col xs={12} className='mt-3'>
                         <b style={{ fontSize: "1.25rem" }}>Ubah Profil</b>
                         <hr className="mt-2 mb-2" />
                     </Col>
-                    <Modal show={StatusAlert.loading || ChangeImage.loading} size="sm" centered>
+                    <Modal show={StatusAlert.loading || ChangeImage.loading || ChangePassword.loading} size="sm" centered>
                         <Modal.Body className="text-center pt-5 pb-5"><Spinner animation="border" size="lg" /></Modal.Body>
                     </Modal>
                     <Modal show={ChangeImage.modal} onHide={StatusAlert.success} centered size="sm">
@@ -130,7 +138,7 @@ const EditProfile = () => {
                     </Modal>
                     <Modal show={ChangePassword.modal} centered>
                         <Modal.Header>
-                            <Modal.Title>Modal heading</Modal.Title>
+                            <Modal.Title>Ubah Kata Sandi</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form>
@@ -151,7 +159,7 @@ const EditProfile = () => {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button variant="outline-secondary" onClick={() => setChangePassword({ modal: false, invalid: false, loading: false, newPassword: null, oldPassword: null })}>
+                            <Button variant="outline-secondary" onClick={() => setChangePassword({ modal: false, success: false, invalid: false, loading: false, newPassword: null, oldPassword: null })}>
                                 Batal
                             </Button>
                             <Button variant="success" onClick={handleChangePassword}>

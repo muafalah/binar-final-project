@@ -47,7 +47,7 @@ const ListCarouselAdmin = () => {
               <div className='w-100 my-auto'><b style={{ fontSize: "1.25rem" }}>Carousel</b></div>
               <div className='w-100 my-auto text-end'><Button size="sm" variant="dark" href="/admin/carousel/add"><PlusLg className='my-auto me-2' size={16} />Tambah Carousel</Button></div>
             </div>
-            <hr className="mt-3 mb-1" />
+            <hr className="mt-2 mb-1" />
           </Col>
           <Col xs={12} className="p-0">
             <Table striped bordered hover responsive>
